@@ -4,6 +4,8 @@ import Counter from './projects/Counter/Counter.jsx'
 import Todo from "./Projects/Todo/Todo.jsx";
 import ControlledForm from './Projects/Controlled/ControlledForm.jsx';
 import CustomUI from './Projects/CustomUI/CustomUI.jsx';
+import BuscadorPeliculas from "./Projects/BuscadorPeliculas";
+
 
 
 
@@ -309,14 +311,16 @@ function Projects() {
       <h2 className="text-3xl font-bold">Proyectos</h2>
 
       <div className="mt-6 grid md:grid-cols-2 gap-6">
-        <ProjectCard
-          title="Buscador de Películas"
-          desc="App más completa con autenticación o dashboard. Breve descripción del problema que resuelve."
-          tags={['React', 'API', 'CSS']}
-          code="#"
-          onDemo={openModal}
-          preview={<div className="text-sm text-slate-600">Preview del proyecto</div>}
-        />
+    <ProjectCard
+      title="Buscador de Películas"
+      desc="Busca películas en tiempo real con TMDB."
+      tags={['React', 'API', 'fetch']}
+      code="#"
+      onDemo={openModal}
+      preview={<div className="text-sm text-slate-600">Preview del proyecto</div>}
+  >
+    <BuscadorPeliculas />
+</ProjectCard>
       </div>
 
       <h3 className="mt-10 text-xl font-bold">Mini-Proyectos React</h3>
