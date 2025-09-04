@@ -9,7 +9,7 @@ Este repositorio contiene mi **portfolio en React** donde muestro mini-proyectos
 - 🎨 Tailwind CSS
 - 🗂️ Git + GitHub
 - 🌐 API TMDB
--TEST
+
 
 ---
 
