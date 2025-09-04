@@ -1,11 +1,10 @@
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaGitAlt } from "react-icons/fa";
 import { SiVite } from "react-icons/si";
-import Counter from './projects/Counter/Counter.jsx'
+import Counter from './Projects/Counter/Counter.jsx'
 import Todo from "./Projects/Todo/Todo.jsx";
 import ControlledForm from './Projects/Controlled/ControlledForm.jsx';
 import CustomUI from './Projects/CustomUI/CustomUI.jsx';
-import BuscadorPeliculas from "./Projects/BuscadorPeliculas";
-
+import { Link } from "react-router-dom";
 
 
 
@@ -267,16 +266,10 @@ function PreviewFrame({ children, className = "" }) {
 }
 
 /* --------------------------- Card (preview + modal) ------------------------- */
-function ProjectCard({ title, desc, tags = [], preview, code = '#', children, onDemo }) {
+function ProjectCard({ title, desc, tags = [], preview, code = '#', children, onDemo, demoHref }) {
   return (
     <div className="card overflow-hidden">
-      {/* header: preview o placeholder */}
-      {preview ? (
-        <PreviewFrame>{preview}</PreviewFrame>
-      ) : (
-        <div className="h-40 bg-slate-200" />
-      )}
-
+      {preview ? <PreviewFrame>{preview}</PreviewFrame> : <div className="h-40 bg-slate-200" />}
       <div className="p-4">
         <h3 className="text-lg font-bold">{title}</h3>
         <p className="mt-2 text-sm text-slate-600">{desc}</p>
@@ -286,19 +279,18 @@ function ProjectCard({ title, desc, tags = [], preview, code = '#', children, on
         </div>
 
         <div className="mt-4 flex gap-3">
-          {children && (
-            <button className="btn" onClick={() => onDemo?.(title, children)}>
-              Demo
-            </button>
+          {demoHref ? (
+            <Link to={demoHref} className="btn">Demo</Link>
+          ) : (
+            children && <button className="btn" onClick={() => onDemo?.(title, children)}>Demo</button>
           )}
-          <a className="btn-outline" href={code} target="_blank" rel="noreferrer">
-            Código
-          </a>
+          <a className="btn-outline" href={code} target="_blank" rel="noreferrer">Código</a>
         </div>
       </div>
     </div>
   );
 }
+
 
 /* -------------------------------- Projects ---------------------------------- */
 function Projects() {
@@ -311,16 +303,16 @@ function Projects() {
       <h2 className="text-3xl font-bold">Proyectos</h2>
 
       <div className="mt-6 grid md:grid-cols-2 gap-6">
-    <ProjectCard
+      <ProjectCard
       title="Buscador de Películas"
       desc="Busca películas en tiempo real con TMDB."
       tags={['React', 'API', 'fetch']}
       code="#"
-      onDemo={openModal}
       preview={<div className="text-sm text-slate-600">Preview del proyecto</div>}
-  >
-    <BuscadorPeliculas />
-</ProjectCard>
+      demoHref="/peliculas"  
+    />
+
+
       </div>
 
       <h3 className="mt-10 text-xl font-bold">Mini-Proyectos React</h3>
