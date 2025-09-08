@@ -38,5 +38,10 @@ export default function MovieCard({ movie, to }) {
   );
 
   // Si pasas "to", convierte la card en enlace (útil para detalle más adelante)
-  return to ? <Link to={typeof to === "string" ? to : `/peliculas/${id}`}>{card}</Link> : card;
+  return to ? (
+  <Link to={typeof to === "string" ? to : `/peliculas/${id}`} replace>
+    {card}
+  </Link>
+) : card;
+
 }
