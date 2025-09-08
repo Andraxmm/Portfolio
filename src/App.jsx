@@ -19,6 +19,7 @@ function useTheme() {
       ? 'dark'
       : 'light';
   };
+  
   const [theme, setTheme] = useState(getInitial);
   useEffect(() => {
     const root = document.documentElement;
@@ -361,9 +362,9 @@ function Projects() {
         tags={['localStorage', 'Tailwind CSS']}
         code="#"
         onDemo={openModal}
-        preview={<CustomUI />}
+        preview={<CustomUI persist={false} />}
       >
-        <CustomUI />
+        <CustomUI persist={false} />
       </ProjectCard> 
 
       </div>
