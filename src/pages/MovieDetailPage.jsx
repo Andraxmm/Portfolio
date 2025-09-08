@@ -33,7 +33,8 @@ export default function MovieDetailPage() {
 
   return (
     <main className="container-p py-8">
-      <Link to="/peliculas" className="btn-outline mb-4 inline-block">← Volver</Link>
+      <Link to="/peliculas" replace className="btn-outline mb-4 inline-block">← Volver</Link>
+
 
       <div className="grid md:grid-cols-2 gap-6">
         {/* Imagen */}
