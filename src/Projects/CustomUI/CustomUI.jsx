@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-export default function CustomUI() {
-    const paletasDeColores = {
+export default function CustomUI({ persist = true }) {
+  // 1) Paletas tal cual
+  const paletasDeColores = {
     claro: {
       nombre: 'Claro',
       fondo: 'bg-white',
@@ -29,54 +30,105 @@ export default function CustomUI() {
       texto: 'text-green-900',
       claseFondo: 'bg-green-200',
       altoContraste: { fondo: 'bg-black', texto: 'text-yellow-400' }
-    } 
-  }; 
+    }
+  };
 
-    const [tema, setTema] = useState(() => {
-        return localStorage.getItem('tema') || 'claro';
-    });
+  // 2) Guardamos lo que había en localStorage (para restaurar si fuese necesario)
+  const originalRef = useRef({
+    tema: localStorage.getItem('tema'),
+    tamanoFuente: localStorage.getItem('tamanoFuente'),
+    tipoFuente: localStorage.getItem('tipoFuente'),
+    altoContraste: localStorage.getItem('altoContraste'),
+  });
 
+  // 3) Tema inicial para las demos (sin persistencia)
+  const temaInicialDemo = (() => {
+    const saved = localStorage.getItem('theme'); // guardado por App
+    const isDark = saved ? saved === 'dark' : document.documentElement.classList.contains('dark');
+    return isDark ? 'oscuro' : 'claro';
+  })();
 
-    const [tamanoFuente, setTamanoFuente] = useState(() => {
-        return localStorage.getItem('tamanoFuente') || 'mediano';
-    });
+  // 4) Estados
+  const [tema, setTema] = useState(() => {
+    return persist
+      ? (localStorage.getItem('tema') || 'claro')
+      : temaInicialDemo;
+  });
+  const [tamanoFuente, setTamanoFuente] = useState(() =>
+    persist ? (localStorage.getItem('tamanoFuente') || 'mediano') : 'mediano'
+  );
+  const [tipoFuente, setTipoFuente] = useState(() =>
+    persist ? (localStorage.getItem('tipoFuente') || 'sans') : 'sans'
+  );
+  const [altoContraste, setAltoContraste] = useState(() =>
+    persist ? (localStorage.getItem('altoContraste') === 'true') : false
+  );
 
-    const [tipoFuente, setTipoFuente] = useState(() => {
-        return localStorage.getItem('tipoFuente') || 'sans';
-    }); 
+  // 5) Efectos de guardado (solo si persist=true)
+  useEffect(() => {
+    if (persist) localStorage.setItem('tema', tema);
+  }, [tema, persist]);
 
-    const [altoContraste, setAltoContraste] = useState(() => {
-        return localStorage.getItem('altoContraste') === 'true';
-    })
+  useEffect(() => {
+    if (persist) localStorage.setItem('tamanoFuente', tamanoFuente);
+  }, [tamanoFuente, persist]);
 
+  useEffect(() => {
+    if (persist) localStorage.setItem('tipoFuente', tipoFuente);
+  }, [tipoFuente, persist]);
 
-    useEffect(() => {
-        localStorage.setItem('tema', tema);
-    }, [tema]);
+  useEffect(() => {
+    if (persist) localStorage.setItem('altoContraste', altoContraste.toString());
+  }, [altoContraste, persist]);
 
-    useEffect(() => {
-        localStorage.setItem('tamanoFuente', tamanoFuente);
-    }, [tamanoFuente]);
+  // Nuevo efecto para sincronizar con el tema claro/oscuro del portafolio.
+  useEffect(() => {
+    if (!persist) {
+      // Usamos MutationObserver para detectar cambios en los atributos del <html>
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.attributeName === 'class') {
+            const isDarkNow = document.documentElement.classList.contains('dark');
+            // Si el portafolio está en oscuro, ponemos el tema 'oscuro' en la app.
+            if (isDarkNow) {
+              setTema('oscuro');
+            } else if (tema === 'oscuro') {
+              // Si el portafolio se va a claro, y la app estaba en oscuro,
+              // la app también se va a claro.
+              setTema('claro');
+            }
+          }
+        });
+      });
 
-    useEffect(() => {
-        localStorage.setItem('tipoFuente', tipoFuente);
-    }, [tipoFuente]);
+      // Observamos cambios en los atributos del elemento <html> (donde está la clase 'dark').
+      observer.observe(document.documentElement, { attributes: true });
 
-    useEffect(() => {
-    localStorage.setItem('altoContraste', altoContraste.toString());
-    }, [altoContraste]);
+      // Limpieza: desconectamos el observador al desmontar el componente.
+      return () => observer.disconnect();
+    }
+  }, [persist, tema]);
 
-    
-  // 2. Funciones para manejar los cambios de estado..
-  const handleThemeChange = (nuevoTema) => setTema(nuevoTema);
+  // 7) Handlers
+  const handleThemeChange = (nuevoTema) => {
+    if (persist) {
+      // Si el usuario elige 'claro' o 'oscuro', también actualizamos la clase del portafolio.
+      if (nuevoTema === 'oscuro') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }
+    setTema(nuevoTema);
+  };
   const handleFontSizeChange = (nuevoTamano) => setTamanoFuente(nuevoTamano);
   const handleFontTypeChange = (nuevoTipo) => setTipoFuente(nuevoTipo);
   const handleContrastToggle = () => setAltoContraste(prev => !prev);
 
-  // 3. 
+  // 8) Clases
   const temaSeleccionado = altoContraste
-   ? paletasDeColores[tema].altoContraste 
-   : paletasDeColores[tema];
+    ? paletasDeColores[tema].altoContraste
+    : paletasDeColores[tema];
 
   const contenedorClases = `
     p-6 rounded-lg shadow-lg transition-colors duration-300
@@ -85,21 +137,27 @@ export default function CustomUI() {
   `;
 
   const textoClases = `font-medium ${
-    tamanoFuente === 'pequeño' ? 'text-sm'
-    : tamanoFuente === 'grande' ? 'text-lg' 
-    : 'text-base'
-  } ${tipoFuente === 'serif' ? 'font-serif' 
-    : tipoFuente === 'mono' ? 'font-mono' 
-    : 'font-sans'}`;
+    tamanoFuente === 'pequeño'
+      ? 'text-sm'
+      : tamanoFuente === 'grande'
+      ? 'text-lg'
+      : 'text-base'
+  } ${
+    tipoFuente === 'serif'
+      ? 'font-serif'
+      : tipoFuente === 'mono'
+      ? 'font-mono'
+      : 'font-sans'
+  }`;
 
-  const claseBotonNoSeleccionado = 'bg-gray-300 text-gray-800'; 
+  const claseBotonNoSeleccionado = 'bg-gray-300 text-gray-800';
 
-
+  // 9) Render
   return (
     <div className={contenedorClases}>
       <div className="space-y-4 mb-6">
+        {/* 1. Selector de Tema */}
         <div>
-       {/* 1. Selector de Tema */}
           <span className="font-semibold mr-2">Tema:</span>
           {Object.keys(paletasDeColores).map((key) => (
             <button
@@ -114,7 +172,7 @@ export default function CustomUI() {
             </button>
           ))}
         </div>
-        
+
         {/* 2. Selector de Tamaño de Fuente */}
         <div>
           <span className="font-semibold mr-2">Tamaño de fuente:</span>
@@ -132,7 +190,7 @@ export default function CustomUI() {
           ))}
         </div>
 
-        {/* Selector de Tipo de Fuente */}
+        {/* 3. Selector de Tipo de Fuente */}
         <div>
           <span className="font-semibold mr-2">Tipo de fuente:</span>
           {['sans', 'serif', 'mono'].map((font) => (
@@ -149,7 +207,7 @@ export default function CustomUI() {
           ))}
         </div>
 
-        {/* Toggle de Alto Contraste */}
+        {/* 4. Toggle de Alto Contraste */}
         <div>
           <label className="flex items-center">
             <input
@@ -164,7 +222,11 @@ export default function CustomUI() {
       </div>
 
       {/* Área de Vista Previa */}
-      <div className={`p-4 rounded-md mt-4 ${altoContraste ? temaSeleccionado.fondo : paletasDeColores[tema].claseFondo}`}>
+      <div
+        className={`p-4 rounded-md mt-4 ${
+          altoContraste ? temaSeleccionado.fondo : paletasDeColores[tema].claseFondo
+        }`}
+      >
         <p className={`${textoClases} ${temaSeleccionado.texto}`}>
           ¡Hola! Este texto cambia su apariencia según tus selecciones.
         </p>
