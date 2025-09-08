@@ -21,6 +21,8 @@ export default function MoviesPage() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
+  const [genres, setGenres] = useState([]);
+  const [selectedGenre, setSelectedGenre] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
 
   // Al montar: si hay ?q= usa búsqueda; si no, carga tendencias
@@ -32,8 +34,19 @@ export default function MoviesPage() {
     } else {
       loadTrending();
     }
+
+    loadGenres();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  async function loadGenres() {
+    try {
+      const data = await api("/genre/movie/list");
+      setGenres(data.genres || []);
+    } catch (e) {
+      console.error("Error al cargar géneros", e);
+    }
+  }
 
   async function loadTrending() {
     try {
@@ -71,6 +84,11 @@ export default function MoviesPage() {
     doSearch(q);
   }
 
+  // Filtrado por género (si hay uno seleccionado)
+  const filteredMovies = selectedGenre
+    ? movies.filter((m) => m.genre_ids?.includes(Number(selectedGenre)))
+    : movies;
+
   return (
     <main className="container-p py-8">
       <h1 className="text-2xl font-bold mb-4">🎬 Buscador de Películas</h1>
@@ -88,6 +106,25 @@ export default function MoviesPage() {
         <button type="submit" className="btn">Buscar</button>
       </form>
 
+      {/* Filtro de género (solo si hay pelis) */}
+      {movies.length > 0 && (
+        <div className="mb-6">
+          <label className="font-medium mr-2">Filtrar por género:</label>
+          <select
+          value={selectedGenre}
+          onChange={(e) => setSelectedGenre(e.target.value)}
+          className="p-2 rounded border border-white/20 bg-white/10
+                    text-black dark:text-white bg-white dark:bg-slate-800"
+        >
+
+            <option value="">Todos</option>
+            {genres.map((g) => (
+              <option key={g.id} value={g.id}>{g.name}</option>
+            ))}
+          </select>
+        </div>
+      )}
+
       {/* Estados */}
       {err && <p className="text-red-400 mb-4">{err}</p>}
 
@@ -98,11 +135,11 @@ export default function MoviesPage() {
       >
         {loading
           ? Array.from({ length: 8 }).map((_, i) => <SkeletonCard key={i} />)
-          : movies.map((m) => <MovieCard key={m.id} movie={m} to />)}
+          : filteredMovies.map((m) => <MovieCard key={m.id} movie={m} to />)}
       </div>
 
       {/* Vacío (cuando no hay error ni loading) */}
-      {!loading && !err && movies.length === 0 && (
+      {!loading && !err && filteredMovies.length === 0 && (
         <p className="opacity-70 mt-4">Sin resultados.</p>
       )}
     </main>
