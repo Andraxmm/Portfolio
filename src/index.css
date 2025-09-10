@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Outfit:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -41,7 +43,4 @@
            hover:shadow-lg hover:-translate-y-0.5
            dark:bg-slate-800 dark:text-slate-200 dark:border-slate-700;
   }
-
- 
-
 }
