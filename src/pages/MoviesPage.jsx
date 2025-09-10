@@ -86,7 +86,7 @@ export default function MoviesPage() {
  async function onSubmit(e) {
   e.preventDefault();
   const q = query.trim();
-  setSearchParams(q ? { q } : {}, { replace: true }); // ✅ corregido
+ setSearchParams(q ? { q } : {});
   if (!q) return loadTrending();
   doSearch(q);
 }
