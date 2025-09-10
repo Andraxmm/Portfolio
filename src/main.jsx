@@ -5,6 +5,8 @@ import App from "./App.jsx";
 import MoviesPage from "./pages/MoviesPage.jsx"
 import "./index.css";
 import MovieDetailPage from "./pages/MovieDetailPage.jsx";
+import FavoritesPage from "./pages/FavoritesPage.jsx";
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -13,7 +15,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/" element={<App />} />
         <Route path="/peliculas" element={<MoviesPage />} />
         <Route path="/peliculas/:id" element={<MovieDetailPage />} />
-
+         <Route path="/favoritos" element={<FavoritesPage />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
