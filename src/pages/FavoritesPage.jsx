@@ -8,6 +8,7 @@ const LS_KEY = "favMovies";
 export default function FavoritesPage() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [err, setErr] = useState("");
 
   useEffect(() => {
     async function loadFavorites() {
@@ -32,6 +33,7 @@ export default function FavoritesPage() {
         setMovies(validMovies);
       } catch (error) {
         console.error("Error al cargar favoritos:", error);
+        setErr("No se pudieron cargar tus películas favoritas.");
       } finally {
         setLoading(false);
       }
@@ -43,23 +45,30 @@ export default function FavoritesPage() {
   return (
     <main className="container-p py-8">
       <Link to="/peliculas" replace className="btn-outline mb-4 inline-block">
-
         ← Volver al buscador
       </Link>
 
       <h1 className="text-2xl font-bold mb-6">❤️ Tus Películas Favoritas</h1>
 
-      {loading && <p>Cargando favoritos…</p>}
+      {/* Estado de carga */}
+      {loading && <p role="status">Cargando favoritos…</p>}
 
-      {!loading && movies.length === 0 && (
+      {/* Estado de error */}
+      {!loading && err && (
+        <p className="text-red-500 mb-4">{err}</p>
+      )}
+
+      {/* Estado vacío */}
+      {!loading && !err && movies.length === 0 && (
         <p className="opacity-70">Aún no tienes películas favoritas.</p>
       )}
 
+      {/* Grid de películas */}
       <div
         className="grid gap-4"
         style={{ gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))" }}
       >
-        {movies.map((movie) => (
+        {!loading && !err && movies.map((movie) => (
           <MovieCard key={movie.id} movie={movie} to />
         ))}
       </div>
