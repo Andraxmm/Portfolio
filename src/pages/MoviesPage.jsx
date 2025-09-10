@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import api from "../Projects/BuscadorPeliculas/api.js";
 import MovieCard from "../Projects/BuscadorPeliculas/MovieCard.jsx";
+import { Link } from "react-router-dom";
+
 
 function SkeletonCard() {
   return (
@@ -24,6 +26,11 @@ export default function MoviesPage() {
   const [genres, setGenres] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
+
+   // 👇 EFECTO: scroll al top cuando se monta el componente
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Al montar: si hay ?q= usa búsqueda; si no, carga tendencias
   useEffect(() => {
@@ -76,13 +83,14 @@ export default function MoviesPage() {
     }
   }
 
-  async function onSubmit(e) {
-    e.preventDefault();
-    const q = query.trim();
-    setSearchParams(q ? { q } : {}); // la query vive en la URL
-    if (!q) return loadTrending();
-    doSearch(q);
-  }
+ async function onSubmit(e) {
+  e.preventDefault();
+  const q = query.trim();
+  setSearchParams(q ? { q } : {}, { replace: true }); // ✅ corregido
+  if (!q) return loadTrending();
+  doSearch(q);
+}
+
 
   // Filtrado por género (si hay uno seleccionado)
   const filteredMovies = selectedGenre
@@ -90,8 +98,12 @@ export default function MoviesPage() {
     : movies;
 
   return (
+    
     <main className="container-p py-8">
       <h1 className="text-2xl font-bold mb-4">🎬 Buscador de Películas</h1>
+       <Link to="/favoritos" className="btn-outline mb-4 inline-block">
+        ❤️ Ver Favoritos
+      </Link>
 
       <form onSubmit={onSubmit} className="flex gap-2 mb-6" role="search">
         <input
