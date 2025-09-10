@@ -45,6 +45,7 @@ export default function MovieCard({ movie, to }) {
         onClick={toggleFavorite}
         className="absolute top-2 right-2 text-2xl drop-shadow-md"
         title={isFav ? "Quitar de favoritos" : "Añadir a favoritos"}
+        aria-label={isFav ? "Quitar de favoritos" : "Añadir a favoritos"}
       >
         {isFav ? "❤️" : "🤍"}
       </button>
