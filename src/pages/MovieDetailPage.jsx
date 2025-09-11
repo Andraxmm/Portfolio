@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import api from "../Projects/BuscadorPeliculas/api.js";
+import api from "../MiniApps/BuscadorPeliculas/Api";
 
 const IMG = "https://image.tmdb.org/t/p/w500";
 
