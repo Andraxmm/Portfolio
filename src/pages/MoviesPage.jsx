@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import api from "../Projects/BuscadorPeliculas/api.js";
-import MovieCard from "../Projects/BuscadorPeliculas/MovieCard.jsx";
+import api from "../MiniApps/BuscadorPeliculas/Api.js";
+import MovieCard from "../MiniApps/BuscadorPeliculas/MovieCard.jsx";
 import { Link } from "react-router-dom";
 
 
