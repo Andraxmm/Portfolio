@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 
 const IMG = "https://image.tmdb.org/t/p/w342";
 const LS_KEY = "favMovies";
