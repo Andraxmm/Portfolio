@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const IMG = "https://image.tmdb.org/t/p/w342";
 const LS_KEY = "favMovies";
@@ -45,6 +46,7 @@ export default function MovieCard({ movie, to }) {
         onClick={toggleFavorite}
         className="absolute top-2 right-2 text-2xl drop-shadow-md"
         title={isFav ? "Quitar de favoritos" : "Añadir a favoritos"}
+        aria-pressed={isFav}
       >
         {isFav ? "❤️" : "🤍"}
       </button>
