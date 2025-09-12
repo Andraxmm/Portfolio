@@ -1,37 +1,38 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react"; 
+import { Link } from "react-router-dom"; 
 
-const IMG = "https://image.tmdb.org/t/p/w342";
-const LS_KEY = "favMovies";
+const IMG = "https://image.tmdb.org/t/p/w342"; //base URL de posters de TMDB
+const LS_KEY = "favMovies"; //clave única en localStorage donde se guardan IDs favoritos
 
-export default function MovieCard({ movie, to }) {
+export default function MovieCard({ movie, to }) { //el objeto TMDB de la película. TO: si es true o un string, la card se envolverá en un <Link>.
   const { id, title, release_date, poster_path, overview } = movie;
   const year = release_date?.slice(0, 4) ?? "—";
-  const img = poster_path ? IMG + poster_path : null;
+  const img = poster_path ? IMG + poster_path : null; //arma la URL del póster si existe; si no, null para mostrar un placeholder.
 
-  const [isFav, setIsFav] = useState(false);
+  const [isFav, setIsFav] = useState(false); //hook para favorito
 
   // Leer favoritos al cargar
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem(LS_KEY)) || [];
-    setIsFav(stored.includes(id));
-  }, [id]);
+    const stored = JSON.parse(localStorage.getItem(LS_KEY)) || []; //Lee los favoritos guardados en localStorage (clave favMovies). (si no hay, usa [])
+    setIsFav(stored.includes(id)); //Marca la card como favorita si el id está en ese array.
+  }, [id]); //Se ejecuta al montar y cuando cambie el id
 
   // Alternar favorito
   function toggleFavorite(e) {
     e.preventDefault(); // para que no se active el <Link>
+    e.stopPropagation();
 
     const stored = JSON.parse(localStorage.getItem(LS_KEY)) || [];
     let updated;
 
-    if (stored.includes(id)) {
-      updated = stored.filter((favId) => favId !== id);
+    if (stored.includes(id)) { //comprueba si esta peli ya es favorita.
+      updated = stored.filter((favId) => favId !== id); //Si ya está → creamos un nuevo array sin ese id (inmutabilidad con filter).
     } else {
-      updated = [...stored, id];
+      updated = [...stored, id]; //Si no está → creamos un nuevo array añadiendo el id (inmutabilidad con spread)
     }
 
     localStorage.setItem(LS_KEY, JSON.stringify(updated));
-    setIsFav(updated.includes(id));
+    setIsFav(updated.includes(id)); //Actualizamos el estado local isFav inmediatamente según el array final
   }
 
   const card = (
@@ -45,7 +46,7 @@ export default function MovieCard({ movie, to }) {
         onClick={toggleFavorite}
         className="absolute top-2 right-2 text-2xl drop-shadow-md"
         title={isFav ? "Quitar de favoritos" : "Añadir a favoritos"}
-        aria-pressed={isFav}
+        aria-pressed={isFav} //mejora accesibilidad
       >
         {isFav ? "❤️" : "🤍"}
       </button>
@@ -55,8 +56,8 @@ export default function MovieCard({ movie, to }) {
         <img
           src={img}
           alt={`Póster de ${title}`}
-          className="w-full aspect-[2/3] object-cover"
-          loading="lazy"
+          className="w-full aspect-[2/3] object-cover" //aspect-[2/3] mantiene proporción uniforme aunque la imagen tarde en cargar
+          loading="lazy" //ahorra red y acelera.
         />
       ) : (
         <div className="w-full aspect-[2/3] grid place-items-center text-sm opacity-70">
@@ -66,7 +67,7 @@ export default function MovieCard({ movie, to }) {
 
       {/* Texto */}
       <div className="p-3 flex flex-col flex-grow">
-        <h3 className="font-semibold leading-tight line-clamp-2">{title}</h3>
+        <h3 className="font-semibold leading-tight line-clamp-2">{title}</h3> {/*line-clamp-2 y line-clamp-3 (requiere el plugin) “recortan” título y overview para que todas las cards tengan alturas parejas*/}
         <p className="text-xs opacity-70">{year}</p>
         {overview && (
           <p className="text-sm mt-2 opacity-80 line-clamp-3">
