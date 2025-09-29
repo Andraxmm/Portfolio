@@ -33,7 +33,7 @@ Incluye:
 ---
 
 ## 📸 Preview
-*(Aquí puedes poner capturas de pantalla de tu app más adelante)*
+
 
 ---
 
