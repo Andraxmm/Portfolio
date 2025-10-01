@@ -1,20 +1,28 @@
 import { motion } from "framer-motion";
+import {  FaStar, FaRegUserCircle } from "react-icons/fa";
 
 export default function About() {
   return (
     <section id="about" className="relative w-full py-16 md:py-24 bg-transparent">
       <div className="container-p">
         <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm p-8 md:p-12">
-          {/* Título */}
-          <motion.h2
-            className="text-3xl font-extrabold text-slate-900 dark:text-white"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            Sobre mí
-          </motion.h2>
+          
+          {/* 🔹 Título con icono y línea */}
+          <div className="mb-8">
+            <div className="flex items-center gap-3">
+              <FaStar  className="text-2xl text-slate-900 dark:text-white" />
+              <motion.h2
+                className="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                Sobre mí
+              </motion.h2>
+            </div>
+            <div className="mt-3 h-0.5 w-full bg-gradient-to-r from-yellow-400 via-sky-400 to-purple-500"></div>
+          </div>
 
           {/* Párrafo */}
           <motion.p
