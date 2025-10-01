@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaCode, FaReact } from "react-icons/fa"; // Icono para la sección Proyectos
+import { FaCode, FaReact } from "react-icons/fa";
 
 import Counter from "../../MiniApps/Counter/Counter.jsx";
 import Todo from "../../MiniApps/Todo/Todo.jsx";
@@ -10,6 +10,26 @@ import ProjectCard from "./ProjectsCard.jsx";
 import Modal from "../Modal.jsx";
 import TodoPreview from "./TodoPreview.jsx";
 
+/* ========= Enlaces a GitHub ========= */
+// ⚙️ Ajusta estos valores a tu cuenta/repositorio
+const GH_USER   = "Andraxmm";
+const GH_REPO   = "portfolio";   // nombre del repo en GitHub
+const GH_BRANCH = "main";        // "main" o "master"
+
+// Helper para construir URLs a carpetas del repo
+const gh = (path) =>
+  `https://github.com/${GH_USER}/${GH_REPO}/tree/${GH_BRANCH}/${path}`;
+
+// Mapa de rutas por mini-app (según tu estructura)
+const CODE_LINKS = {
+  peliculas: gh("src/MiniApps/BuscadorPeliculas"),
+  counter: gh("src/MiniApps/Counter"),
+  todo: gh("src/MiniApps/Todo"),
+  controlled: gh("src/MiniApps/Controlled"),
+  customUI: gh("src/MiniApps/CustomUI"),
+};
+/* ==================================== */
+
 export default function Projects() {
   const [modal, setModal] = useState({ open: false, title: "", content: null });
   const openModal = (title, content) =>
@@ -18,7 +38,7 @@ export default function Projects() {
 
   return (
     <section id="projects" className="container-p py-16 md:py-24">
-      {/* 🔹 Título con icono y línea */}
+      {/* Título con icono y línea */}
       <div className="mb-10">
         <div className="flex items-center gap-3">
           {/* Icono simple, sin fondo */}
@@ -27,16 +47,16 @@ export default function Projects() {
             Proyectos
           </h2>
         </div>
-        <div className="mt-3 h-0.5 w-full bg-gradient-to-r from-yellow-400 via-sky-400 to-purple-500"></div>
+        <div className="mt-3 h-0.5 w-full bg-gradient-to-r from-yellow-400 via-sky-400 to-purple-500" />
       </div>
 
-      {/* 🔹 Proyecto destacado */}
+      {/* Proyecto destacado */}
       <div className="mt-6 grid md:grid-cols-2 gap-6">
         <ProjectCard
           title="Buscador de Películas"
           desc="Busca películas en tiempo real con TMDB."
           tags={["React", "API", "fetch"]}
-          code="#"
+          code={CODE_LINKS.peliculas}
           preview={
             <div
               className="p-6 flex flex-col gap-4 rounded-lg h-full transition-all duration-300
@@ -67,11 +87,11 @@ export default function Projects() {
         />
       </div>
 
-      {/* 🔹 Mini proyectos */}
-     <h3 className="mt-10 text-xl font-bold flex items-center gap-2 text-slate-900 dark:text-white">
-  <FaReact className="text-cyan-500 text-2xl" />
-  Mini-Proyectos React
-</h3>
+      {/* Mini proyectos */}
+      <h3 className="mt-10 text-xl font-bold flex items-center gap-2 text-slate-900 dark:text-white">
+        <FaReact className="text-cyan-500 text-2xl" />
+        Mini-Proyectos React
+      </h3>
 
       <div className="mt-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* Counter */}
@@ -79,7 +99,7 @@ export default function Projects() {
           title="Counter"
           desc="Contador +/− con reset."
           tags={["useState"]}
-          code="#"
+          code={CODE_LINKS.counter}
           onDemo={openModal}
           preview={<Counter />}
         >
@@ -91,7 +111,7 @@ export default function Projects() {
           title="Todo List"
           desc="Añadir, marcar, eliminar tareas."
           tags={["listas", "keys"]}
-          code="#"
+          code={CODE_LINKS.todo}
           onDemo={openModal}
           preview={<TodoPreview />} // preview estático
         >
@@ -103,7 +123,7 @@ export default function Projects() {
           title="Controlled Inputs"
           desc="Formulario controlado + validación."
           tags={["formularios"]}
-          code="#"
+          code={CODE_LINKS.controlled}
           onDemo={openModal}
           preview={<ControlledForm />}
         >
@@ -115,7 +135,7 @@ export default function Projects() {
           title="Customizador de UI"
           desc="Persistencia de datos + manejo de estado para personalizar la UI."
           tags={["localStorage", "Tailwind CSS"]}
-          code="#"
+          code={CODE_LINKS.customUI}
           onDemo={openModal}
           preview={<CustomUI persist={false} />}
         >
