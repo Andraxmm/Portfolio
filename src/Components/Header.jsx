@@ -37,7 +37,7 @@ export default function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-slate-200 dark:bg-slate-900/70 dark:border-slate-800">
+    <header className="site-header sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-slate-200 dark:bg-slate-900/70 dark:border-slate-800">
       <div className="container-p h-16 flex items-center justify-between">
         <a href="#home" className="font-extrabold text-lg">
           Andrea Maña Moreno<span className="text-brand">.</span>
