@@ -4,7 +4,7 @@ import profileImage from "../assets/profile.jpg";
 export default function Hero() {
   const linkedin =
     "https://www.linkedin.com/in/andrea-ma%C3%B1a-moreno-204a2a1b5/";
-    const github = "https://github.com/Andraxmm"; 
+    const github = "https://github.com/Andraxmm/Portfolio"; 
   return (
     <section id="home" className="relative overflow-visible">
       <div className="container-p py-16 md:py-24">
