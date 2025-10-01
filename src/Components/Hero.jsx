@@ -2,6 +2,9 @@ import { motion } from "framer-motion";
 import profileImage from "../assets/profile.jpg";
 
 export default function Hero() {
+  const linkedin =
+    "https://www.linkedin.com/in/andrea-ma%C3%B1a-moreno-204a2a1b5/";
+    const github = "https://github.com/Andraxmm"; 
   return (
     <section id="home" className="relative overflow-visible">
       <div className="container-p py-16 md:py-24">
@@ -53,20 +56,20 @@ export default function Hero() {
             >
               <a
                 className="btn hover:scale-105 transition-transform"
-                href="https://github.com/Andraxmm"
+                href={github}
                 target="_blank"
                 rel="noreferrer"
               >
                 GitHub
               </a>
               <a
-                className="btn-outline hover:scale-105 transition-transform"
-                href="https://www.linkedin.com/"
-                target="_blank"
-                rel="noreferrer"
+              className="btn-outline hover:scale-105 transition-transform"
+              href={linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
               >
-                LinkedIn
-              </a>
+              LinkedIn
+             </a>
               <a
                 className="btn-outline hover:scale-105 transition-transform"
                 href="#projects"
