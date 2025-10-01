@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../Api.js";
-//import MovieCard from "../MovieCard.jsx";
+import MovieCard from "../MovieCard.jsx";
 
 const LS_KEY = "favMovies";
 
