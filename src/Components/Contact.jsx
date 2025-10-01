@@ -5,7 +5,7 @@ export default function Contact() {
   const email = "manamorenoandrea@gmail.com";
   const linkedin =
     "https://www.linkedin.com/in/andrea-ma%C3%B1a-moreno-204a2a1b5/";
-  const github = "https://github.com/Andraxmm"; 
+  const github = "https://github.com/Andraxmm/Portfolio"; 
 
   return (
     <section id="contact" className="container-p py-20 md:py-28">
