@@ -40,7 +40,7 @@ export default function Stack() {
       <div className="container-p mb-10">
         <div className="flex items-center gap-3">
           <FaLayerGroup className="text-2xl text-slate-900 dark:text-white" />
-          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white">
+          <h2 className="text-2xl md:text-3xl  font-extrabold text-slate-900 dark:text-white">
             Stack
           </h2>
         </div>
