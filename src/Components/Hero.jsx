@@ -4,22 +4,7 @@ import profileImage from "../assets/profile.jpg";
 export default function Hero() {
   return (
     <section id="home" className="relative overflow-visible">
-      {/* Fondo degradado */}
-      <div
-  aria-hidden="true"
-  className="
-    absolute left-1/2 -translate-x-1/2 top-0
-    w-screen max-w-none
-    h-[420px] md:h-[520px]
-    pointer-events-none -z-10
-    bg-gradient-to-b
-    from-[#4c1d95]/40 via-[#6d28d9]/30 to-[#f5f3ff]/0
-    dark:from-indigo-500/25 dark:via-indigo-500/10 dark:to-transparent
-  "
-/>
-
-      
-        <div className="container-p py-16 md:py-24">
+      <div className="container-p py-16 md:py-24">
         <div className="grid md:grid-cols-2 items-center gap-10">
           
           {/* TEXTO */}
@@ -45,7 +30,9 @@ export default function Hero() {
               transition={{ duration: 0.6 }}
             >
               Construyo interfaces claras, rápidas y accesibles con{" "}
-              <span className="text-brand">React</span>.
+              <span className="react-gradient-text">
+                React
+              </span>.
             </motion.h1>
 
             <motion.p
@@ -97,7 +84,9 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             <motion.div
-              className="relative w-56 h-56 md:w-72 md:h-72 rounded-full bg-gradient-to-br from-brand to-indigo-300 p-1 shadow-xl"
+              className="relative w-56 h-56 md:w-72 md:h-72 rounded-full 
+                         p-[3px] shadow-xl bg-gradient-to-r 
+                         from-sky-400 via-purple-500 to-yellow-400"
               animate={{ y: [0, -10, 0] }}
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
             >
@@ -111,9 +100,6 @@ export default function Hero() {
 
         </div>
       </div>
-
-   
-
     </section>
   );
 }
