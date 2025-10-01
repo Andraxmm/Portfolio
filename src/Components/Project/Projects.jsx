@@ -10,10 +10,6 @@ import Modal from "../Modal.jsx";
 import TodoPreview from "./TodoPreview.jsx";
 
 
-
-
-
-
 export default function Projects() {
   const [modal, setModal] = useState({ open: false, title: '', content: null });
   const openModal = (title, content) => setModal({ open: true, title, content });
@@ -24,14 +20,39 @@ export default function Projects() {
       <h2 className="text-3xl font-bold">Proyectos</h2>
 
       <div className="mt-6 grid md:grid-cols-2 gap-6">
-      <ProjectCard
-      title="Buscador de Películas"
-      desc="Busca películas en tiempo real con TMDB."
-      tags={['React', 'API', 'fetch']}
-      code="#"
-      preview={<div className="text-sm text-slate-600">Preview del proyecto</div>}
-      demoHref="/peliculas"  
-    />
+   <ProjectCard
+  title="Buscador de Películas"
+  desc="Busca películas en tiempo real con TMDB."
+  tags={['React', 'API', 'fetch']}
+  code="#"
+  preview={
+    <div
+      className="p-6 flex flex-col gap-4 rounded-lg h-full transition-all duration-300
+                 bg-gradient-to-br from-indigo-50 via-purple-50 to-white
+                 hover:shadow-xl hover:-translate-y-1 hover:from-indigo-100 hover:via-purple-100"
+    >
+      {/* Input con icono */}
+      <div className="flex items-center gap-2">
+        <span className="text-indigo-500">🔍</span>
+        <input
+          type="text"
+          placeholder="Busca una película..."
+          disabled
+          className="flex-1 rounded-lg border px-3 py-2 text-sm 
+                     bg-white text-slate-600 shadow-md"
+        />
+      </div>
+
+      {/* Resultados simulados */}
+      <div className="space-y-2 text-sm">
+        <div className="h-4 w-3/4 bg-indigo-200 rounded animate-pulse"></div>
+        <div className="h-4 w-2/3 bg-purple-200 rounded animate-pulse"></div>
+        <div className="h-4 w-1/2 bg-pink-200 rounded animate-pulse"></div>
+      </div>
+    </div>
+  }
+  demoHref="/peliculas"
+/>
 
 
       </div>
