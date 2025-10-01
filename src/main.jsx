@@ -2,10 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App.jsx";
-import MoviesPage from "./pages/MoviesPage.jsx"
+import MoviesPage from "./MiniApps/BuscadorPeliculas/pages/MoviesPage.jsx"
 import "./index.css";
-import MovieDetailPage from "./pages/MovieDetailPage.jsx";
-import FavoritesPage from "./pages/FavoritesPage.jsx";
+import MovieDetailPage from "./MiniApps/BuscadorPeliculas/pages/MovieDetailPage.jsx";
+import FavoritesPage from "./MiniApps/BuscadorPeliculas/pages/FavoritesPage.jsx";
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
