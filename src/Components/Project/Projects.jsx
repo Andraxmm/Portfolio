@@ -43,7 +43,7 @@ export default function Projects() {
         <div className="flex items-center gap-3">
           {/* Icono simple, sin fondo */}
           <FaCode className="text-2xl md:text-3xl text-slate-900 dark:text-white" />
-          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white">
             Proyectos
           </h2>
         </div>
