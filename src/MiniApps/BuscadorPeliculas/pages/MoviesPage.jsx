@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import api from "../Api.js";
-//import MovieCard from "../MovieCard.jsx";
+import MovieCard from "../MovieCard.jsx";
 import { Link } from "react-router-dom";
 
 
