@@ -118,6 +118,7 @@ Build de producción
 npm run build
 npm run preview
 
+--- 
 
 🌓 Tema y accesibilidad
 Dark mode por defecto (con toggle a claro).
@@ -128,6 +129,8 @@ UI responsive (móvil, tablet y desktop).
 
 Feedback táctil en botones/tarjetas en dispositivos móviles.
 
+---
+
 🔗 Enlaces
 Portfolio (repo): https://github.com/Andraxmm/Portfolio
 
@@ -137,14 +140,14 @@ LinkedIn: https://www.linkedin.com/in/andrea-ma%C3%B1a-moreno-204a2a1b5/
 
 Cuando despliegues (Vercel/Netlify), añade aquí el link de demo.
 
+---
+
 🧭 Roadmap / Próximos pasos
 Internacionalización (ES/EN)
 
-Mejoras de accesibilidad (focus states avanzados)
-
 Tests (Vitest/RTL)
 
-Más mini-apps (fetch, charts, drag&drop…)
+---
 
 🙌 Créditos
 Datos e imágenes de películas por TMDB.
