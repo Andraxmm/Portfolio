@@ -81,14 +81,6 @@ src/
 
 ---
 
-## 📸 Preview
-
-> ![Home Dark](./src/assets/HomeDark.png)  
-> ![Projects](./src/assets/Projects.png)  
-> ![Movies](./src/assets/BPeliculas.png)
-
----
-
 ## ⚙️ Configuración
 
 ### Clonar e instalar
