@@ -19,8 +19,6 @@ Este repositorio contiene mi **portfolio en React** donde muestro mini-proyectos
 
 ## 🗂️ Estructura del proyecto
 
-
-```text
 src/
 ├─ components/
 │  ├─ Header.jsx
@@ -53,9 +51,6 @@ src/
 ├─ App.jsx
 ├─ main.jsx
 └─ index.css
-
-
-
 
 ---
 
@@ -97,7 +92,6 @@ src/
 ## ⚙️ Configuración
 
 ### Clonar e instalar
-```bash
 git clone https://github.com/Andraxmm/Portfolio.git
 cd Portfolio
 npm install
@@ -151,7 +145,6 @@ Cuando despliegues (Vercel/Netlify), añade aquí el link de demo.
 
 🧭 Roadmap / Próximos pasos
 Internacionalización (ES/EN)
-
 Tests (Vitest/RTL)
 
 ---
