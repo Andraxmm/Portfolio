@@ -32,7 +32,7 @@ export default function About() {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            Soy una desarrolladora frontend junior con foco en React, JavaScript y accesibilidad.
+            Soy una desarrolladora frontend con foco en React, JavaScript y accesibilidad.
             Disfruto convertir diseños en experiencias usables y mantener el código claro.
             Actualmente construyo mini-apps para consolidar fundamentos (estado, efectos, formularios, fetch).
           </motion.p>
