@@ -3,7 +3,7 @@ import {  FaStar, FaRegUserCircle } from "react-icons/fa";
 
 export default function About() {
   return (
-    <section id="about" className="relative w-full py-16 md:py-24 bg-transparent">
+    <section id="about" className="relative w-full py-16 md:py-24 bg-transparent scroll-mt-24 md:scroll-mt-28">
       <div className="container-p">
         <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm p-8 md:p-12">
           
