@@ -18,7 +18,8 @@ Este repositorio contiene mi **portfolio en React** donde muestro mini-proyectos
 ---
 
 ## 🗂️ Estructura del proyecto
-``
+
+```
 src/
 ├─ components/
 │  ├─ Header.jsx
@@ -51,6 +52,7 @@ src/
 ├─ App.jsx
 ├─ main.jsx
 └─ index.css
+```
 
 ---
 
