@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio | React One-Page</title>
     
-    <script>
-    (function () {
-      const saved = localStorage.getItem('theme') || 'light';
-      if (saved === 'dark') document.documentElement.classList.add('dark');
-      else document.documentElement.classList.remove('dark');
-    })();
+  <script>
+  (function () {
+    try {
+      const saved = localStorage.getItem('theme');
+      const wantsDark = saved ? saved === 'dark' : true; 
+      if (wantsDark) document.documentElement.classList.add('dark');
+    } catch (e) {}
+  })();
 </script>
+
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
