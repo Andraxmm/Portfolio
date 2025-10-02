@@ -56,38 +56,52 @@ src/
 
 
 
+
 ---
 
-## 🧪 Mini-proyectos incluidos
+## 🧪 Mini-proyectos
 
-- ➕ **Counter** — contador con incrementar/decrementar y reset.  
-- ✅ **Todo List** — añadir, marcar y eliminar tareas.  
-- 📝 **Controlled Inputs** — formulario controlado con validación básica.  
+- ➕ **Counter** — contador con incrementar/decrementar y reset.
+- ✅ **Todo List** — añadir, marcar y eliminar tareas.
+- 📝 **Controlled Inputs** — formulario controlado con validación básica.
 - 🎛️ **Customizador de UI** — personaliza tema/fuentes con `localStorage`.
 
 ---
 
 ## 🎥 Proyecto principal: Buscador de Películas (TMDB)
 
-**Características:**
-
+**Características**
 - 🔍 Búsqueda en tiempo real  
-- 🖼️ Resultados con título + póster  
+- 🖼️ Resultados con título y póster  
 - 📄 Detalle de película con sinopsis  
 - ⭐ Favoritos persistidos en `localStorage`  
-- 🧭 Navegación con **React Router**
+- 🧭 Navegación con React Router
 
-**Rutas:**
+**Rutas**
+- `/peliculas` — listado / buscador  
+- `/peliculas/:id` — detalle  
+- `/favoritos` — favoritos guardados  
 
+> ℹ️ TMDB requiere API key (ver *Configuración*).
 
-/peliculas — listado/buscador
+---
 
-/peliculas/:id — detalle
+## 📸 Preview
 
-/favoritos — favoritos guardados
+> ![Home Dark](./src/assets/HomeDark.png)  
+> ![Projects](./src/assets/Projects.png)  
+> ![Movies](./src/assets/BPeliculas.png)
 
+---
 
-> ℹ️ TMDB requiere API key (ver **Configuración**).
+## ⚙️ Configuración
+
+### Clonar e instalar
+```bash
+git clone https://github.com/Andraxmm/Portfolio.git
+cd Portfolio
+npm install
+
 
 ---
 
@@ -99,13 +113,6 @@ src/
 
 ---
 
-## ⚙️ Configuración
-
-### Clonar e instalar
-```bash
-git clone https://github.com/Andraxmm/Portfolio.git
-cd Portfolio
-npm install
 
 Variables de entorno (TMDB)
 VITE_TMDB_API_KEY=TU_API_KEY_DE_TMDB
