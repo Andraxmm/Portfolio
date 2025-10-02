@@ -44,7 +44,7 @@ export default function Stack() {
   ];
 
   return (
-    <section id="stack" className="w-full py-16 md:py-24 bg-transparent">
+    <section id="stack" className="w-full py-16 md:py-24 bg-transparent scroll-mt-24 md:scroll-mt-28">
       {/* 🔹 Título con icono y línea */}
       <div className="container-p mb-10">
         <div className="flex items-center gap-3">
