@@ -106,7 +106,7 @@ npm install
 **Ejecutar en desarrollo**
 - npm run dev
 
-**Build de producción*
+**Build de producción**
 - npm run build
 - npm run preview
 
