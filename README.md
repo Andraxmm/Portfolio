@@ -18,6 +18,11 @@ Este repositorio contiene mi **portfolio en React** donde muestro mini-proyectos
 ---
 
 ## 🗂️ Estructura del proyecto
+
+<details>
+<summary>Ver árbol</summary>
+
+```text
 src/
 ├─ components/
 │  ├─ Header.jsx
@@ -26,12 +31,12 @@ src/
 │  │  ├─ Hero.jsx
 │  │  ├─ About.jsx
 │  │  ├─ Stack.jsx
-│  │  ├─ Projects/
-│  │  │  ├─ Projects.jsx
-│  │  │  ├─ ProjectsCard.jsx
-│  │  │  ├─ Modal.jsx
-│  │  │  └─ TodoPreview.jsx
-│  │  └─ Contact.jsx
+│  │  └─ Projects/
+│  │     ├─ Projects.jsx
+│  │     ├─ ProjectsCard.jsx
+│  │     ├─ Modal.jsx
+│  │     └─ TodoPreview.jsx
+│  └─ Contact.jsx
 │
 ├─ MiniApps/
 │  ├─ Counter/
@@ -50,6 +55,7 @@ src/
 ├─ App.jsx
 ├─ main.jsx
 └─ index.css
+
 
 
 ---
@@ -97,22 +103,18 @@ src/
 
 ## ⚙️ Configuración
 
-**Clonar e instalar**
+### Clonar e instalar
 ```bash
 git clone https://github.com/Andraxmm/Portfolio.git
 cd Portfolio
 npm install
 
-
-
-## Variables de entorno (TMDB)
-Crea un archivo .env en la raíz:
+Variables de entorno (TMDB)
 VITE_TMDB_API_KEY=TU_API_KEY_DE_TMDB
 
 
 Ejecutar en desarrollo
 npm run dev
-
 
 Build de producción
 npm run build
@@ -120,18 +122,15 @@ npm run preview
 
 
 🌓 Tema y accesibilidad
+Dark mode por defecto (con toggle a claro).
 
-🕶️ Dark mode por defecto (con toggle a claro).
+Desplazamiento suave y compensación de anclas para header fijo.
 
-🧭 Desplazamiento suave y compensación de anclas para header fijo.
+UI responsive (móvil, tablet y desktop).
 
-📱 UI responsive (móvil, tablet y desktop).
-
-👆 Feedback táctil en botones/tarjetas en dispositivos móviles.
-
+Feedback táctil en botones/tarjetas en dispositivos móviles.
 
 🔗 Enlaces
-
 Portfolio (repo): https://github.com/Andraxmm/Portfolio
 
 GitHub: https://github.com/Andraxmm
@@ -140,17 +139,14 @@ LinkedIn: https://www.linkedin.com/in/andrea-ma%C3%B1a-moreno-204a2a1b5/
 
 Cuando despliegues (Vercel/Netlify), añade aquí el link de demo.
 
+🧭 Roadmap / Próximos pasos
+Internacionalización (ES/EN)
 
-📌 Roadmap / Próximos pasos
+Mejoras de accesibilidad (focus states avanzados)
 
- Internacionalización (ES/EN)
+Tests (Vitest/RTL)
 
- Mejoras de accesibilidad (focus states avanzados)
-
- Tests básicos (Vitest/RTL)
-
- Añadir más mini-apps (fetch, charts, drag&drop…)
-
+Más mini-apps (fetch, charts, drag&drop…)
 
 🙌 Créditos
 Datos e imágenes de películas por TMDB.
