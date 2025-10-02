@@ -24,7 +24,6 @@
       #ede9fe 80%,    /* lavanda muy suave */
       #ffffff 100%    /* blanco limpio */
     );
-
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
@@ -48,7 +47,7 @@
 
 /* -------- Components ------ */
 @layer components {
-  .container-p { @apply max-w-6xl mx-auto px-4; }
+  .container-p { @apply max-w-6xl mx-auto px-4 sm:px-6; }
 
   /* ✨ Header con efecto glass elegante */
   .site-header {
@@ -69,22 +68,16 @@
   }
 
   /* Botón secundario (outline) */
-/* Botón secundario (outline) */
-.btn-outline {
-  @apply inline-flex items-center gap-2 rounded-xl border 
-         px-4 py-2 font-semibold
-         border-indigo-300 text-indigo-700
-         dark:border-indigo-500 dark:text-indigo-300
-         transition-colors duration-200;
-}
-
-/* Hover: blanco + texto morado en claro, gris oscuro + texto morado claro en dark */
-.btn-outline:hover {
-  @apply bg-white text-indigo-600 shadow-sm;
-}
-.dark .btn-outline:hover {
-  @apply bg-slate-800 text-indigo-300 shadow-sm;
-}
+  .btn-outline {
+    @apply inline-flex items-center gap-2 rounded-xl border 
+           px-4 py-2 font-semibold
+           border-indigo-300 text-indigo-700
+           dark:border-indigo-500 dark:text-indigo-300
+           transition-colors duration-200;
+  }
+  /* Hover: blanco + texto morado en claro, gris oscuro + texto morado claro en dark */
+  .btn-outline:hover { @apply bg-white text-indigo-600 shadow-sm; }
+  .dark .btn-outline:hover { @apply bg-slate-800 text-indigo-300 shadow-sm; }
 
   .chip {
     @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-medium
@@ -104,17 +97,40 @@
 
   /* 🎨 Texto React degradado amarillo → verde → cian */
   .react-gradient-text {
-    background: linear-gradient(
-      90deg,
-      #facc15,   /* amarillo */
-      #4ade80,   /* verde lima */
-      #38bdf8    /* cian */
-    );
+    background: linear-gradient(90deg, #facc15, #4ade80, #38bdf8);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
-  .project-card {
-    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl;
+  .project-card { @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl; }
+
+  /* ——— Tap feedback (móvil) + suavizar transiciones ——— */
+  .btn, .btn-outline, .card {
+    -webkit-tap-highlight-color: transparent; /* quita el destello gris en iOS */
+    touch-action: manipulation;               /* evita doble-tap zoom en botones */
+    transition:
+      transform 150ms ease,
+      box-shadow 150ms ease,
+      background-color 150ms ease,
+      color 150ms ease,
+      border-color 150ms ease;
+  }
+
+  /* Desktop (ratón): hover más marcado */
+  @media (hover: hover) and (pointer: fine) {
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px rgba(0,0,0,.15);
+    }
+  }
+
+  /* Móvil (táctil): feedback al tocar */
+  @media (hover: none) and (pointer: coarse) {
+    .btn:active,
+    .btn-outline:active,
+    .card:active {
+      transform: translateY(2px) scale(.985);
+      box-shadow: 0 6px 12px rgba(0,0,0,.12);
+    }
   }
 }
