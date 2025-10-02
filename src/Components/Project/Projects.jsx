@@ -37,7 +37,7 @@ export default function Projects() {
   const closeModal = () => setModal((m) => ({ ...m, open: false }));
 
   return (
-    <section id="projects" className="container-p py-16 md:py-24">
+    <section id="projects" className="container-p py-16 md:py-24 scroll-mt-24 md:scroll-mt-28">
       {/* Título con icono y línea */}
       <div className="mb-10">
         <div className="flex items-center gap-3">
@@ -70,8 +70,7 @@ export default function Projects() {
                   type="text"
                   placeholder="Busca una película..."
                   disabled
-                  className="flex-1 rounded-lg border px-3 py-2 text-sm 
-                             bg-white text-slate-600 shadow-md"
+                  className="flex-1 rounded-lg border px-3 py-2 text-base md:text-sm bg-white text-slate-600 shadow-md"
                 />
               </div>
 
