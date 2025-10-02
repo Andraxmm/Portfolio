@@ -72,36 +72,41 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Columna derecha: foto (md+) */}
-          <div className="hidden md:flex md:justify-self-end md:pr-2 lg:pr-4 xl:pr-6 xl:translate-x-2">
-            <div className="relative">
-              {/* Borde degradado alrededor de la foto */}
-              <div
+       {/* Columna derecha: foto */}
+        <div className="hidden md:flex md:justify-self-end md:pr-2 lg:pr-4 xl:pr-10 xl:translate-x-4 2xl:pr-14 2xl:translate-x-8">
+          <div className="relative">
+            {/* Borde degradado un pelín más gordo */}
+            <div
+              className="
+                p-[4px] rounded-full
+                bg-gradient-to-tr from-indigo-400 via-sky-400 to-purple-500
+                dark:bg-[linear-gradient(135deg,#facc15_0%,#4ade80_35%,#38bdf8_70%,#a855f7_100%)]
+              "
+            >
+              <img
+                src={profile}
+                alt="Andrea Maña Moreno"
+                width={360}
+                height={360}
                 className="
-                  p-[3px] rounded-full
-                  bg-gradient-to-tr from-indigo-400 via-sky-400 to-purple-500
-                  dark:bg-[linear-gradient(135deg,#facc15_0%,#4ade80_35%,#38bdf8_70%,#a855f7_100%)]
+                  block h-72 w-72 lg:h-80 lg:w-80 xl:h-[22rem] xl:w-[22rem] rounded-full object-cover
+                  ring-1 ring-black/5 dark:ring-white/10 shadow-2xl
+                  bg-white/60 dark:bg-slate-900/40
                 "
-              >
-                <img
-                  src={profile}
-                  alt="Andrea Maña Moreno"
-                  width={320}
-                  height={320}
-                  className="block h-72 w-72 lg:h-80 lg:w-80 rounded-full object-cover
-                             ring-1 ring-black/5 dark:ring-white/10 shadow-2xl
-                             bg-white/60 dark:bg-slate-900/40"
-                />
-              </div>
-
-              {/* Brillo suave */}
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0 rounded-full
-                           shadow-[0_0_60px_12px_rgba(56,189,248,0.25)]"
               />
             </div>
+
+            {/* Glow un poco más suave */}
+            <div
+              aria-hidden="true"
+              className="
+                pointer-events-none absolute inset-0 rounded-full
+                shadow-[0_0_60px_12px_rgba(56,189,248,0.18)]
+                dark:shadow-[0_0_60px_12px_rgba(56,189,248,0.22)]
+              "
+            />
           </div>
+        </div>
         </div>
       </div>
 
