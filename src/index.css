@@ -8,26 +8,27 @@
 @layer base {
   :root { --radius: 16px; }
   html, body, #root { height: 100%; }
+/* 🎨 Fondo global (MODO CLARO) — azul suave, sin lila */
+body {
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+               'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji','Segoe UI Emoji';
+  @apply text-slate-900 dark:text-slate-100;
 
-  body {
-    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
-                 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji','Segoe UI Emoji';
-
-    /* 🎨 Fondo degradado global (modo claro) */
-    @apply text-slate-900 dark:text-slate-100;
-    background: linear-gradient(
+  /* degrade suave tipo cielo → blanco (combina con el hero) */
+  background:
+    radial-gradient(1200px 800px at 12% -10%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 60%),
+    linear-gradient(
       to bottom,
-      #7c3aed 0%,
-      #8b5cf6 20%,
-      #a5b4fc 40%,
-      #ffffff 60%,
-      #ede9fe 80%,
-      #ffffff 100%
+      #cfe3ff 0%,   /* azul muy claro */
+      #b7d1ff 25%,  /* azul pastel */
+      #eaf1ff 55%,  /* casi blanco azulado */
+      #ffffff 100%  /* blanco */
     );
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 
   /* 🌑 Versión modo oscuro */
   .dark body {
@@ -102,12 +103,26 @@
            dark:hover:bg-slate-700;
   }
 
-  /* 🎨 Texto React degradado amarillo → verde → cian */
-  .react-gradient-text {
-    background: linear-gradient(90deg, #facc15, #4ade80, #38bdf8);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+  /* MODO CLARO: lila → azul (mejor legibilidad sobre fondo claro) */
+.react-gradient-text {
+  background: linear-gradient(90deg, #724edd 0%, #3775d1 60%, #53b0d8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+   -webkit-text-fill-color: transparent; /* Safari */
+  display: inline-block;
+}
+
+/* MODO OSCURO: mantenemos amarillo → verde → cian */
+.dark .react-gradient-text {
+  background: linear-gradient(90deg, #facc15, #4ade80, #38bdf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
 
   .project-card { @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl; }
 
@@ -139,5 +154,69 @@
       transform: translateY(2px) scale(.985);
       box-shadow: 0 6px 12px rgba(0,0,0,.12);
     }
+  }
+
+  /* ============================
+     HERO — Cielo estrellado
+     ============================ */
+
+  /* Fondo base del hero: gradiente (claro y oscuro) */
+.hero-sky-bg {
+  background:
+    radial-gradient(900px 700px at 12% 105%, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0) 60%),
+    linear-gradient(
+      180deg,
+      #7f9cf7 0%,    /* indigo azulado suave */
+      #8eaaf8 32%,
+      #aebcfb 58%,
+      #ecebff 85%,  /* lavanda claro */
+      #f6f5ff 100%  /* lavanda muy suave al final */
+    );
+}
+
+
+  .dark .hero-sky-bg {
+    /* MODO OSCURO: profundo, tipo noche */
+    background:
+      radial-gradient(1100px 800px at 8% 120%, rgba(56,189,248,0.15) 0%, rgba(0,0,0,0) 60%),
+      linear-gradient(180deg, #0b1220 0%, #0f172a 45%, #0b1026 100%);
+  }
+
+  /* Capa de estrellas: mucha densidad + parpadeo sutil */
+  .hero-sky-stars {
+    opacity: .8;
+    mix-blend-mode: screen;
+    background:
+      /* capa 1 (muchas, pequeñas) */
+      radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,.95) 99%, transparent) 0 0 / 200px 200px repeat,
+      radial-gradient(1px 1px at 120px 80px, rgba(255,255,255,.85) 99%, transparent) 0 0 / 250px 250px repeat,
+      /* capa 2 (tamaño medio) */
+      radial-gradient(2px 2px at 80px 120px, rgba(255,255,255,.8) 99%, transparent) 0 0 / 350px 350px repeat,
+      radial-gradient(2px 2px at 60px 40px, rgba(255,255,255,.75) 99%, transparent) 0 0 / 420px 420px repeat,
+      /* capa 3 (alguna grande y muy dispersa) */
+      radial-gradient(3px 3px at 150px 90px, rgba(255,255,255,.7) 99%, transparent) 0 0 / 600px 600px repeat;
+    animation: hero-twinkle 4s ease-in-out infinite alternate,
+               hero-drift 60s linear infinite;
+  }
+  .dark .hero-sky-stars { opacity: .95; }
+}
+
+/* -------- Utilities & keyframes ------ */
+@layer utilities {
+  /* Tu animación de twinkle existente */
+  @keyframes twinkle {
+    0%, 100% { opacity: .35; }
+    50%      { opacity: .9;  }
+  }
+  .animate-twinkle { animation: twinkle 2.6s ease-in-out infinite; }
+
+  /* Parpadeo sutil de estrellas + deriva de capas */
+  @keyframes hero-twinkle {
+    from { filter: brightness(1);   }
+    to   { filter: brightness(1.25); }
+  }
+  @keyframes hero-drift {
+    0%   { background-position: 0 0, 0 0, 0 0, 0 0, 0 0; }
+    100% { background-position: 60px 40px, -40px 20px, 30px -30px, -30px -20px, 20px 10px; }
   }
 }
