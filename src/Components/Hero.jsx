@@ -44,7 +44,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Desarrolladora frontend junior enfocada en buenas prácticas y UX simple.
+              Desarrolladora frontend enfocada en buenas prácticas y UX simple.
               Busco mi primera oportunidad en un equipo donde seguir creciendo.
             </motion.p>
 
