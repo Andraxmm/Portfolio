@@ -8,7 +8,7 @@ export default function Contact() {
   const github = "https://github.com/Andraxmm/Portfolio"; 
 
   return (
-    <section id="contact" className="container-p py-20 md:py-28">
+    <section id="contact" className="container-p py-20 md:py-28 scroll-mt-24 md:scroll-mt-28">
       {/* 🔹 Título con icono y línea */}
       <div className="mb-10">
         <div className="flex items-center gap-3">
