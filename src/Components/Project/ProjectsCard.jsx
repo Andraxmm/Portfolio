@@ -13,16 +13,20 @@ export default function ProjectCard({
   return (
     <div className="card overflow-hidden">
       {preview ? (
-        <div className="h-40 bg-slate-200 flex items-center justify-center overflow-hidden rounded-t-xl">
+        /* 👇 CAMBIO: quita h-40 y usa aspect ratio responsivo */
+        <div className="bg-slate-200 flex items-center justify-center overflow-hidden rounded-t-xl
+                        aspect-[16/9] sm:aspect-[3/1]">
           <div className="pointer-events-none select-none opacity-95 scale-95">
             {preview}
           </div>
         </div>
       ) : (
-        <div className="h-40 bg-slate-200" />
+        /* 👇 Igual aquí: sin h-40, misma relación de aspecto */
+        <div className="bg-slate-200 rounded-t-xl aspect-[16/9] sm:aspect-[3/1]" />
       )}
 
-      <div className="p-4">
+      {/* 👇 Pequeño ajuste de padding responsivo (opcional) */}
+      <div className="p-4 sm:p-5">
         <h3 className="text-lg font-bold">{title}</h3>
         <p className="mt-2 text-sm text-slate-600">{desc}</p>
 
@@ -34,7 +38,8 @@ export default function ProjectCard({
           ))}
         </div>
 
-        <div className="mt-4 flex gap-3">
+        {/* 👇 permite que los botones bajen de línea en pantallas estrechas */}
+        <div className="mt-4 flex flex-wrap gap-3">
           {demoHref ? (
             <Link to={demoHref} className="btn">
               Demo
@@ -50,7 +55,7 @@ export default function ProjectCard({
             )
           )}
 
-          {/* Mostrar "Código" solo si hay URL */}
+          
           {code && (
             <a
               className="btn-outline"
