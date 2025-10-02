@@ -100,18 +100,15 @@ npm install
 ---
 
 **Variables de entorno (TMDB)**
-
-VITE_TMDB_API_KEY=TU_API_KEY_DE_TMDB
+- VITE_TMDB_API_KEY=TU_API_KEY_DE_TMDB
 
 
 **Ejecutar en desarrollo**
+- npm run dev
 
-npm run dev
-
-**Build de producción**
-
-npm run build
-npm run preview
+**Build de producción*
+- npm run build
+- npm run preview
 
 --- 
 
