@@ -19,8 +19,6 @@ Este repositorio contiene mi **portfolio en React** donde muestro mini-proyectos
 
 ## 🗂️ Estructura del proyecto
 
-<details>
-<summary>Ver árbol</summary>
 
 ```text
 src/
