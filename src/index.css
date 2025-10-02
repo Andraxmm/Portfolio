@@ -17,12 +17,12 @@
     @apply text-slate-900 dark:text-slate-100;
     background: linear-gradient(
       to bottom,
-      #7c3aed 0%,     /* morado elegante, menos fuerte */
-      #8b5cf6 20%,    /* violeta brillante */
-      #a5b4fc 40%,    /* lavanda azulada pastel */
-      #ffffff 60%,    /* blanco */
-      #ede9fe 80%,    /* lavanda muy suave */
-      #ffffff 100%    /* blanco limpio */
+      #7c3aed 0%,
+      #8b5cf6 20%,
+      #a5b4fc 40%,
+      #ffffff 60%,
+      #ede9fe 80%,
+      #ffffff 100%
     );
     background-attachment: fixed;
     background-repeat: no-repeat;
@@ -33,16 +33,25 @@
   .dark body {
     background: linear-gradient(
       to bottom,
-      #0f172a 0%,     /* gris azulado muy oscuro */
-      #1e1b4b 20%,    /* indigo oscuro */
-      #312e81 40%,    /* indigo medio */
-      #1e293b 70%,    /* slate oscuro */
-      #0f172a 100%    /* casi negro al final */
+      #0f172a 0%,
+      #1e1b4b 20%,
+      #312e81 40%,
+      #1e293b 70%,
+      #0f172a 100%
     );
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
   }
+
+  /* ✅ Compensar el header fijo al navegar por anclas */
+  section[id] { scroll-margin-top: 4.5rem; }
+  @media (min-width: 768px) {
+    section[id] { scroll-margin-top: 5rem; }
+  }
+
+  /* ✅ Imágenes fluidas por si añades más en el futuro */
+  img { max-width: 100%; height: auto; }
 }
 
 /* -------- Components ------ */
@@ -63,9 +72,7 @@
            px-4 py-2 font-semibold shadow-sm
            transition-colors duration-200;
   }
-  .btn:hover {
-    @apply bg-indigo-700; /* un tono más oscuro al pasar el ratón */
-  }
+  .btn:hover { @apply bg-indigo-700; }
 
   /* Botón secundario (outline) */
   .btn-outline {
@@ -106,8 +113,8 @@
 
   /* ——— Tap feedback (móvil) + suavizar transiciones ——— */
   .btn, .btn-outline, .card {
-    -webkit-tap-highlight-color: transparent; /* quita el destello gris en iOS */
-    touch-action: manipulation;               /* evita doble-tap zoom en botones */
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
     transition:
       transform 150ms ease,
       box-shadow 150ms ease,
