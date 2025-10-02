@@ -19,8 +19,7 @@ Este repositorio contiene mi **portfolio en React** donde muestro mini-proyectos
 
 ## 🗂️ Estructura del proyecto
 
-
-```text
+```
 src/
 ├─ components/
 │  ├─ Header.jsx
@@ -53,9 +52,7 @@ src/
 ├─ App.jsx
 ├─ main.jsx
 └─ index.css
-
-
-
+```
 
 ---
 
@@ -86,18 +83,9 @@ src/
 
 ---
 
-## 📸 Preview
-
-> ![Home Dark](./src/assets/HomeDark.png)  
-> ![Projects](./src/assets/Projects.png)  
-> ![Movies](./src/assets/BPeliculas.png)
-
----
-
 ## ⚙️ Configuración
 
 ### Clonar e instalar
-```bash
 git clone https://github.com/Andraxmm/Portfolio.git
 cd Portfolio
 npm install
@@ -113,17 +101,16 @@ npm install
 
 ---
 
+**Variables de entorno (TMDB)**
+- VITE_TMDB_API_KEY=TU_API_KEY_DE_TMDB
 
-Variables de entorno (TMDB)
-VITE_TMDB_API_KEY=TU_API_KEY_DE_TMDB
 
+**Ejecutar en desarrollo**
+- npm run dev
 
-Ejecutar en desarrollo
-npm run dev
-
-Build de producción
-npm run build
-npm run preview
+**Build de producción**
+- npm run build
+- npm run preview
 
 --- 
 
@@ -146,13 +133,6 @@ GitHub: https://github.com/Andraxmm
 LinkedIn: https://www.linkedin.com/in/andrea-ma%C3%B1a-moreno-204a2a1b5/
 
 Cuando despliegues (Vercel/Netlify), añade aquí el link de demo.
-
----
-
-🧭 Roadmap / Próximos pasos
-Internacionalización (ES/EN)
-
-Tests (Vitest/RTL)
 
 ---
 
