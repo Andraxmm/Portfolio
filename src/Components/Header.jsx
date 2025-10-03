@@ -136,15 +136,15 @@ export default function Header() {
               {theme === "dark" ? "☀️ Claro" : "🌙 Oscuro"}
             </button>
 
-            {/* Botón CV */}
-            <a
-              className="btn px-3 py-2 self-center"
-              href="#"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Descargar CV
-            </a>
+          {/* Botón CV */}
+<a
+  className="btn px-3 py-2 self-center"
+  href="/CV-Andrea-Moreno.pdf"
+  download="CV-Andrea-Moreno.pdf"
+>
+  Descargar CV
+</a>
+
           </div>
         </div>
       )}
