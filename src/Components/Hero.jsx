@@ -8,9 +8,23 @@ export default function Hero() {
       <div className="hero-sky-bg absolute inset-0 -z-20 pointer-events-none" />
       <div className="hero-sky-stars absolute inset-0 -z-10 pointer-events-none" />
 
+      {/* Foto perfil en móvil */}
+      <div className="absolute top-20 right-4 md:hidden z-10">
+        <div
+          className="p-[3px] rounded-full bg-gradient-to-tr from-indigo-400 via-sky-400 to-purple-500
+                     dark:bg-[linear-gradient(135deg,#facc15_0%,#4ade80_35%,#38bdf8_70%,#a855f7_100%)]"
+        >
+          <img
+            src={profile}
+            alt="Andrea Maña Moreno"
+            className="w-28 h-28 rounded-full object-cover ring-1 ring-black/5 dark:ring-white/10 shadow-xl
++            bg-white/60 dark:bg-slate-900/40"
+          />
+        </div>
+      </div>
+
       {/* Contenido a pantalla completa */}
-      <div className="container-p min-h-screen md:min-h-[100svh] py-24 md:py-32 flex items-center">
-        {/* 2 columnas en desktop (más ancho para texto), 1 en móvil */}
+      <div className="container-p min-h-[90vh] md:min-h-[100svh] py-20 md:py-32 flex items-center">
         <div className="grid items-center gap-10 md:grid-cols-[1.6fr_1fr] w-full">
           {/* Columna izquierda: texto */}
           <div className="max-w-3xl">
@@ -48,70 +62,65 @@ export default function Hero() {
               Desarrolladora frontend junior enfocada en UX simple, buenas prácticas y rendimiento.
             </motion.p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.25 }}
-              viewport={{ once: true }}
-              className="mt-8 flex flex-wrap gap-3"
-            >
-              <a className="btn" href="https://github.com/Andraxmm" target="_blank" rel="noreferrer">
-                GitHub
-              </a>
-              <a
-                className="btn-outline"
-                href="https://www.linkedin.com/in/andrea-ma%C3%B1a-moreno-204a2a1b5/"
-                target="_blank"
-                rel="noreferrer"
+            {/* Botones sociales + CV */}
+          <motion.div
+  initial={{ opacity: 0, y: 14 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6, delay: 0.25 }}
+  viewport={{ once: true }}
+  className="mt-8 flex flex-wrap gap-3"
+>
+  <a className="btn" href="https://github.com/Andraxmm" target="_blank" rel="noreferrer">
+    GitHub
+  </a>
+  <a
+    className="btn-outline"
+    href="https://www.linkedin.com/in/andrea-ma%C3%B1a-moreno-204a2a1b5/"
+    target="_blank"
+    rel="noreferrer"
+  >
+    LinkedIn
+  </a>
+  <a className="btn-outline" href="#projects">
+    Ver proyectos
+  </a>
+  {/* Botón solo en móvil */}
+  <a
+    className="btn-outline md:hidden"
+    href="/CV.AndreaMoreno.pdf"
+    target="_blank"
+    rel="noreferrer"
+  >
+    Descargar CV
+  </a>
+</motion.div>
+
+          </div>
+
+          {/* Columna derecha: foto (solo en desktop) */}
+          <div className="hidden md:flex md:justify-self-end md:pr-2 lg:pr-4 xl:pr-10 xl:translate-x-4 2xl:pr-14 2xl:translate-x-8">
+            <div className="relative">
+              <div
+                className="p-[4px] rounded-full bg-gradient-to-tr from-indigo-400 via-sky-400 to-purple-500
+                           dark:bg-[linear-gradient(135deg,#facc15_0%,#4ade80_35%,#38bdf8_70%,#a855f7_100%)]"
               >
-                LinkedIn
-              </a>
-              <a className="btn-outline" href="#projects">
-                Ver proyectos
-              </a>
-            </motion.div>
-          </div>
-
-       {/* Columna derecha: foto */}
-        <div className="hidden md:flex md:justify-self-end md:pr-2 lg:pr-4 xl:pr-10 xl:translate-x-4 2xl:pr-14 2xl:translate-x-8">
-          <div className="relative">
-            {/* Borde degradado un pelín más gordo */}
-            <div
-              className="
-                p-[4px] rounded-full
-                bg-gradient-to-tr from-indigo-400 via-sky-400 to-purple-500
-                dark:bg-[linear-gradient(135deg,#facc15_0%,#4ade80_35%,#38bdf8_70%,#a855f7_100%)]
-              "
-            >
-              <img
-                src={profile}
-                alt="Andrea Maña Moreno"
-                width={360}
-                height={360}
-                className="
-                  block h-72 w-72 lg:h-80 lg:w-80 xl:h-[22rem] xl:w-[22rem] rounded-full object-cover
-                  ring-1 ring-black/5 dark:ring-white/10 shadow-2xl
-                  bg-white/60 dark:bg-slate-900/40
-                "
-              />
+                <img
+                  src={profile}
+                  alt="Andrea Maña Moreno"
+                  width={360}
+                  height={360}
+                  className="block h-72 w-72 lg:h-80 lg:w-80 xl:h-[22rem] xl:w-[22rem] rounded-full object-cover
+                             ring-1 ring-black/5 dark:ring-white/10 shadow-2xl
+                             bg-white/60 dark:bg-slate-900/40"
+                />
+              </div>
             </div>
-
-            {/* Glow un poco más suave */}
-            <div
-              aria-hidden="true"
-              className="
-                pointer-events-none absolute inset-0 rounded-full
-                shadow-[0_0_60px_12px_rgba(56,189,248,0.18)]
-                dark:shadow-[0_0_60px_12px_rgba(56,189,248,0.22)]
-              "
-            />
           </div>
-        </div>
         </div>
       </div>
 
-      {/* Indicador: “Sobre mí” + flecha */}
-      <div className="absolute inset-x-0 bottom-6 md:bottom-8 flex flex-col items-center gap-2">
+      {/* Indicador: “Sobre mí” */}
+      <div className="absolute inset-x-0 bottom-10 md:bottom-8 flex flex-col items-center gap-2">
         <span className="text-[11px] tracking-wide uppercase text-slate-700 dark:text-white/85">
           Sobre mí
         </span>
