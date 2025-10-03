@@ -3,12 +3,19 @@ const BASE = "https://api.themoviedb.org/3";
 const READ_TOKEN = import.meta.env.VITE_TMDB_READ_TOKEN;
 
 export default async function api(path, signal) {
-  // Une bien BASE + path aunque falte la barra
-  const url = new URL(path, BASE);
+  // 1) Quita barras iniciales del path
+  const clean = String(path || "").replace(/^\/+/, "");
+  // 2) Une siempre con /3/ para no perderlo
+  const url = `${BASE}/${clean}`;
 
-  if (!url.searchParams.has("language")) url.searchParams.set("language", "es-ES");
+  // (opcional) fuerza idioma si no lo trae
+  const u = new URL(url);
+  if (!u.searchParams.has("language")) u.searchParams.set("language", "es-ES");
 
-  const res = await fetch(url.toString(), {
+  // (debug opcional)
+  // console.log("TMDB →", u.toString());
+
+  const res = await fetch(u.toString(), {
     method: "GET",
     headers: {
       accept: "application/json",
@@ -19,7 +26,7 @@ export default async function api(path, signal) {
 
   if (!res.ok) {
     const txt = await res.text().catch(() => "");
-    throw new Error(`TMDB ${res.status}: ${txt || res.statusText} — ${url.toString()}`);
+    throw new Error(`TMDB ${res.status}: ${u.toString()} — ${txt || res.statusText}`);
   }
   return res.json();
 }
