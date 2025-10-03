@@ -46,9 +46,9 @@ export default function Projects() {
       </div>
 
       {/* Proyectos destacados */}
-      <div className="mt-6 grid md:grid-cols-2 gap-4 sm:gap-6 px-5 sm:px-0">
+      <div className="mt-6 grid md:grid-cols-2 gap-4 sm:gap-6 gap-y-8 px-5 sm:px-0">
         {/* Buscador de Películas */}
-        <div className="w-full max-w-[340px] sm:max-w-none mx-auto">
+        <div className="w-full max-w-[340px] sm:max-w-none mx-auto mb-8 sm:mb-0">
           <ProjectCard
             title="Buscador de Películas"
             desc="Busca películas en tiempo real con TMDB."
@@ -78,10 +78,12 @@ export default function Projects() {
             }
             demoHref="/peliculas"
           />
+          {/* separador solo móvil */}
+          <div className="sm:hidden mt-4 h-1 w-11/12 mx-auto rounded-full bg-gradient-to-r from-transparent via-slate-400/25 to-transparent" />
         </div>
 
         {/* Biblioteca Personal */}
-        <div className="w-full max-w-[340px] sm:max-w-none mx-auto">
+        <div className="w-full max-w-[340px] sm:max-w-none mx-auto mb-8 sm:mb-0">
           <ProjectCard
             title="Biblioteca Personal"
             desc="Proyecto Fin de Grado desarrollado en PHP con MySQL. Permite gestionar libros, usuarios y panel de administración."
@@ -100,6 +102,8 @@ export default function Projects() {
               </div>
             }
           />
+          {/* separador solo móvil */}
+          <div className="sm:hidden mt-4 h-1 w-11/12 mx-auto rounded-full bg-gradient-to-r from-transparent via-slate-400/25 to-transparent" />
         </div>
       </div>
 
@@ -109,14 +113,14 @@ export default function Projects() {
         Mini-Proyectos React
       </h3>
 
-      <div className="mt-4 grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 px-5 sm:px-0">
+      <div className="mt-4 grid gap-4 sm:gap-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3 px-5 sm:px-0">
         {[
           { Comp: Counter, title: "Counter", desc: "Contador +/− con reset.", tags: ["useState"], code: CODE_LINKS.counter, preview: <Counter /> },
           { Comp: Todo, title: "Todo List", desc: "Añadir, marcar, eliminar tareas.", tags: ["listas", "keys"], code: CODE_LINKS.todo, preview: <TodoPreview /> },
           { Comp: ControlledForm, title: "Controlled Inputs", desc: "Formulario controlado + validación.", tags: ["formularios"], code: CODE_LINKS.controlled, preview: <ControlledForm /> },
           { Comp: CustomUI, title: "Customizador de UI", desc: "Persistencia de datos + manejo de estado para personalizar la UI.", tags: ["localStorage", "Tailwind CSS"], code: CODE_LINKS.customUI, preview: <CustomUI persist={false} /> },
         ].map(({ Comp, title, desc, tags, code, preview }, i) => (
-          <div key={i} className="w-full max-w-[300px] sm:max-w-none mx-auto">
+          <div key={i} className="w-full max-w-[300px] sm:max-w-none mx-auto mb-8 sm:mb-0">
             <ProjectCard
               title={title}
               desc={desc}
@@ -127,6 +131,8 @@ export default function Projects() {
             >
               <Comp />
             </ProjectCard>
+            {/* separador solo móvil */}
+            <div className="sm:hidden mt-4 h-1 w-11/12 mx-auto rounded-full bg-gradient-to-r from-transparent via-slate-400/25 to-transparent" />
           </div>
         ))}
       </div>
