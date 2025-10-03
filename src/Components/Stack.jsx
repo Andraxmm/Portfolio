@@ -38,19 +38,25 @@ export default function Stack() {
   ];
 
   return (
-    <section id="stack" className="w-full py-16 md:py-24 bg-transparent scroll-mt-24 md:scroll-mt-28">
-      {/* Título */}
-      <div className="container-p px-5 sm:px-0 mb-10">
+    // 1) IGUAL QUE PROJECTS: container-p en el SECTION
+    <section
+      id="stack"
+      className="container-p py-16 md:py-24 bg-transparent scroll-mt-24 md:scroll-mt-28"
+    >
+      {/* 2) Título: SOLO padding lateral, sin container-p */}
+      <div className="mb-10 px-5 sm:px-0">
         <div className="flex items-center gap-3">
-          <FaLayerGroup className="text-2xl text-slate-900 dark:text-white" />
+          <FaLayerGroup className="text-2xl md:text-3xl text-slate-900 dark:text-white" />
           <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white">
             Stack
           </h2>
         </div>
+        {/* barrita igual que Projects */}
         <div className="mt-3 h-0.5 w-full bg-gradient-to-r from-yellow-400 via-sky-400 to-purple-500" />
       </div>
 
-      <div className="container-p px-5 sm:px-0 space-y-12">
+      {/* 3) Contenido: SOLO padding lateral, sin container-p */}
+      <div className="px-5 sm:px-0 space-y-12">
         {/* FRONTEND */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -59,7 +65,7 @@ export default function Stack() {
           viewport={{ once: true }}
         >
           <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-6 text-slate-900 dark:text-white">
-          Frontend
+            Frontend
           </h3>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-5 sm:gap-6 justify-items-center sm:justify-items-stretch">
@@ -76,7 +82,9 @@ export default function Stack() {
                 <div className="opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-transform duration-300">
                   {t.icon}
                 </div>
-                <span className="font-semibold text-center text-sm sm:text-base">{t.name}</span>
+                <span className="font-semibold text-center text-sm sm:text-base">
+                  {t.name}
+                </span>
               </div>
             ))}
           </div>
@@ -92,8 +100,8 @@ export default function Stack() {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-             <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-6 text-slate-900 dark:text-white">
-              {cat.title}
+              <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-6 text-slate-900 dark:text-white">
+                {cat.title}
               </h3>
 
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-5 sm:gap-6 justify-items-center sm:justify-items-stretch">
@@ -110,7 +118,9 @@ export default function Stack() {
                     <div className="opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-transform duration-300">
                       {t.icon}
                     </div>
-                    <span className="font-semibold text-center text-sm sm:text-base">{t.name}</span>
+                    <span className="font-semibold text-center text-sm sm:text-base">
+                      {t.name}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -121,3 +131,4 @@ export default function Stack() {
     </section>
   );
 }
+
