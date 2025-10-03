@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 
+
 function useTheme() {
   const getInitial = () => {
     const saved = localStorage.getItem("theme");
     if (saved === "light" || saved === "dark") return saved;
-    return "dark"; // 👈 por defecto oscuro
+    return "dark"; 
   };
 
   const [theme, setTheme] = useState(getInitial);
@@ -81,7 +82,7 @@ export default function Header() {
             {theme === "dark" ? "☀️ Claro" : "🌙 Oscuro"}
           </button>
 
-          <a className="btn" href="#" target="_blank" rel="noreferrer">
+          <a className="btn" href="../../public/CV.AndreaMoreno.pdf" target="_blank" rel="noreferrer">
             Descargar CV
           </a>
         </nav>
@@ -135,16 +136,6 @@ export default function Header() {
             >
               {theme === "dark" ? "☀️ Claro" : "🌙 Oscuro"}
             </button>
-
-          {/* Botón CV */}
-<a
-  className="btn px-3 py-2 self-center"
-  href="/CV-Andrea-Moreno.pdf"
-  download="CV-Andrea-Moreno.pdf"
->
-  Descargar CV
-</a>
-
           </div>
         </div>
       )}
