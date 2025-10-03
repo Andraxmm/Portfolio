@@ -11,16 +11,15 @@ import Modal from "../Modal.jsx";
 import TodoPreview from "./TodoPreview.jsx";
 
 /* ========= Enlaces a GitHub ========= */
-// ⚙️ Ajusta estos valores a tu cuenta/repositorio
 const GH_USER   = "Andraxmm";
-const GH_REPO   = "portfolio";   // nombre del repo en GitHub
-const GH_BRANCH = "main";        // "main" o "master"
+const GH_REPO   = "portfolio";   // portfolio
+const GH_BRANCH = "main";        // main
 
 // Helper para construir URLs a carpetas del repo
 const gh = (path) =>
   `https://github.com/${GH_USER}/${GH_REPO}/tree/${GH_BRANCH}/${path}`;
 
-// Mapa de rutas por mini-app (según tu estructura)
+// Mapa de rutas por mini-app
 const CODE_LINKS = {
   peliculas: gh("src/MiniApps/BuscadorPeliculas"),
   counter: gh("src/MiniApps/Counter"),
@@ -37,11 +36,13 @@ export default function Projects() {
   const closeModal = () => setModal((m) => ({ ...m, open: false }));
 
   return (
-    <section id="projects" className="container-p py-16 md:py-24 scroll-mt-24 md:scroll-mt-28">
+    <section
+      id="projects"
+      className="container-p py-16 md:py-24 scroll-mt-24 md:scroll-mt-28"
+    >
       {/* Título con icono y línea */}
       <div className="mb-10">
         <div className="flex items-center gap-3">
-          {/* Icono simple, sin fondo */}
           <FaCode className="text-2xl md:text-3xl text-slate-900 dark:text-white" />
           <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white">
             Proyectos
@@ -50,8 +51,9 @@ export default function Projects() {
         <div className="mt-3 h-0.5 w-full bg-gradient-to-r from-yellow-400 via-sky-400 to-purple-500" />
       </div>
 
-      {/* Proyecto destacado */}
+      {/* Proyectos destacados */}
       <div className="mt-6 grid md:grid-cols-2 gap-6">
+        {/* Buscador de Películas */}
         <ProjectCard
           title="Buscador de Películas"
           desc="Busca películas en tiempo real con TMDB."
@@ -63,7 +65,6 @@ export default function Projects() {
                  bg-gradient-to-br from-indigo-50 via-purple-50 to-white
                  hover:shadow-xl hover:-translate-y-1 hover:from-indigo-100 hover:via-purple-100"
             >
-              {/* Input con icono */}
               <div className="flex items-center gap-2">
                 <span className="text-indigo-500">🔍</span>
                 <input
@@ -73,8 +74,6 @@ export default function Projects() {
                   className="flex-1 rounded-lg border px-3 py-2 text-base md:text-sm bg-white text-slate-600 shadow-md"
                 />
               </div>
-
-              {/* Resultados simulados */}
               <div className="space-y-2 text-sm">
                 <div className="h-4 w-3/4 bg-indigo-200 rounded animate-pulse"></div>
                 <div className="h-4 w-2/3 bg-purple-200 rounded animate-pulse"></div>
@@ -83,6 +82,26 @@ export default function Projects() {
             </div>
           }
           demoHref="/peliculas"
+        />
+
+        {/* Proyecto Extra (Fin de Grado) */}
+        <ProjectCard
+          title="Biblioteca Personal"
+          desc="Proyecto Fin de Grado desarrollado en PHP con MySQL. Permite gestionar libros, usuarios y panel de administración."
+          tags={["Extra", "PHP", "MySQL"]}
+          code="https://github.com/Andraxmm/biblioteca-php"
+          preview={
+            <div
+              className="p-6 flex flex-col items-center justify-center gap-4 rounded-lg h-full transition-all duration-300
+                bg-gradient-to-br from-yellow-50 via-rose-50 to-white
+                hover:shadow-xl hover:-translate-y-1 hover:from-yellow-100 hover:via-rose-100"
+            >
+              <span className="text-5xl">📚</span>
+              <p className="text-sm text-center text-slate-600">
+                Login de usuarios, panel de administración y gestión de libros.
+              </p>
+            </div>
+          }
         />
       </div>
 
@@ -93,7 +112,6 @@ export default function Projects() {
       </h3>
 
       <div className="mt-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* Counter */}
         <ProjectCard
           title="Counter"
           desc="Contador +/− con reset."
@@ -105,19 +123,17 @@ export default function Projects() {
           <Counter />
         </ProjectCard>
 
-        {/* Todo */}
         <ProjectCard
           title="Todo List"
           desc="Añadir, marcar, eliminar tareas."
           tags={["listas", "keys"]}
           code={CODE_LINKS.todo}
           onDemo={openModal}
-          preview={<TodoPreview />} // preview estático
+          preview={<TodoPreview />}
         >
-          <Todo key={`todo-${Date.now()}`} /> {/* remount para limpiar estado */}
+          <Todo key={`todo-${Date.now()}`} />
         </ProjectCard>
 
-        {/* Controlled Inputs */}
         <ProjectCard
           title="Controlled Inputs"
           desc="Formulario controlado + validación."
@@ -129,7 +145,6 @@ export default function Projects() {
           <ControlledForm />
         </ProjectCard>
 
-        {/* Customizador UI */}
         <ProjectCard
           title="Customizador de UI"
           desc="Persistencia de datos + manejo de estado para personalizar la UI."
