@@ -1,17 +1,28 @@
-//Define la URL base para todas las peticiones a la API de TMDB
+// src/BuscadorPeliculas/Api.js
 const BASE = "https://api.themoviedb.org/3";
 
-//Toma la clave secreta (API Key) desde el archivo .env 
-const KEY = import.meta.env.VITE_TMDB_API_KEY;
+// ⚠️ Usa el READ ACCESS TOKEN v4 (no la api_key v3). Ponlo en .env y reinicia Vite.
+// VITE_TMDB_READ_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+const READ_TOKEN = import.meta.env.VITE_TMDB_READ_TOKEN;
 
-//path: es el fragmento final del endpoint que quieres consultar. Ejemplo: `/search/movie?query=batman`
-//signal: es una señal para cancelar la petición si es necesario
 export default async function api(path, signal) {
-    const url = new URL(BASE + path);
-  url.searchParams.set("api_key", KEY);     //api_key: sin esto, TMDB rechaza la petición.
-  url.searchParams.set("language", "es-ES"); 
+  const url = new URL(BASE + path);
 
-  const res = await fetch(url, { signal }); //hacemos la petición a la URL completa. El lsignal sirve para poder cancelar la petición con un AbortController
-  if (!res.ok) throw new Error(`TMDB ${res.status}`); //Si la respuesta no es OK (por ejemplo 404, 401...), lanza un error personalizado
-  return res.json(); //Convierte la respuesta a JSON (objeto JS) y la devuelve.
-}  
+  // Si quieres seguir forzando idioma por defecto:
+  if (!url.searchParams.has("language")) url.searchParams.set("language", "es-ES");
+
+  const res = await fetch(url.toString(), {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${READ_TOKEN}`,
+    },
+    signal,
+  });
+
+  if (!res.ok) {
+    const txt = await res.text().catch(() => "");
+    throw new Error(`TMDB ${res.status}: ${txt || res.statusText}`);
+  }
+  return res.json();
+}
