@@ -82,7 +82,7 @@ export default function Header() {
             {theme === "dark" ? "☀️ Claro" : "🌙 Oscuro"}
           </button>
 
-          <a className="btn" href="../../public/CV.AndreaMoreno.pdf" target="_blank" rel="noreferrer">
+          <a className="btn" href="/CV.AndreaMoreno.pdf" target="_blank" rel="noreferrer">
             Descargar CV
           </a>
         </nav>
