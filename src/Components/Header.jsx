@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 
-
 function useTheme() {
   const getInitial = () => {
     const saved = localStorage.getItem("theme");
     if (saved === "light" || saved === "dark") return saved;
-    return "dark"; 
+    return "dark";
   };
 
   const [theme, setTheme] = useState(getInitial);
@@ -53,7 +52,7 @@ export default function Header() {
         bg-white/95 md:bg-white/80 backdrop-blur
         border-b border-slate-200
         dark:bg-slate-900/95 md:dark:bg-slate-900/70 dark:border-slate-800
-        transition-colors
+        transition-colors fixed top-0 left-0 right-0 z-50
       "
     >
       <div className="container-p h-16 flex items-center justify-between">
@@ -65,39 +64,48 @@ export default function Header() {
           Andrea Maña Moreno<span className="text-brand">.</span>
         </a>
 
-        {/* Nav escritorio */}
-        <nav className="hidden md:flex items-center gap-4">
-          <NavLink href="#home">Inicio</NavLink>
-          <NavLink href="#about">Sobre mí</NavLink>
-          <NavLink href="#stack">Stack</NavLink>
-          <NavLink href="#projects">Proyectos</NavLink>
-          <NavLink href="#contact">Contacto</NavLink>
-
+        {/* Controles derecha */}
+        <div className="flex items-center gap-3">
+          {/* Toggle siempre visible */}
           <button
             onClick={toggle}
-            className="btn-outline"
+            className="p-2 rounded-full bg-white/20 hover:bg-white/30 dark:bg-white/10 dark:hover:bg-white/20 transition"
             aria-label="Cambiar tema"
             title={`Cambiar a ${theme === "dark" ? "claro" : "oscuro"}`}
           >
-            {theme === "dark" ? "☀️ Claro" : "🌙 Oscuro"}
+            {theme === "dark" ? "☀️" : "🌙"}
           </button>
 
-          <a className="btn" href="/CV.AndreaMoreno.pdf" target="_blank" rel="noreferrer">
-            Descargar CV
-          </a>
-        </nav>
+          {/* Nav escritorio */}
+          <nav className="hidden md:flex items-center gap-4">
+            <NavLink href="#home">Inicio</NavLink>
+            <NavLink href="#about">Sobre mí</NavLink>
+            <NavLink href="#stack">Stack</NavLink>
+            <NavLink href="#projects">Proyectos</NavLink>
+            <NavLink href="#contact">Contacto</NavLink>
 
-        {/* Burger */}
-        <button
-          className="md:hidden h-10 w-10 flex items-center justify-center rounded-lg
+            <a
+              className="btn"
+              href="/CV.AndreaMoreno.pdf"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Descargar CV
+            </a>
+          </nav>
+
+          {/* Burger solo móvil */}
+          <button
+            className="md:hidden h-10 w-10 flex items-center justify-center rounded-lg
                      border border-slate-300 dark:border-slate-700"
-          onClick={() => setOpen((o) => !o)}
-          aria-label="Abrir menú"
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-        >
-          ☰
-        </button>
+            onClick={() => setOpen((o) => !o)}
+            aria-label="Abrir menú"
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+          >
+            ☰
+          </button>
+        </div>
       </div>
 
       {/* Menú móvil */}
@@ -123,19 +131,6 @@ export default function Header() {
             <NavLink href="#contact" onClick={() => setOpen(false)}>
               Contacto
             </NavLink>
-
-            {/* Botón tema */}
-            <button
-              onClick={() => {
-                toggle();
-                setOpen(false);
-              }}
-              className="btn-outline justify-center px-3 py-2 self-center"
-              aria-label="Cambiar tema móvil"
-              title={`Cambiar a ${theme === "dark" ? "claro" : "oscuro"}`}
-            >
-              {theme === "dark" ? "☀️ Claro" : "🌙 Oscuro"}
-            </button>
           </div>
         </div>
       )}
