@@ -22,7 +22,7 @@ body {
       #cfe3ff 0%,   /* azul muy claro */
       #b7d1ff 25%,  /* azul pastel */
       #eaf1ff 55%,  /* casi blanco azulado */
-      #ffffff 100%  /* blanco */
+      #c9dfe3 100%  /* blanco */
     );
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -34,11 +34,10 @@ body {
   .dark body {
     background: linear-gradient(
       to bottom,
-      #0f172a 0%,
-      #1e1b4b 20%,
-      #312e81 40%,
-      #1e293b 70%,
-      #0f172a 100%
+      #0b1120 0%,   
+      #253e79 25%,   
+      #1e293b 60%,   
+      #0b1120 100%
     );
     background-attachment: fixed;
     background-repeat: no-repeat;
