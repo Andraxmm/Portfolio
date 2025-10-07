@@ -78,6 +78,14 @@ export default function Projects() {
             }
             demoHref="/peliculas"
           />
+
+          {/* Aviso solo en móvil */}
+        <span className="sm:hidden mt-2 inline-block text-[11px] px-2 py-0.5 rounded-full
+                        bg-yellow-400/15 text-yellow-300 ring-1 ring-yellow-400/30">
+          En mantenimiento (solo en móvil)
+        </span>
+
+
           {/* separador solo móvil */}
           <div className="sm:hidden mt-4 h-1 w-11/12 mx-auto rounded-full bg-gradient-to-r from-transparent via-slate-400/25 to-transparent" />
         </div>
