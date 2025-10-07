@@ -116,7 +116,7 @@ export default function Projects() {
       <div className="mt-4 grid gap-4 sm:gap-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3 px-5 sm:px-0">
         {[
           { Comp: Counter, title: "Counter", desc: "Contador +/− con reset.", tags: ["useState"], code: CODE_LINKS.counter, preview: <Counter /> },
-          { Comp: Todo, title: "Todo List", desc: "Añadir, marcar, eliminar tareas.", tags: ["listas", "keys"], code: CODE_LINKS.todo, preview: <TodoPreview /> },
+          { Comp: Todo, title: "To do List", desc: "Añadir, marcar, eliminar tareas.", tags: ["listas", "keys"], code: CODE_LINKS.todo, preview: <TodoPreview /> },
           { Comp: ControlledForm, title: "Controlled Inputs", desc: "Formulario controlado + validación.", tags: ["formularios"], code: CODE_LINKS.controlled, preview: <ControlledForm /> },
           { Comp: CustomUI, title: "Customizador de UI", desc: "Persistencia de datos + manejo de estado para personalizar la UI.", tags: ["localStorage", "Tailwind CSS"], code: CODE_LINKS.customUI, preview: <CustomUI persist={false} /> },
         ].map(({ Comp, title, desc, tags, code, preview }, i) => (
