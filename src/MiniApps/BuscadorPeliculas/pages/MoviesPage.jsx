@@ -99,9 +99,13 @@ export default function MoviesPage() {
       <main className="container-p py-8">
         <h1 className="text-2xl font-bold mb-4">🎬 Buscador de Películas</h1>
 
-        <Link to="/favoritos" className="btn-outline mb-4 inline-block">
-          ❤️ Ver Favoritos
-        </Link>
+      <Link
+        to="/favoritos"
+        className="btn-outline mb-4 inline-block text-sm sm:text-base px-3 py-1.5 sm:px-4 sm:py-2"
+      >
+        ❤️ Ver Favoritos
+      </Link>
+
 
         <form onSubmit={onSubmit} className="flex gap-2 mb-6" role="search">
           <input
