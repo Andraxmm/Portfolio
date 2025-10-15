@@ -139,10 +139,10 @@ export default function MoviesPage() {
           className="grid gap-4 movies-grid"
           style={{ gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))" }}
         >
-          {loading
-            ? Array.from({ length: 8 }).map((_, i) => <SkeletonCard key={i} />)
-            : filteredMovies.map((m) => <MovieCard key={m.id} movie={m} />)}
-        </div>
+           {loading
+                      ? Array.from({ length: 8 }).map((_, i) => <SkeletonCard key={i} />)
+                      : filteredMovies.map((m) => <MovieCard key={m.id} movie={m} to />)}
+                  </div>
 
         {!loading && !err && filteredMovies.length === 0 && (
           <p className="opacity-70 mt-4">Sin resultados.</p>
