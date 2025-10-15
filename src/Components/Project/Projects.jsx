@@ -79,11 +79,13 @@ export default function Projects() {
             demoHref="/peliculas"
           />
 
-          {/* Aviso solo en móvil */}
-        <span className="sm:hidden mt-2 inline-block text-[11px] px-2 py-0.5 rounded-full
-                        bg-yellow-400/15 text-yellow-300 ring-1 ring-yellow-400/30">
-          En mantenimiento (solo en móvil)
-        </span>
+    {/* Aviso de cambios en curso — visible en móvil y PC */}
+<span className="mt-2 inline-block text-xs px-2 py-0.5 rounded-full
+                 bg-yellow-100 text-yellow-800 font-medium
+                 dark:bg-yellow-700 dark:text-yellow-100
+                 ring-1 ring-yellow-200 dark:ring-yellow-400/50">
+  ⚠️ Se están realizando cambios — sección en desarrollo
+</span>
 
 
           {/* separador solo móvil */}
