@@ -64,36 +64,43 @@ export default function MoviesPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMobile]);
 
-  async function loadGenres() {
-    try {
-      const data = await api("genre/movie/list");
-      setGenres(data.genres || []);
-    } catch (e) {
-      console.error("Error al cargar géneros", e);
-    }
+async function loadGenres() {
+  try {
+    const data = await api("genre/movie/list"); // sin params extra
+    setGenres(data.genres || []);
+  } catch (e) {
+    console.error("Error al cargar géneros", e);
   }
+}
 
-  async function loadTrending() {
-    try {
-      setLoading(true); setErr("");
-      const data = await api("trending/movie/week");
-      setMovies(data?.results || []);
-    } catch (e) {
-      console.error(e);
-      setErr("No se pudieron cargar las tendencias. " + (e?.message || e));
-    } finally { setLoading(false); }
+async function loadTrending() {
+  try {
+    setLoading(true);
+    setErr("");
+    const data = await api("trending/movie/week"); // sin params extra
+    setMovies(data?.results || []);
+  } catch (e) {
+    console.error(e);
+    setErr("No se pudieron cargar las tendencias. " + (e?.message || e));
+  } finally {
+    setLoading(false);
   }
+}
 
-  async function doSearch(q) {
-    try {
-      setLoading(true); setErr("");
-      const data = await api(`search/movie?query=${encodeURIComponent(q)}`);
-      setMovies(data?.results || []);
-    } catch (e) {
-      console.error(e);
-      setErr("No se pudo buscar. " + (e?.message || e));
-    } finally { setLoading(false); }
+async function doSearch(q) {
+  try {
+    setLoading(true);
+    setErr("");
+    const data = await api("search/movie", null, { query: q }); // ✅ pasa query en params
+    setMovies(data?.results || []);
+  } catch (e) {
+    console.error(e);
+    setErr("No se pudo buscar. " + (e?.message || e));
+  } finally {
+    setLoading(false);
   }
+}
+
 
   async function onSubmit(e) {
     e.preventDefault();
