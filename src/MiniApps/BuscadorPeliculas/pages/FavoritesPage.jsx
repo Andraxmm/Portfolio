@@ -14,7 +14,6 @@ export default function FavoritesPage() {
     async function loadFavorites() {
       const stored = JSON.parse(localStorage.getItem(LS_KEY)) || [];
 
-      // Si no hay favoritos, salimos
       if (stored.length === 0) {
         setMovies([]);
         setLoading(false);
@@ -50,27 +49,36 @@ export default function FavoritesPage() {
 
       <h1 className="text-2xl font-bold mb-6">❤️ Tus Películas Favoritas</h1>
 
-      {/* Estado de carga */}
       {loading && <p role="status">Cargando favoritos…</p>}
 
-      {/* Estado de error */}
-      {!loading && err && (
-        <p className="text-red-500 mb-4">{err}</p>
-      )}
+      {!loading && err && <p className="text-red-500 mb-4">{err}</p>}
 
-      {/* Estado vacío */}
       {!loading && !err && movies.length === 0 && (
         <p className="opacity-70">Aún no tienes películas favoritas.</p>
       )}
 
-      {/* Grid de películas */}
+      {/* Grid responsive */}
       <div
-        className="grid gap-4"
-        style={{ gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))" }}
+        className="grid gap-4 movies-grid"
+        style={{
+          gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
+        }}
       >
-        {!loading && !err && movies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} to />
-        ))}
+        {!loading &&
+          !err &&
+          movies.map((movie) => (
+            <div
+              key={movie.id}
+              className="w-full"
+              // Solo en móvil: ajustar aspecto y tamaño
+            >
+              <MovieCard
+                movie={movie}
+                to
+                className="sm:aspect-[2/3] aspect-[1/1.5] px-1 py-1"
+              />
+            </div>
+          ))}
       </div>
     </main>
   );
