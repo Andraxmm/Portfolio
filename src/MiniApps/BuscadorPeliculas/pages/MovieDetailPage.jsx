@@ -24,8 +24,8 @@ export default function MovieDetailPage() {
 
         setMovie(movieData);
 
-        const trailer = videoData.results.find(v =>
-          v.type === "Trailer" && v.site === "YouTube"
+        const trailer = videoData.results.find(
+          (v) => v.type === "Trailer" && v.site === "YouTube"
         );
         setVideo(trailer);
       } catch (error) {
@@ -48,37 +48,35 @@ export default function MovieDetailPage() {
         ← Volver
       </Link>
 
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid gap-6 md:grid-cols-2">
         {/* Imagen */}
         {movie.poster_path && (
           <img
             src={IMG + movie.poster_path}
             alt={`Póster de ${movie.title}`}
-            className="rounded-lg shadow-lg"
+            className="rounded-lg shadow-lg w-full max-w-[280px] sm:max-w-[320px] md:max-w-full h-auto object-cover mx-auto"
           />
         )}
 
         {/* Info */}
-        <div>
-          <h1 className="text-3xl font-bold mb-2">{movie.title}</h1>
-          <p className="opacity-70 mb-2">
+        <div className="flex flex-col justify-start">
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2">{movie.title}</h1>
+          <p className="opacity-70 mb-2 text-sm sm:text-base">
             {movie.release_date} · {movie.runtime} min
           </p>
 
-          {/* ⭐ Rating */}
           {movie.vote_average > 0 && (
-            <p className="mb-2">
+            <p className="mb-2 text-sm sm:text-base">
               <strong>Rating:</strong> ⭐ {movie.vote_average.toFixed(1)} / 10
             </p>
           )}
 
-          {/* 🎭 Géneros */}
           {movie.genres?.length > 0 && (
             <div className="mb-4 flex flex-wrap gap-2">
               {movie.genres.map((g) => (
                 <span
                   key={g.id}
-                  className="px-2 py-1 bg-indigo-100 text-indigo-800 dark:bg-indigo-800 dark:text-white text-sm rounded"
+                  className="px-2 py-1 text-xs sm:text-sm bg-indigo-100 text-indigo-800 dark:bg-indigo-800 dark:text-white rounded"
                 >
                   {g.name}
                 </span>
@@ -86,18 +84,16 @@ export default function MovieDetailPage() {
             </div>
           )}
 
-          {/* Descripción */}
           {movie.overview && (
-            <p className="mb-4 opacity-90">{movie.overview}</p>
+            <p className="mb-4 opacity-90 text-sm sm:text-base">{movie.overview}</p>
           )}
 
-          {/* ▶️ Tráiler */}
           {video && (
             <a
               href={`https://www.youtube.com/watch?v=${video.key}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn"
+              className="btn self-start"
             >
               Ver tráiler en YouTube
             </a>
