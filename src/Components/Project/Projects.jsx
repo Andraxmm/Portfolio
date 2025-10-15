@@ -84,7 +84,7 @@ export default function Projects() {
                  bg-yellow-100 text-yellow-800 font-medium
                  dark:bg-yellow-700 dark:text-yellow-100
                  ring-1 ring-yellow-200 dark:ring-yellow-400/50">
-  ⚠️ Se están realizando cambios — sección en desarrollo
+  ⚠️ Sección en desarrollo
 </span>
 
 
