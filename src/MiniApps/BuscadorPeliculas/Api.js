@@ -1,32 +1,34 @@
-// src/BuscadorPeliculas/Api.js
+// src/MiniApps/BuscadorPeliculas/Api.js
+
 const BASE = "https://api.themoviedb.org/3";
-const READ_TOKEN = import.meta.env.VITE_TMDB_READ_TOKEN;
+const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
-export default async function api(path, signal) {
-  // 1) Quita barras iniciales del path
-  const clean = String(path || "").replace(/^\/+/, "");
-  // 2) Une siempre con /3/ para no perderlo
-  const url = `${BASE}/${clean}`;
+/**
+ * Hace fetch a TMDB usando API key v3 (seguro para frontend)
+ *
+ * @param {string} path - ruta dentro de TMDB, por ejemplo "trending/movie/week"
+ * @param {AbortSignal} signal - opcional, para cancelar fetch
+ * @param {object} params - opcional, parámetros extra para la query
+ * @returns {Promise<any>} datos de TMDB
+ */
+export default async function api(path, signal, params = {}) {
+  const url = new URL(`${BASE}/${path}`);
 
-  // (opcional) fuerza idioma si no lo trae
-  const u = new URL(url);
-  if (!u.searchParams.has("language")) u.searchParams.set("language", "es-ES");
+  // Agregar API key
+  url.searchParams.set("api_key", API_KEY);
 
-  // (debug opcional)
-  // console.log("TMDB →", u.toString());
+  // Forzar idioma español si no se envía
+  if (!url.searchParams.has("language")) url.searchParams.set("es-ES");
 
-  const res = await fetch(u.toString(), {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization: `Bearer ${READ_TOKEN}`,
-    },
-    signal,
-  });
+  // Agregar parámetros extra
+  Object.keys(params).forEach((key) => url.searchParams.set(key, params[key]));
+
+  const res = await fetch(url.toString(), { signal });
 
   if (!res.ok) {
     const txt = await res.text().catch(() => "");
-    throw new Error(`TMDB ${res.status}: ${u.toString()} — ${txt || res.statusText}`);
+    throw new Error(`TMDB ${res.status}: ${url.toString()} — ${txt || res.statusText}`);
   }
+
   return res.json();
 }
