@@ -100,12 +100,6 @@ export default function MoviesPage() {
           ❤️ Ver Favoritos
         </Link>
 
-        {/* Aviso ligero solo en móvil */}
-        {isMobile && (
-          <div className="mb-4 p-2 text-sm bg-yellow-100 dark:bg-yellow-800 rounded text-center">
-            Estamos mejorando la versión móvil. Algunas cosas pueden verse grandes o desajustadas.
-          </div>
-        )}
 
         <form onSubmit={onSubmit} className="flex gap-2 mb-6" role="search">
           <input
