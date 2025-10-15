@@ -1,7 +1,8 @@
+// src/BuscadorPeliculas/pages/MoviesPage.jsx
 import { useEffect, useState } from "react";
 import { useSearchParams, Link } from "react-router-dom";
-import api from "../Api.js"; 
-import MovieCard from "../MovieCard.jsx"; 
+import api from "../Api.js";
+import MovieCard from "../MovieCard.jsx";
 
 function SkeletonCard() {
   return (
@@ -17,6 +18,29 @@ function SkeletonCard() {
 }
 
 export default function MoviesPage() {
+  // 1) Detectar móvil (sm < 640px)
+  const isMobile =
+    typeof window !== "undefined" &&
+    window.matchMedia("(max-width: 639px)").matches;
+
+  /*** BLOQUE MÓVIL: aviso de mantenimiento ***/
+  const MobileMaintenance = () => (
+    <>
+      <Link to="/" className="btn-outline fixed top-4 left-4 z-50 px-3 py-1.5 text-sm">
+        ← Volver al portfolio
+      </Link>
+
+      <main className="container-p py-16 text-center">
+        <h1 className="text-2xl font-extrabold mb-3">🎬 Buscador de Películas</h1>
+        <p className="text-slate-600 dark:text-slate-300">
+          Estamos <b>mejorando la versión móvil</b> de este buscador.
+          <br /> Prueba desde un ordenador o vuelve más tarde. 💫
+        </p>
+        <Link to="/" className="btn mt-6">Volver</Link>
+      </main>
+    </>
+  );
+
   // --- estado/lógica original ---
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
@@ -26,23 +50,19 @@ export default function MoviesPage() {
   const [selectedGenre, setSelectedGenre] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // EFECTO 1: Scroll (se ejecuta solo al montar, sin condiciones)
+  // 2) Evitar efectos/red en móvil
   useEffect(() => {
+    if (isMobile) return;
     window.scrollTo(0, 0);
-  }, []); 
+  }, [isMobile]);
 
-  // EFECTO 2: Carga de datos inicial (se ejecuta solo al montar, sin condiciones)
   useEffect(() => {
+    if (isMobile) return;
     const q = searchParams.get("q")?.trim() || "";
-    if (q) {
-      setQuery(q);
-      doSearch(q);
-    } else {
-      loadTrending();
-    }
+    if (q) { setQuery(q); doSearch(q); } else { loadTrending(); }
     loadGenres();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); 
+  }, [isMobile]);
 
   async function loadGenres() {
     try {
@@ -55,30 +75,24 @@ export default function MoviesPage() {
 
   async function loadTrending() {
     try {
-      setLoading(true);
-      setErr("");
+      setLoading(true); setErr("");
       const data = await api("trending/movie/week");
       setMovies(data?.results || []);
     } catch (e) {
       console.error(e);
       setErr("No se pudieron cargar las tendencias. " + (e?.message || e));
-    } finally {
-      setLoading(false);
-    }
+    } finally { setLoading(false); }
   }
 
   async function doSearch(q) {
     try {
-      setLoading(true);
-      setErr("");
+      setLoading(true); setErr("");
       const data = await api(`search/movie?query=${encodeURIComponent(q)}`);
       setMovies(data?.results || []);
     } catch (e) {
       console.error(e);
       setErr("No se pudo buscar. " + (e?.message || e));
-    } finally {
-      setLoading(false);
-    }
+    } finally { setLoading(false); }
   }
 
   async function onSubmit(e) {
@@ -93,7 +107,10 @@ export default function MoviesPage() {
     ? movies.filter((m) => m.genre_ids?.includes(Number(selectedGenre)))
     : movies;
 
-  // 4) Render normal para todas las pantallas
+  // 3) En móvil: devolver solo el aviso (sin montar la UI de PC)
+  if (isMobile) return <MobileMaintenance />;
+
+  // 4) En tablet/PC: render normal
   return (
     <>
       <Link
@@ -104,7 +121,7 @@ export default function MoviesPage() {
         ← Volver al portfolio
       </Link>
 
-      <main className="container-p pt-20 sm:pt-8 pb-8"> {/* pt-20 evita superposición en móvil */}
+      <main className="container-p py-8">
         <h1 className="text-2xl font-bold mb-4">🎬 Buscador de Películas</h1>
 
         <Link to="/favoritos" className="btn-outline mb-4 inline-block">
@@ -118,12 +135,10 @@ export default function MoviesPage() {
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Buscar película…"
             className="flex-1 px-4 py-3 rounded-xl bg-white/5 border border-slate-300/40
-                       outline-none focus:border-indigo-400 dark:bg-slate-800 dark:border-slate-700"
+                       outline-none focus:border-indigo-400 dark:bg-slate-800 dark:border-slate-700"
             aria-label="Buscar película"
           />
-          <button type="submit" className="btn">
-            Buscar
-          </button>
+          <button type="submit" className="btn">Buscar</button>
         </form>
 
         {movies.length > 0 && (
@@ -133,13 +148,11 @@ export default function MoviesPage() {
               value={selectedGenre}
               onChange={(e) => setSelectedGenre(e.target.value)}
               className="p-2 rounded border border-white/20 bg-white/10
-                        text-black dark:text-white bg-white dark:bg-slate-800"
+                        text-black dark:text-white bg-white dark:bg-slate-800"
             >
               <option value="">Todos</option>
               {genres.map((g) => (
-                <option key={g.id} value={g.id}>
-                  {g.name}
-                </option>
+                <option key={g.id} value={g.id}>{g.name}</option>
               ))}
             </select>
           </div>
@@ -147,25 +160,10 @@ export default function MoviesPage() {
 
         {err && <p className="text-red-400 mb-4">{err}</p>}
 
-        {/* USO DE GRID con tamaño ajustado para móvil y escritorio */}
         <div
           className="grid gap-4"
-          // Usamos una variable CSS para el tamaño mínimo del grid y la redefinimos en móvil (max 640px)
-          // Desktop/Tablet: minmax(220px, 1fr)
-          // Mobile (hasta 640px): minmax(180px, 1fr)
-          style={{ 
-            gridTemplateColumns: "repeat(auto-fill, minmax(var(--card-min-size, 280px), 1fr))" 
-          }}
+          style={{ gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))" }}
         >
-          {/* Estilo CSS simple para forzar el tamaño de tarjeta en móvil */}
-          <style jsx="true">{`
-            @media (max-width: 639px) {
-              .grid {
-                --card-min-size: 160px; /* Tamaño un poco más pequeño para móvil */
-              }
-            }
-          `}</style>
-
           {loading
             ? Array.from({ length: 8 }).map((_, i) => <SkeletonCard key={i} />)
             : filteredMovies.map((m) => <MovieCard key={m.id} movie={m} to />)}
