@@ -34,6 +34,9 @@ export default function MoviesPage() {
 
   // Carga inicial y búsqueda
   useEffect(() => {
+    // 🔹 Asegura que la página cargue arriba
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+
     const q = searchParams.get("q")?.trim() || "";
     if (q) { setQuery(q); doSearch(q); } else { loadTrending(); }
     loadGenres();
@@ -100,7 +103,6 @@ export default function MoviesPage() {
           ❤️ Ver Favoritos
         </Link>
 
-
         <form onSubmit={onSubmit} className="flex gap-2 mb-6" role="search">
           <input
             type="text"
@@ -139,7 +141,7 @@ export default function MoviesPage() {
         >
           {loading
             ? Array.from({ length: 8 }).map((_, i) => <SkeletonCard key={i} />)
-            : filteredMovies.map((m) => <MovieCard key={m.id} movie={m} to />)}
+            : filteredMovies.map((m) => <MovieCard key={m.id} movie={m} />)}
         </div>
 
         {!loading && !err && filteredMovies.length === 0 && (
