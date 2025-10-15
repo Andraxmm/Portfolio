@@ -218,4 +218,51 @@ body {
     0%   { background-position: 0 0, 0 0, 0 0, 0 0, 0 0; }
     100% { background-position: 60px 40px, -40px 20px, 30px -30px, -30px -20px, 20px 10px; }
   }
+
+/* Ajustes solo para móviles <=639px */
+@media (max-width: 639px) {
+
+  /* Ajusta la grilla de películas */
+  .movies-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)) !important; /* más estrecho */
+    gap: 0.5rem;
+  }
+
+  /* Ajusta las tarjetas */
+  .movies-grid .card {
+    aspect-ratio: 1 / 1.5;  /* más alargadas y menos grandes */
+    padding: 0.5rem;
+  }
+
+  /* Imagen dentro de la tarjeta */
+  .movies-grid .card img {
+    aspect-ratio: 1 / 1.5;
+    object-fit: cover;
+  }
+
+  /* Texto dentro de la tarjeta */
+  .movies-grid .card .title {
+    font-size: 0.875rem; /* 14px aprox */
+    line-height: 1.1rem;
+  }
+
+  /* Ajuste botón "volver" para que no tape el título */
+  .btn-outline.fixed.top-4.left-4 {
+    top: 1rem;      /* un poco más arriba */
+    left: 0.5rem;   /* ligeramente separado del borde */
+    font-size: 0.75rem; /* más pequeño */
+    padding: 0.25rem 0.75rem;
+  }
+
+  /* Ajustar margen del título principal para que no quede bajo el botón */
+  main h1 {
+    margin-top: 2.5rem; /* suficiente para que el botón no lo cubra */
+  }
+
+  /* Ajustes menores de padding del contenedor */
+  .container-p {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
 }
