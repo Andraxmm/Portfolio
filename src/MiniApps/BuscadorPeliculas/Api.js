@@ -20,6 +20,7 @@ function buildUrl(path, params = {}) {
   // Agregar API key
   url.searchParams.set('api_key', API_KEY);
 
+
   // Agregar parámetros extra correctamente
   Object.keys(params).forEach((key) => {
     url.searchParams.set(key, params[key]);
@@ -39,6 +40,7 @@ export default async function api(path, signal, params = {}) {
   if (!API_KEY)
     throw new Error('NO_API_KEY: Revisa tu .env o Vercel env variables');
 
+
   const url = buildUrl(path, params);
 
   // Logs de dev opcionales
@@ -50,6 +52,7 @@ export default async function api(path, signal, params = {}) {
   const res = await fetch(url.toString(), {
     method: 'GET',
     headers: { accept: 'application/json' },
+
     signal,
   });
 
@@ -58,6 +61,7 @@ export default async function api(path, signal, params = {}) {
     throw new Error(
       `TMDB ${res.status}: ${url.toString()} :: ${txt || res.statusText}`
     );
+
   }
 
   return res.json();

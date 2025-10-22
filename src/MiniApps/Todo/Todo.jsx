@@ -1,5 +1,5 @@
-import { useState, useMemo, useCallback } from 'react';
-import TodoItem from './TodoItem.jsx';
+import { useState, useMemo, useCallback } from "react";
+import TodoItem from "./TodoItem.jsx";
 
 // Identificador único (ID) para cada nueva tarea.
 function uid() {
@@ -7,12 +7,12 @@ function uid() {
 }
 
 export default function Todo() {
-  const [filtro, setFiltro] = useState('all');
-  const [text, setText] = useState('');
+  const [filtro, setFiltro] = useState("all");
+  const [text, setText] = useState("");
   const [lista, setLista] = useState([
-    { id: uid(), text: 'Hacer la compra', done: false },
-    { id: uid(), text: 'Hacer ejercicio', done: false },
-    { id: uid(), text: 'Pasear al perro', done: false },
+    { id: uid(), text: "Hacer la compra", done: false },
+    { id: uid(), text: "Hacer ejercicio", done: false },
+    { id: uid(), text: "Pasear al perro", done: false },
   ]);
 
   // Contadores memorizados
@@ -27,10 +27,10 @@ export default function Todo() {
 
   const handleAdd = (e) => {
     e.preventDefault();
-    if (text.trim() === '') return;
+    if (text.trim() === "") return;
     const newItem = { id: uid(), text, done: false };
     setLista((currentList) => [...currentList, newItem]);
-    setText('');
+    setText("");
   };
 
   const Eliminar = useCallback((id) => {
@@ -52,8 +52,8 @@ export default function Todo() {
   // Lista filtrada memorizada
   const listaFiltrada = useMemo(() => {
     return lista.filter((item) => {
-      if (filtro === 'done') return item.done;
-      if (filtro === 'active') return !item.done;
+      if (filtro === "done") return item.done;
+      if (filtro === "active") return !item.done;
       return true;
     });
   }, [lista, filtro]);
@@ -105,7 +105,7 @@ export default function Todo() {
         />
         <button
           type="submit"
-          disabled={text.trim() === ''}
+          disabled={text.trim() === ""}
           className="
             self-end sm:self-auto                /* en móvil se alinea al final de la columna */
             inline-flex items-center justify-center
@@ -123,9 +123,9 @@ export default function Todo() {
       {/* Filtros */}
       <div className="mt-4 flex flex-wrap items-center gap-2">
         {[
-          { id: 'all', label: 'Todas' },
-          { id: 'active', label: 'Pendientes' },
-          { id: 'done', label: 'Hechas' },
+          { id: "all", label: "Todas" },
+          { id: "active", label: "Pendientes" },
+          { id: "done", label: "Hechas" },
         ].map(({ id, label }) => (
           <button
             key={id}
@@ -134,8 +134,8 @@ export default function Todo() {
               text-xs sm:text-sm px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg border
               ${
                 filtro === id
-                  ? 'bg-brand text-white border-brand'
-                  : 'border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200'
+                  ? "bg-brand text-white border-brand"
+                  : "border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200"
               }
             `}
           >

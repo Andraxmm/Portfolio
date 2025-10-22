@@ -1,8 +1,8 @@
 // src/BuscadorPeliculas/pages/MoviesPage.jsx
-import { useEffect, useState } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
-import api from '../Api.js';
-import MovieCard from '../MovieCard.jsx';
+import { useEffect, useState } from "react";
+import { useSearchParams, Link } from "react-router-dom";
+import api from "../Api.js";
+import MovieCard from "../MovieCard.jsx";
 
 function SkeletonCard() {
   return (
@@ -20,68 +20,57 @@ function SkeletonCard() {
 export default function MoviesPage() {
   // Detectar móvil (sm < 640px)
   const isMobile =
-    typeof window !== 'undefined' &&
-    window.matchMedia('(max-width: 639px)').matches;
+    typeof window !== "undefined" &&
+    window.matchMedia("(max-width: 639px)").matches;
 
   // --- estados ---
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [err, setErr] = useState('');
+  const [err, setErr] = useState("");
   const [genres, setGenres] = useState([]);
-  const [selectedGenre, setSelectedGenre] = useState('');
+  const [selectedGenre, setSelectedGenre] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
 
   // Carga inicial y búsqueda
   useEffect(() => {
     // 🔹 Asegura que la página cargue arriba
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
 
-    const q = searchParams.get('q')?.trim() || '';
-    if (q) {
-      setQuery(q);
-      doSearch(q);
-    } else {
-      loadTrending();
-    }
+    const q = searchParams.get("q")?.trim() || "";
+    if (q) { setQuery(q); doSearch(q); } else { loadTrending(); }
     loadGenres();
   }, [searchParams]);
 
   async function loadGenres() {
     try {
-      const data = await api('genre/movie/list');
+      const data = await api("genre/movie/list");
       setGenres(data.genres || []);
     } catch (e) {
-      console.error('Error al cargar géneros', e);
+      console.error("Error al cargar géneros", e);
     }
   }
 
   async function loadTrending() {
     try {
-      setLoading(true);
-      setErr('');
-      const data = await api('trending/movie/week');
+      setLoading(true); setErr("");
+      const data = await api("trending/movie/week");
       setMovies(data?.results || []);
     } catch (e) {
       console.error(e);
-      setErr('No se pudieron cargar las tendencias. ' + (e?.message || e));
-    } finally {
-      setLoading(false);
-    }
+      setErr("No se pudieron cargar las tendencias. " + (e?.message || e));
+    } finally { setLoading(false); }
   }
 
   async function doSearch(q) {
     try {
-      setLoading(true);
-      setErr('');
-      const data = await api('search/movie', null, { query: q });
+      setLoading(true); setErr("");
+      const data = await api("search/movie", null, { query: q });
       setMovies(data?.results || []);
     } catch (e) {
       console.error(e);
-      setErr('No se pudo buscar. ' + (e?.message || e));
-    } finally {
-      setLoading(false);
-    }
+      setErr("No se pudo buscar. " + (e?.message || e));
+    } finally { setLoading(false); }
   }
 
   async function onSubmit(e) {
@@ -110,12 +99,13 @@ export default function MoviesPage() {
       <main className="container-p py-8">
         <h1 className="text-2xl font-bold mb-4">🎬 Buscador de Películas</h1>
 
-        <Link
-          to="/favoritos"
-          className="btn-outline mb-4 inline-block text-sm sm:text-base px-3 py-1.5 sm:px-4 sm:py-2"
-        >
-          ❤️ Ver Favoritos
-        </Link>
+      <Link
+        to="/favoritos"
+        className="btn-outline mb-4 inline-block text-sm sm:text-base px-3 py-1.5 sm:px-4 sm:py-2"
+      >
+        ❤️ Ver Favoritos
+      </Link>
+
 
         <form onSubmit={onSubmit} className="flex gap-2 mb-6" role="search">
           <input
@@ -127,9 +117,7 @@ export default function MoviesPage() {
                       outline-none focus:border-indigo-400 dark:bg-slate-800 dark:border-slate-700"
             aria-label="Buscar película"
           />
-          <button type="submit" className="btn">
-            Buscar
-          </button>
+          <button type="submit" className="btn">Buscar</button>
         </form>
 
         {movies.length > 0 && (
@@ -143,9 +131,7 @@ export default function MoviesPage() {
             >
               <option value="">Todos</option>
               {genres.map((g) => (
-                <option key={g.id} value={g.id}>
-                  {g.name}
-                </option>
+                <option key={g.id} value={g.id}>{g.name}</option>
               ))}
             </select>
           </div>
@@ -155,14 +141,12 @@ export default function MoviesPage() {
 
         <div
           className="grid gap-4 movies-grid"
-          style={{
-            gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
-          }}
+          style={{ gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))" }}
         >
           {loading
-            ? Array.from({ length: 8 }).map((_, i) => <SkeletonCard key={i} />)
-            : filteredMovies.map((m) => <MovieCard key={m.id} movie={m} to />)}
-        </div>
+                      ? Array.from({ length: 8 }).map((_, i) => <SkeletonCard key={i} />)
+                      : filteredMovies.map((m) => <MovieCard key={m.id} movie={m} to />)}
+                  </div>
 
         {!loading && !err && filteredMovies.length === 0 && (
           <p className="opacity-70 mt-4">Sin resultados.</p>

@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import api from '../Api.js';
-import MovieCard from '../MovieCard.jsx';
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import api from "../Api.js";
+import MovieCard from "../MovieCard.jsx";
 
-const LS_KEY = 'favMovies';
+const LS_KEY = "favMovies";
 
 export default function FavoritesPage() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [err, setErr] = useState('');
+  const [err, setErr] = useState("");
 
   useEffect(() => {
     async function loadFavorites() {
@@ -26,13 +26,13 @@ export default function FavoritesPage() {
         );
 
         const validMovies = results
-          .filter((res) => res.status === 'fulfilled')
+          .filter((res) => res.status === "fulfilled")
           .map((res) => res.value);
 
         setMovies(validMovies);
       } catch (error) {
-        console.error('Error al cargar favoritos:', error);
-        setErr('No se pudieron cargar tus películas favoritas.');
+        console.error("Error al cargar favoritos:", error);
+        setErr("No se pudieron cargar tus películas favoritas.");
       } finally {
         setLoading(false);
       }
@@ -61,7 +61,7 @@ export default function FavoritesPage() {
       <div
         className="grid gap-4 movies-grid"
         style={{
-          gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
+          gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
         }}
       >
         {!loading &&

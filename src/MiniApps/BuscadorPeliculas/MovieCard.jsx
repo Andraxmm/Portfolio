@@ -1,6 +1,8 @@
+
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+
 
 const IMG = 'https://image.tmdb.org/t/p/w342'; //base URL de posters de TMDB
 const LS_KEY = 'favMovies'; //clave única en localStorage donde se guardan IDs favoritos
@@ -40,16 +42,20 @@ export default function MovieCard({ movie, to }) {
   const card = (
     <article
       className="relative flex flex-col rounded-xl overflow-hidden bg-white/5
-                 border border-slate-300 dark:border-white/10
-                 hover:border-indigo-400/50 hover:shadow-lg transition h-full
-                 max-w-[280px] sm:max-w-[320px] md:max-w-full mx-auto"
+                border border-slate-300 dark:border-white/10
+                hover:border-indigo-400/50 hover:shadow-lg transition h-full
+
+                max-w-[280px] sm:max-w-[320px] md:max-w-full mx-auto"
       /* Limita ancho en móvil, mantiene full width en desktop */
+
     >
       {/* Botón de favorito */}
       <button
         onClick={toggleFavorite}
         className="absolute top-2 right-2 text-xl sm:text-2xl drop-shadow-md"
+
         title={isFav ? 'Quitar de favoritos' : 'Añadir a favoritos'}
+
         aria-pressed={isFav} //mejora accesibilidad
       >
         {isFav ? '❤️' : '🤍'}
@@ -73,13 +79,13 @@ export default function MovieCard({ movie, to }) {
       <div className="p-3 flex flex-col flex-grow">
         <h3 className="font-semibold leading-tight text-sm sm:text-base line-clamp-2">
           {title}
-        </h3>{' '}
-        {/*line-clamp-2 recorta el título para que todas las cards tengan alturas parejas*/}
+
+        </h3> {/*line-clamp-2 recorta el título para que todas las cards tengan alturas parejas*/}
         <p className="text-xs opacity-70">{year}</p>
         {overview && (
           <p className="text-xs sm:text-sm mt-2 opacity-80 line-clamp-3">
-            {overview}{' '}
-            {/*line-clamp-3 recorta la descripción para uniformidad*/}
+            {overview} {/*line-clamp-3 recorta la descripción para uniformidad*/}
+
           </p>
         )}
       </div>

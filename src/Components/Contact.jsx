@@ -1,15 +1,10 @@
-import {
-  FaRegPaperPlane,
-  FaEnvelope,
-  FaLinkedin,
-  FaGithub,
-} from 'react-icons/fa';
+import { FaRegPaperPlane, FaEnvelope, FaLinkedin, FaGithub } from "react-icons/fa";
 
 export default function Contact() {
-  const email = 'manamorenoandrea@gmail.com';
+  const email = "manamorenoandrea@gmail.com";
   const linkedin =
-    'https://www.linkedin.com/in/andrea-ma%C3%B1a-moreno-204a2a1b5/';
-  const github = 'https://github.com/Andraxmm/Portfolio';
+    "https://www.linkedin.com/in/andrea-ma%C3%B1a-moreno-204a2a1b5/";
+  const github = "https://github.com/Andraxmm/Portfolio";
 
   return (
     // Igual que Proyectos/Stack: container en el SECTION
@@ -21,7 +16,7 @@ export default function Contact() {
       <div className="mb-10 px-5 sm:px-0">
         <div className="flex items-center gap-3">
           <FaRegPaperPlane className="text-2xl md:text-3xl text-slate-900 dark:text-white" />
-          <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white">
+        <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white">
             Contacto
           </h2>
         </div>
@@ -39,9 +34,9 @@ export default function Contact() {
         <a
           href={`mailto:${email}`}
           className="font-semibold text-sm sm:text-base md:text-xl
-                     text-slate-900 dark:text-white
-                     hover:text-indigo-500 dark:hover:text-indigo-400
-                     transition break-all sm:break-normal"
+                    text-slate-900 dark:text-white
+                    hover:text-indigo-500 dark:hover:text-indigo-400
+                    transition break-all sm:break-normal"
         >
           {email}
         </a>
@@ -54,7 +49,7 @@ export default function Contact() {
           target="_blank"
           rel="noreferrer"
           className="text-slate-600 dark:text-slate-300
-                     hover:text-indigo-500 dark:hover:text-indigo-400 transition"
+                    hover:text-indigo-500 dark:hover:text-indigo-400 transition"
           aria-label="GitHub"
         >
           <FaGithub />
@@ -64,7 +59,7 @@ export default function Contact() {
           target="_blank"
           rel="noreferrer"
           className="text-slate-600 dark:text-slate-300
-                     hover:text-sky-500 dark:hover:text-sky-400 transition"
+                    hover:text-sky-500 dark:hover:text-sky-400 transition"
           aria-label="LinkedIn"
         >
           <FaLinkedin />

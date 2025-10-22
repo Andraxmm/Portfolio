@@ -1,36 +1,36 @@
-import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import api from '../Api.js';
+import { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import api from "../Api.js";
 
-const IMG = 'https://image.tmdb.org/t/p/w500';
+const IMG = "https://image.tmdb.org/t/p/w500";
 
 export default function MovieDetailPage() {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [video, setVideo] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [err, setErr] = useState('');
+  const [err, setErr] = useState("");
 
   useEffect(() => {
     async function load() {
       try {
         setLoading(true);
-        setErr('');
+        setErr("");
 
         const [movieData, videoData] = await Promise.all([
           api(`/movie/${id}`),
-          api(`/movie/${id}/videos`),
+          api(`/movie/${id}/videos`)
         ]);
 
         setMovie(movieData);
 
         const trailer = videoData.results.find(
-          (v) => v.type === 'Trailer' && v.site === 'YouTube'
+          (v) => v.type === "Trailer" && v.site === "YouTube"
         );
         setVideo(trailer);
       } catch (error) {
         console.error(error);
-        setErr('Error al cargar la película.');
+        setErr("Error al cargar la película.");
       } finally {
         setLoading(false);
       }
@@ -85,9 +85,7 @@ export default function MovieDetailPage() {
           )}
 
           {movie.overview && (
-            <p className="mb-4 opacity-90 text-sm sm:text-base">
-              {movie.overview}
-            </p>
+            <p className="mb-4 opacity-90 text-sm sm:text-base">{movie.overview}</p>
           )}
 
           {video && (
