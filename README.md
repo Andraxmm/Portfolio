@@ -68,28 +68,30 @@ src/
 ## 🎥 Proyecto principal: Buscador de Películas (TMDB)
 
 **Características**
-- 🔍 Búsqueda en tiempo real  
-- 🖼️ Resultados con título y póster  
-- 📄 Detalle de película con sinopsis  
-- ⭐ Favoritos persistidos en `localStorage`  
+
+- 🔍 Búsqueda en tiempo real
+- 🖼️ Resultados con título y póster
+- 📄 Detalle de película con sinopsis
+- ⭐ Favoritos persistidos en `localStorage`
 - 🧭 Navegación con React Router
 
 **Rutas**
-- `/peliculas` — listado / buscador  
-- `/peliculas/:id` — detalle  
-- `/favoritos` — favoritos guardados  
 
-> ℹ️ TMDB requiere API key (ver *Configuración*).
+- `/peliculas` — listado / buscador
+- `/peliculas/:id` — detalle
+- `/favoritos` — favoritos guardados
+
+> ℹ️ TMDB requiere API key (ver _Configuración_).
 
 ---
 
 ## ⚙️ Configuración
 
 ### Clonar e instalar
+
 git clone https://github.com/Andraxmm/Portfolio.git
 cd Portfolio
 npm install
-
 
 ---
 
@@ -102,17 +104,19 @@ npm install
 ---
 
 **Variables de entorno (TMDB)**
+
 - VITE_TMDB_API_KEY=TU_API_KEY_DE_TMDB
 
-
 **Ejecutar en desarrollo**
+
 - npm run dev
 
 **Build de producción**
+
 - npm run build
 - npm run preview
 
---- 
+---
 
 🌓 Tema y accesibilidad
 Dark mode por defecto (con toggle a claro).
