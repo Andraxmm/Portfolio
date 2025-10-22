@@ -6,37 +6,56 @@
 
 /* ---------- Base ---------- */
 @layer base {
-  :root { --radius: 16px; }
-  html, body, #root { height: 100%; }
-/* 🎨 Fondo global (MODO CLARO) — azul suave, sin lila */
-body {
-  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
-               'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji','Segoe UI Emoji';
-  @apply text-slate-900 dark:text-slate-100;
+  :root {
+    --radius: 16px;
+  }
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  /* 🎨 Fondo global (MODO CLARO) — azul suave, sin lila */
+  body {
+    font-family:
+      'Inter',
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      Segoe UI,
+      Roboto,
+      'Helvetica Neue',
+      Arial,
+      'Noto Sans',
+      'Apple Color Emoji',
+      'Segoe UI Emoji';
+    @apply text-slate-900 dark:text-slate-100;
 
-  /* degrade suave tipo cielo → blanco (combina con el hero) */
-  background:
-    radial-gradient(1200px 800px at 12% -10%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 60%),
-    linear-gradient(
-      to bottom,
-      #cfe3ff 0%,   /* azul muy claro */
-      #b7d1ff 25%,  /* azul pastel */
-      #eaf1ff 55%,  /* casi blanco azulado */
-      #c9dfe3 100%  /* blanco */
-    );
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
+    /* degrade suave tipo cielo → blanco (combina con el hero) */
+    background:
+      radial-gradient(
+        1200px 800px at 12% -10%,
+        rgba(255, 255, 255, 0.55) 0%,
+        rgba(255, 255, 255, 0) 60%
+      ),
+      linear-gradient(
+        to bottom,
+        #cfe3ff 0%,
+        /* azul muy claro */ #b7d1ff 25%,
+        /* azul pastel */ #eaf1ff 55%,
+        /* casi blanco azulado */ #c9dfe3 100% /* blanco */
+      );
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 
   /* 🌑 Versión modo oscuro */
   .dark body {
     background: linear-gradient(
       to bottom,
-      #0b1120 0%,   
-      #253e79 25%,   
-      #1e293b 60%,   
+      #0b1120 0%,
+      #253e79 25%,
+      #1e293b 60%,
       #0b1120 100%
     );
     background-attachment: fixed;
@@ -45,18 +64,27 @@ body {
   }
 
   /* ✅ Compensar el header fijo al navegar por anclas */
-  section[id] { scroll-margin-top: 4.5rem; }
+  section[id] {
+    scroll-margin-top: 4.5rem;
+  }
   @media (min-width: 768px) {
-    section[id] { scroll-margin-top: 5rem; }
+    section[id] {
+      scroll-margin-top: 5rem;
+    }
   }
 
   /* ✅ Imágenes fluidas por si añades más en el futuro */
-  img { max-width: 100%; height: auto; }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 }
 
 /* -------- Components ------ */
 @layer components {
-  .container-p { @apply max-w-6xl mx-auto px-4 sm:px-6; }
+  .container-p {
+    @apply max-w-6xl mx-auto px-4 sm:px-6;
+  }
 
   /* ✨ Header con efecto glass elegante */
   .site-header {
@@ -72,7 +100,9 @@ body {
            px-4 py-2 font-semibold shadow-sm
            transition-colors duration-200;
   }
-  .btn:hover { @apply bg-indigo-700; }
+  .btn:hover {
+    @apply bg-indigo-700;
+  }
 
   /* Botón secundario (outline) */
   .btn-outline {
@@ -83,8 +113,12 @@ body {
            transition-colors duration-200;
   }
   /* Hover: blanco + texto morado en claro, gris oscuro + texto morado claro en dark */
-  .btn-outline:hover { @apply bg-white text-indigo-600 shadow-sm; }
-  .dark .btn-outline:hover { @apply bg-slate-800 text-indigo-300 shadow-sm; }
+  .btn-outline:hover {
+    @apply bg-white text-indigo-600 shadow-sm;
+  }
+  .dark .btn-outline:hover {
+    @apply bg-slate-800 text-indigo-300 shadow-sm;
+  }
 
   .chip {
     @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-medium
@@ -103,30 +137,33 @@ body {
   }
 
   /* MODO CLARO: lila → azul (mejor legibilidad sobre fondo claro) */
-.react-gradient-text {
-  background: linear-gradient(90deg, #724edd 0%, #3775d1 60%, #53b0d8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-   -webkit-text-fill-color: transparent; /* Safari */
-  display: inline-block;
-}
+  .react-gradient-text {
+    background: linear-gradient(90deg, #724edd 0%, #3775d1 60%, #53b0d8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent; /* Safari */
+    display: inline-block;
+  }
 
-/* MODO OSCURO: mantenemos amarillo → verde → cian */
-.dark .react-gradient-text {
-  background: linear-gradient(90deg, #facc15, #4ade80, #38bdf8);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-}
+  /* MODO OSCURO: mantenemos amarillo → verde → cian */
+  .dark .react-gradient-text {
+    background: linear-gradient(90deg, #facc15, #4ade80, #38bdf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
 
-
-  .project-card { @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl; }
+  .project-card {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl;
+  }
 
   /* ——— Tap feedback (móvil) + suavizar transiciones ——— */
-  .btn, .btn-outline, .card {
+  .btn,
+  .btn-outline,
+  .card {
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
     transition:
@@ -141,7 +178,7 @@ body {
   @media (hover: hover) and (pointer: fine) {
     .card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 12px 24px rgba(0,0,0,.15);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
     }
   }
 
@@ -150,8 +187,8 @@ body {
     .btn:active,
     .btn-outline:active,
     .card:active {
-      transform: translateY(2px) scale(.985);
-      box-shadow: 0 6px 12px rgba(0,0,0,.12);
+      transform: translateY(2px) scale(0.985);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
     }
   }
 
@@ -160,62 +197,171 @@ body {
      ============================ */
 
   /* Fondo base del hero: gradiente (claro y oscuro) */
-.hero-sky-bg {
-  background:
-    radial-gradient(900px 700px at 12% 105%, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0) 60%),
-    linear-gradient(
-      180deg,
-      #7f9cf7 0%,    /* indigo azulado suave */
-      #8eaaf8 32%,
-      #aebcfb 58%,
-      #ecebff 85%,  /* lavanda claro */
-      #f6f5ff 100%  /* lavanda muy suave al final */
-    );
-}
-
+  .hero-sky-bg {
+    background:
+      radial-gradient(
+        900px 700px at 12% 105%,
+        rgba(255, 255, 255, 0.35) 0%,
+        rgba(255, 255, 255, 0) 60%
+      ),
+      linear-gradient(
+        180deg,
+        #7f9cf7 0%,
+        /* indigo azulado suave */ #8eaaf8 32%,
+        #aebcfb 58%,
+        #ecebff 85%,
+        /* lavanda claro */ #f6f5ff 100% /* lavanda muy suave al final */
+      );
+  }
 
   .dark .hero-sky-bg {
     /* MODO OSCURO: profundo, tipo noche */
     background:
-      radial-gradient(1100px 800px at 8% 120%, rgba(56,189,248,0.15) 0%, rgba(0,0,0,0) 60%),
+      radial-gradient(
+        1100px 800px at 8% 120%,
+        rgba(56, 189, 248, 0.15) 0%,
+        rgba(0, 0, 0, 0) 60%
+      ),
       linear-gradient(180deg, #0b1220 0%, #0f172a 45%, #0b1026 100%);
   }
 
   /* Capa de estrellas: mucha densidad + parpadeo sutil */
   .hero-sky-stars {
-    opacity: .8;
+    opacity: 0.8;
     mix-blend-mode: screen;
     background:
       /* capa 1 (muchas, pequeñas) */
-      radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,.95) 99%, transparent) 0 0 / 200px 200px repeat,
-      radial-gradient(1px 1px at 120px 80px, rgba(255,255,255,.85) 99%, transparent) 0 0 / 250px 250px repeat,
+      radial-gradient(
+          1px 1px at 20px 30px,
+          rgba(255, 255, 255, 0.95) 99%,
+          transparent
+        )
+        0 0 / 200px 200px repeat,
+      radial-gradient(
+          1px 1px at 120px 80px,
+          rgba(255, 255, 255, 0.85) 99%,
+          transparent
+        )
+        0 0 / 250px 250px repeat,
       /* capa 2 (tamaño medio) */
-      radial-gradient(2px 2px at 80px 120px, rgba(255,255,255,.8) 99%, transparent) 0 0 / 350px 350px repeat,
-      radial-gradient(2px 2px at 60px 40px, rgba(255,255,255,.75) 99%, transparent) 0 0 / 420px 420px repeat,
+        radial-gradient(
+          2px 2px at 80px 120px,
+          rgba(255, 255, 255, 0.8) 99%,
+          transparent
+        )
+        0 0 / 350px 350px repeat,
+      radial-gradient(
+          2px 2px at 60px 40px,
+          rgba(255, 255, 255, 0.75) 99%,
+          transparent
+        )
+        0 0 / 420px 420px repeat,
       /* capa 3 (alguna grande y muy dispersa) */
-      radial-gradient(3px 3px at 150px 90px, rgba(255,255,255,.7) 99%, transparent) 0 0 / 600px 600px repeat;
-    animation: hero-twinkle 4s ease-in-out infinite alternate,
-               hero-drift 60s linear infinite;
+        radial-gradient(
+          3px 3px at 150px 90px,
+          rgba(255, 255, 255, 0.7) 99%,
+          transparent
+        )
+        0 0 / 600px 600px repeat;
+    animation:
+      hero-twinkle 4s ease-in-out infinite alternate,
+      hero-drift 60s linear infinite;
   }
-  .dark .hero-sky-stars { opacity: .95; }
+  .dark .hero-sky-stars {
+    opacity: 0.95;
+  }
 }
 
 /* -------- Utilities & keyframes ------ */
 @layer utilities {
   /* Tu animación de twinkle existente */
   @keyframes twinkle {
-    0%, 100% { opacity: .35; }
-    50%      { opacity: .9;  }
+    0%,
+    100% {
+      opacity: 0.35;
+    }
+    50% {
+      opacity: 0.9;
+    }
   }
-  .animate-twinkle { animation: twinkle 2.6s ease-in-out infinite; }
+  .animate-twinkle {
+    animation: twinkle 2.6s ease-in-out infinite;
+  }
 
   /* Parpadeo sutil de estrellas + deriva de capas */
   @keyframes hero-twinkle {
-    from { filter: brightness(1);   }
-    to   { filter: brightness(1.25); }
+    from {
+      filter: brightness(1);
+    }
+    to {
+      filter: brightness(1.25);
+    }
   }
   @keyframes hero-drift {
-    0%   { background-position: 0 0, 0 0, 0 0, 0 0, 0 0; }
-    100% { background-position: 60px 40px, -40px 20px, 30px -30px, -30px -20px, 20px 10px; }
+    0% {
+      background-position:
+        0 0,
+        0 0,
+        0 0,
+        0 0,
+        0 0;
+    }
+    100% {
+      background-position:
+        60px 40px,
+        -40px 20px,
+        30px -30px,
+        -30px -20px,
+        20px 10px;
+    }
+  }
+
+  /* Ajustes solo para móviles <=639px */
+  @media (max-width: 639px) {
+    /* Ajusta la grilla de películas */
+    .movies-grid {
+      grid-template-columns: repeat(
+        auto-fill,
+        minmax(140px, 1fr)
+      ) !important; /* más estrecho */
+      gap: 0.5rem;
+    }
+
+    /* Ajusta las tarjetas */
+    .movies-grid .card {
+      aspect-ratio: 1 / 1.5; /* más alargadas y menos grandes */
+      padding: 0.5rem;
+    }
+
+    /* Imagen dentro de la tarjeta */
+    .movies-grid .card img {
+      aspect-ratio: 1 / 1.5;
+      object-fit: cover;
+    }
+
+    /* Texto dentro de la tarjeta */
+    .movies-grid .card .title {
+      font-size: 0.875rem; /* 14px aprox */
+      line-height: 1.1rem;
+    }
+
+    /* Ajuste botón "volver" para que no tape el título */
+    .btn-outline.fixed.top-4.left-4 {
+      top: 1rem; /* un poco más arriba */
+      left: 0.5rem; /* ligeramente separado del borde */
+      font-size: 0.75rem; /* más pequeño */
+      padding: 0.25rem 0.75rem;
+    }
+
+    /* Ajustar margen del título principal para que no quede bajo el botón */
+    main h1 {
+      margin-top: 2.5rem; /* suficiente para que el botón no lo cubra */
+    }
+
+    /* Ajustes menores de padding del contenedor */
+    .container-p {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
   }
 }

@@ -1,8 +1,8 @@
-export default function PreviewFrame({ children, className = "" }) {
+export default function PreviewFrame({ children, className = '' }) {
   return (
     <div
       className={
-        "h-40 bg-slate-200 flex items-center justify-center overflow-hidden rounded-t-xl " +
+        'h-40 bg-slate-200 flex items-center justify-center overflow-hidden rounded-t-xl ' +
         className
       }
     >
@@ -13,4 +13,3 @@ export default function PreviewFrame({ children, className = "" }) {
     </div>
   );
 }
-

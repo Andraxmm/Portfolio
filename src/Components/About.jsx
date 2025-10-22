@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
-import { FaStar } from "react-icons/fa";
+import { motion } from 'framer-motion';
+import { FaStar } from 'react-icons/fa';
 
 export default function About() {
   return (
@@ -34,9 +34,10 @@ export default function About() {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            Soy una desarrolladora frontend con foco en React, JavaScript y accesibilidad.
-            Disfruto convertir diseños en experiencias usables y mantener el código claro.
-            Actualmente construyo mini-apps para consolidar fundamentos (estado, efectos, formularios, fetch).
+            Soy una desarrolladora frontend con foco en React, JavaScript y
+            accesibilidad. Disfruto convertir diseños en experiencias usables y
+            mantener el código claro. Actualmente construyo mini-apps para
+            consolidar fundamentos (estado, efectos, formularios, fetch).
           </motion.p>
 
           {/* Lista de habilidades */}
@@ -52,11 +53,11 @@ export default function About() {
           >
             {[
               {
-                icon: "⚛️",
-                text: "Bases sólidas de React (hooks, props, listas, condicionales)",
+                icon: '⚛️',
+                text: 'Bases sólidas de React (hooks, props, listas, condicionales)',
               },
-              { icon: "🌐", text: "Llamadas a API y manejo de loading/error" },
-              { icon: "🚀", text: "Git/GitHub y deploy en Netlify/Vercel" },
+              { icon: '🌐', text: 'Llamadas a API y manejo de loading/error' },
+              { icon: '🚀', text: 'Git/GitHub y deploy en Netlify/Vercel' },
             ].map((item, index) => (
               <motion.li
                 key={index}

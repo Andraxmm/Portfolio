@@ -6,7 +6,9 @@ export default function Modal({ open, onClose, title, children }) {
       <div className="relative z-[61] w-full max-w-2xl rounded-2xl bg-white p-5 shadow-xl dark:bg-slate-900">
         <div className="flex items-center justify-between gap-4">
           <h3 className="text-lg font-bold">{title}</h3>
-          <button className="btn-outline" onClick={onClose} aria-label="Cerrar">✕</button>
+          <button className="btn-outline" onClick={onClose} aria-label="Cerrar">
+            ✕
+          </button>
         </div>
         <div className="mt-4">{children}</div>
       </div>

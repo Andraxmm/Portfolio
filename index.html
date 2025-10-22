@@ -4,23 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio | React One-Page</title>
-    
-  <script>
-  (function () {
-    try {
-      const saved = localStorage.getItem('theme');
-      const wantsDark = saved ? saved === 'dark' : true; 
-      if (wantsDark) document.documentElement.classList.add('dark');
-    } catch (e) {}
-  })();
-</script>
 
+    <script>
+      (function () {
+        try {
+          const saved = localStorage.getItem('theme');
+          const wantsDark = saved ? saved === 'dark' : true;
+          if (wantsDark) document.documentElement.classList.add('dark');
+        } catch (e) {}
+      })();
+    </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body class="antialiased bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100">
+  <body
+    class="antialiased bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100"
+  >
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

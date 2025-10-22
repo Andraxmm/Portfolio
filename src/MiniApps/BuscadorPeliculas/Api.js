@@ -1,17 +1,64 @@
-//Define la URL base para todas las peticiones a la API de TMDB
-const BASE = "https://api.themoviedb.org/3";
+// src/BuscadorPeliculas/Api.js
 
-//Toma la clave secreta (API Key) desde el archivo .env 
-const KEY = import.meta.env.VITE_TMDB_API_KEY;
+const BASE = 'https://api.themoviedb.org/3';
+const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
-//path: es el fragmento final del endpoint que quieres consultar. Ejemplo: `/search/movie?query=batman`
-//signal: es una señal para cancelar la petición si es necesario
-export default async function api(path, signal) {
-    const url = new URL(BASE + path);
-  url.searchParams.set("api_key", KEY);     //api_key: sin esto, TMDB rechaza la petición.
-  url.searchParams.set("language", "es-ES"); 
+/**
+ * Construye la URL completa de TMDB
+ * @param {string} path - ruta dentro de TMDB
+ * @param {object} params - parámetros extra de query
+ * @returns {URL} url completa
+ */
+function buildUrl(path, params = {}) {
+  const clean = String(path || '').replace(/^\/+/, '');
+  const url = new URL(`${BASE}/${clean}`);
 
-  const res = await fetch(url, { signal }); //hacemos la petición a la URL completa. El lsignal sirve para poder cancelar la petición con un AbortController
-  if (!res.ok) throw new Error(`TMDB ${res.status}`); //Si la respuesta no es OK (por ejemplo 404, 401...), lanza un error personalizado
-  return res.json(); //Convierte la respuesta a JSON (objeto JS) y la devuelve.
-}  
+  // Forzar idioma español si no se especifica
+  if (!url.searchParams.has('language'))
+    url.searchParams.set('language', 'es-ES');
+
+  // Agregar API key
+  url.searchParams.set('api_key', API_KEY);
+
+  // Agregar parámetros extra correctamente
+  Object.keys(params).forEach((key) => {
+    url.searchParams.set(key, params[key]);
+  });
+
+  return url;
+}
+
+/**
+ * Fetch a TMDB usando API key v3
+ * @param {string} path - ruta de TMDB
+ * @param {AbortSignal} signal - opcional para cancelar fetch
+ * @param {object} params - opcional, parámetros extra
+ * @returns {Promise<any>} datos de TMDB
+ */
+export default async function api(path, signal, params = {}) {
+  if (!API_KEY)
+    throw new Error('NO_API_KEY: Revisa tu .env o Vercel env variables');
+
+  const url = buildUrl(path, params);
+
+  // Logs de dev opcionales
+  if (import.meta.env.DEV) {
+    console.log('[TMDB] URL:', url.toString());
+    console.log('[TMDB] API_KEY disponible:', !!API_KEY);
+  }
+
+  const res = await fetch(url.toString(), {
+    method: 'GET',
+    headers: { accept: 'application/json' },
+    signal,
+  });
+
+  if (!res.ok) {
+    const txt = await res.text().catch(() => '');
+    throw new Error(
+      `TMDB ${res.status}: ${url.toString()} :: ${txt || res.statusText}`
+    );
+  }
+
+  return res.json();
+}

@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
-import profile from "../assets/profile.jpg";
+import { motion } from 'framer-motion';
+import profile from '../assets/profile.jpg';
 
 export default function Hero() {
   return (
@@ -48,7 +48,7 @@ export default function Hero() {
               className="mt-4 text-4xl md:text-6xl lg:text-7xl font-extrabold leading-tight
                          text-slate-900 dark:text-white"
             >
-              Construyo interfaces claras, rápidas y accesibles con{" "}
+              Construyo interfaces claras, rápidas y accesibles con{' '}
               <span className="react-gradient-text">React</span>.
             </motion.h1>
 
@@ -59,42 +59,47 @@ export default function Hero() {
               viewport={{ once: true }}
               className="mt-4 max-w-2xl text-slate-700 md:text-lg dark:text-white/90"
             >
-              Desarrolladora frontend junior enfocada en UX simple, buenas prácticas y rendimiento.
+              Desarrolladora frontend junior enfocada en UX simple, buenas
+              prácticas y rendimiento.
             </motion.p>
 
             {/* Botones sociales + CV */}
-          <motion.div
-  initial={{ opacity: 0, y: 14 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6, delay: 0.25 }}
-  viewport={{ once: true }}
-  className="mt-8 flex flex-wrap gap-3"
->
-  <a className="btn" href="https://github.com/Andraxmm" target="_blank" rel="noreferrer">
-    GitHub
-  </a>
-  <a
-    className="btn-outline"
-    href="https://www.linkedin.com/in/andrea-ma%C3%B1a-moreno-204a2a1b5/"
-    target="_blank"
-    rel="noreferrer"
-  >
-    LinkedIn
-  </a>
-  <a className="btn-outline" href="#projects">
-    Ver proyectos
-  </a>
-  {/* Botón solo en móvil */}
-  <a
-    className="btn-outline md:hidden"
-    href="/CV.AndreaMoreno.pdf"
-    target="_blank"
-    rel="noreferrer"
-  >
-    Descargar CV
-  </a>
-</motion.div>
-
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.25 }}
+              viewport={{ once: true }}
+              className="mt-8 flex flex-wrap gap-3"
+            >
+              <a
+                className="btn"
+                href="https://github.com/Andraxmm"
+                target="_blank"
+                rel="noreferrer"
+              >
+                GitHub
+              </a>
+              <a
+                className="btn-outline"
+                href="https://www.linkedin.com/in/andrea-ma%C3%B1a-moreno-204a2a1b5/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                LinkedIn
+              </a>
+              <a className="btn-outline" href="#projects">
+                Ver proyectos
+              </a>
+              {/* Botón solo en móvil */}
+              <a
+                className="btn-outline md:hidden"
+                href="/CV.AndreaMoreno.pdf"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Descargar CV
+              </a>
+            </motion.div>
           </div>
 
           {/* Columna derecha: foto (solo en desktop) */}
@@ -134,7 +139,8 @@ export default function Hero() {
         >
           <svg
             className="h-4 w-4 text-slate-700 dark:text-white transition-transform group-hover:translate-y-0.5"
-            viewBox="0 0 20 20" fill="currentColor"
+            viewBox="0 0 20 20"
+            fill="currentColor"
           >
             <path d="M10 14a1 1 0 0 1-.7-.29l-5-5a1 1 0 1 1 1.4-1.42L10 11.59l4.3-4.3a1 1 0 0 1 1.4 1.42l-5 5a1 1 0 0 1-.7.29z" />
           </svg>

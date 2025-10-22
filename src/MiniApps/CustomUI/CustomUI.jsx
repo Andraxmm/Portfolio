@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
 
 export default function CustomUI({ persist = true }) {
   // 1) Paletas tal cual
@@ -8,29 +8,29 @@ export default function CustomUI({ persist = true }) {
       fondo: 'bg-white',
       texto: 'text-gray-800',
       claseFondo: 'bg-gray-200',
-      altoContraste: { fondo: 'bg-black', texto: 'text-yellow-400' }
+      altoContraste: { fondo: 'bg-black', texto: 'text-yellow-400' },
     },
     oscuro: {
       nombre: 'Oscuro',
       fondo: 'bg-gray-800',
       texto: 'text-white',
       claseFondo: 'bg-gray-700',
-      altoContraste: { fondo: 'bg-black', texto: 'text-yellow-400' }
+      altoContraste: { fondo: 'bg-black', texto: 'text-yellow-400' },
     },
     azul: {
       nombre: 'Azul',
       fondo: 'bg-blue-100',
       texto: 'text-blue-900',
       claseFondo: 'bg-blue-200',
-      altoContraste: { fondo: 'bg-black', texto: 'text-yellow-400' }
+      altoContraste: { fondo: 'bg-black', texto: 'text-yellow-400' },
     },
     verde: {
       nombre: 'Verde',
       fondo: 'bg-green-100',
       texto: 'text-green-900',
       claseFondo: 'bg-green-200',
-      altoContraste: { fondo: 'bg-black', texto: 'text-yellow-400' }
-    }
+      altoContraste: { fondo: 'bg-black', texto: 'text-yellow-400' },
+    },
   };
 
   // 2) Guardamos lo que había en localStorage (para restaurar si fuese necesario)
@@ -44,24 +44,24 @@ export default function CustomUI({ persist = true }) {
   // 3) Tema inicial para las demos (sin persistencia)
   const temaInicialDemo = (() => {
     const saved = localStorage.getItem('theme'); // guardado por App
-    const isDark = saved ? saved === 'dark' : document.documentElement.classList.contains('dark');
+    const isDark = saved
+      ? saved === 'dark'
+      : document.documentElement.classList.contains('dark');
     return isDark ? 'oscuro' : 'claro';
   })();
 
   // 4) Estados
   const [tema, setTema] = useState(() => {
-    return persist
-      ? (localStorage.getItem('tema') || 'claro')
-      : temaInicialDemo;
+    return persist ? localStorage.getItem('tema') || 'claro' : temaInicialDemo;
   });
   const [tamanoFuente, setTamanoFuente] = useState(() =>
-    persist ? (localStorage.getItem('tamanoFuente') || 'mediano') : 'mediano'
+    persist ? localStorage.getItem('tamanoFuente') || 'mediano' : 'mediano'
   );
   const [tipoFuente, setTipoFuente] = useState(() =>
-    persist ? (localStorage.getItem('tipoFuente') || 'sans') : 'sans'
+    persist ? localStorage.getItem('tipoFuente') || 'sans' : 'sans'
   );
   const [altoContraste, setAltoContraste] = useState(() =>
-    persist ? (localStorage.getItem('altoContraste') === 'true') : false
+    persist ? localStorage.getItem('altoContraste') === 'true' : false
   );
 
   // 5) Efectos de guardado (solo si persist=true)
@@ -78,7 +78,8 @@ export default function CustomUI({ persist = true }) {
   }, [tipoFuente, persist]);
 
   useEffect(() => {
-    if (persist) localStorage.setItem('altoContraste', altoContraste.toString());
+    if (persist)
+      localStorage.setItem('altoContraste', altoContraste.toString());
   }, [altoContraste, persist]);
 
   // Nuevo efecto para sincronizar con el tema claro/oscuro del portafolio.
@@ -88,7 +89,8 @@ export default function CustomUI({ persist = true }) {
       const observer = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
           if (mutation.attributeName === 'class') {
-            const isDarkNow = document.documentElement.classList.contains('dark');
+            const isDarkNow =
+              document.documentElement.classList.contains('dark');
             // Si el portafolio está en oscuro, ponemos el tema 'oscuro' en la app.
             if (isDarkNow) {
               setTema('oscuro');
@@ -123,7 +125,7 @@ export default function CustomUI({ persist = true }) {
   };
   const handleFontSizeChange = (nuevoTamano) => setTamanoFuente(nuevoTamano);
   const handleFontTypeChange = (nuevoTipo) => setTipoFuente(nuevoTipo);
-  const handleContrastToggle = () => setAltoContraste(prev => !prev);
+  const handleContrastToggle = () => setAltoContraste((prev) => !prev);
 
   // 8) Clases
   const temaSeleccionado = altoContraste
@@ -140,14 +142,14 @@ export default function CustomUI({ persist = true }) {
     tamanoFuente === 'pequeño'
       ? 'text-sm'
       : tamanoFuente === 'grande'
-      ? 'text-lg'
-      : 'text-base'
+        ? 'text-lg'
+        : 'text-base'
   } ${
     tipoFuente === 'serif'
       ? 'font-serif'
       : tipoFuente === 'mono'
-      ? 'font-mono'
-      : 'font-sans'
+        ? 'font-mono'
+        : 'font-sans'
   }`;
 
   const claseBotonNoSeleccionado = 'bg-gray-300 text-gray-800';
@@ -224,7 +226,9 @@ export default function CustomUI({ persist = true }) {
       {/* Área de Vista Previa */}
       <div
         className={`p-4 rounded-md mt-4 ${
-          altoContraste ? temaSeleccionado.fondo : paletasDeColores[tema].claseFondo
+          altoContraste
+            ? temaSeleccionado.fondo
+            : paletasDeColores[tema].claseFondo
         }`}
       >
         <p className={`${textoClases} ${temaSeleccionado.texto}`}>

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 export default function ProjectCard({
   title,
@@ -14,8 +14,10 @@ export default function ProjectCard({
     <div className="card overflow-hidden">
       {preview ? (
         /* 👇 CAMBIO: quita h-40 y usa aspect ratio responsivo */
-        <div className="bg-slate-200 flex items-center justify-center overflow-hidden rounded-t-xl
-                        aspect-[16/9] sm:aspect-[3/1]">
+        <div
+          className="bg-slate-200 flex items-center justify-center overflow-hidden rounded-t-xl
+                        aspect-[16/9] sm:aspect-[3/1]"
+        >
           <div className="pointer-events-none select-none opacity-95 scale-95">
             {preview}
           </div>
@@ -46,16 +48,12 @@ export default function ProjectCard({
             </Link>
           ) : (
             children && (
-              <button
-                className="btn"
-                onClick={() => onDemo?.(title, children)}
-              >
+              <button className="btn" onClick={() => onDemo?.(title, children)}>
                 Demo
               </button>
             )
           )}
 
-          
           {code && (
             <a
               className="btn-outline"

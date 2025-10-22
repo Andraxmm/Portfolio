@@ -1,20 +1,19 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function Contador() {
-const [count, setCount] = useState(0);
+  const [count, setCount] = useState(0);
 
-function Increment() {
-    setCount(prev => prev +1);
-}
+  function Increment() {
+    setCount((prev) => prev + 1);
+  }
 
-function Restar() {
-  setCount(prev => (prev > 0 ? prev - 1 : 0));
-}
+  function Restar() {
+    setCount((prev) => (prev > 0 ? prev - 1 : 0));
+  }
 
-
-function Reset() {
+  function Reset() {
     setCount(0);
-}
+  }
 
   return (
     <div className="p-4 border rounded-xl shadow-sm bg-white dark:bg-slate-800 flex flex-col items-center gap-4">

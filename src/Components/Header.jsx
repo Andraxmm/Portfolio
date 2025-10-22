@@ -1,22 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 function useTheme() {
   const getInitial = () => {
-    const saved = localStorage.getItem("theme");
-    if (saved === "light" || saved === "dark") return saved;
-    return "dark";
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light' || saved === 'dark') return saved;
+    return 'dark';
   };
 
   const [theme, setTheme] = useState(getInitial);
 
   useEffect(() => {
     const root = document.documentElement;
-    if (theme === "dark") root.classList.add("dark");
-    else root.classList.remove("dark");
-    localStorage.setItem("theme", theme);
+    if (theme === 'dark') root.classList.add('dark');
+    else root.classList.remove('dark');
+    localStorage.setItem('theme', theme);
   }, [theme]);
 
-  const toggle = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
+  const toggle = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
   return { theme, toggle };
 }
 
@@ -39,9 +39,9 @@ export default function Header() {
 
   // ⛔️ Bloquear el scroll del body cuando el menú móvil está abierto
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    document.body.style.overflow = open ? 'hidden' : '';
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = '';
     };
   }, [open]);
 
@@ -71,9 +71,9 @@ export default function Header() {
             onClick={toggle}
             className="p-2 rounded-full bg-white/20 hover:bg-white/30 dark:bg-white/10 dark:hover:bg-white/20 transition"
             aria-label="Cambiar tema"
-            title={`Cambiar a ${theme === "dark" ? "claro" : "oscuro"}`}
+            title={`Cambiar a ${theme === 'dark' ? 'claro' : 'oscuro'}`}
           >
-            {theme === "dark" ? "☀️" : "🌙"}
+            {theme === 'dark' ? '☀️' : '🌙'}
           </button>
 
           {/* Nav escritorio */}

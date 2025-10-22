@@ -15,9 +15,11 @@ const TodoItem = React.memo(({ item, onEliminar, onDone }) => {
           className="size-4 accent-brand"
         />
         <span
-          className={item.done
-            ? "line-through text-slate-400 dark:text-slate-500"
-            : "text-slate-800 dark:text-slate-100"}
+          className={
+            item.done
+              ? 'line-through text-slate-400 dark:text-slate-500'
+              : 'text-slate-800 dark:text-slate-100'
+          }
         >
           {item.text}
         </span>
@@ -31,5 +33,6 @@ const TodoItem = React.memo(({ item, onEliminar, onDone }) => {
     </li>
   );
 });
+TodoItem.displayName = 'TodoItem';
 
 export default TodoItem;
