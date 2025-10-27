@@ -169,7 +169,7 @@ export default function Projects() {
       bg-indigo-50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
               >
                 <span className="text-slate-700 text-base sm:text-lg font-medium">
-                  `Mini App Amigo Invisible`
+                  Mini App Amigo Invisible
                 </span>
               </div>
             ),
