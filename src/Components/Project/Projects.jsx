@@ -25,6 +25,7 @@ const CODE_LINKS = {
   todo: gh('src/MiniApps/Todo'),
   controlled: gh('src/MiniApps/Controlled'),
   customUI: gh('src/MiniApps/CustomUI'),
+  AmigoInvisible: gh('src/MiniApps/AmigoInvisible'),
 };
 /* ==================================== */
 
