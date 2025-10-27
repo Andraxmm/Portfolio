@@ -163,6 +163,7 @@ export default function Projects() {
             desc: 'Asignación por sorteo.',
             tags: ['formularios'],
             code: CODE_LINKS.AmigoInvisible,
+            demoHref: '/amigo-invisible',
             preview: <AmigoInvisible />,
           },
           {
