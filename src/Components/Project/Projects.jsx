@@ -9,7 +9,6 @@ import CustomUI from '../../MiniApps/CustomUI/CustomUI.jsx';
 import ProjectCard from './ProjectsCard.jsx';
 import Modal from '../Modal.jsx';
 import TodoPreview from './TodoPreview.jsx';
-import AmigoInvisible from '../../MiniApps/AmigoInvisible/AmigoInvisible.jsx';
 
 /* ========= Enlaces a GitHub ========= */
 const GH_USER = 'Andraxmm';
@@ -162,29 +161,7 @@ export default function Projects() {
             code: CODE_LINKS.customUI,
             preview: <CustomUI persist={false} />,
           },
-        ].map(({ Comp, title, desc, tags, code, preview }, i) => (
-          <div
-            key={i}
-            className="w-full max-w-[300px] sm:max-w-none mx-auto mb-8 sm:mb-0"
-          >
-            <ProjectCard
-              title={title}
-              desc={desc}
-              tags={tags}
-              code={code}
-              onDemo={openModal}
-              preview={preview}
-            >
-              <Comp />
-            </ProjectCard>
-            <div className="sm:hidden mt-4 h-1 w-11/12 mx-auto rounded-full bg-gradient-to-r from-transparent via-slate-400/25 to-transparent" />
-          </div>
-        ))}
-      </div>
-
-      {/* Agregamos Amigo Invisible como proyecto separado que navega */}
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 px-5 sm:px-0">
-        {[
+          // ✅ Amigo Invisible añadido al mismo grid
           {
             title: 'Amigo Invisible',
             desc: 'Asignación por sorteo.',
@@ -202,7 +179,7 @@ export default function Projects() {
               </div>
             ),
           },
-        ].map(({ title, desc, tags, code, demoHref, preview }, i) => (
+        ].map(({ Comp, title, desc, tags, code, preview, demoHref }, i) => (
           <div
             key={i}
             className="w-full max-w-[300px] sm:max-w-none mx-auto mb-8 sm:mb-0"
@@ -212,9 +189,12 @@ export default function Projects() {
               desc={desc}
               tags={tags}
               code={code}
-              demoHref={demoHref} // <Link> se encarga de la navegación
+              onDemo={openModal}
               preview={preview}
-            />
+              demoHref={demoHref} // <Link> se encarga de la navegación
+            >
+              {Comp && <Comp />}
+            </ProjectCard>
             <div className="sm:hidden mt-4 h-1 w-11/12 mx-auto rounded-full bg-gradient-to-r from-transparent via-slate-400/25 to-transparent" />
           </div>
         ))}
