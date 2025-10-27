@@ -163,7 +163,13 @@ export default function Projects() {
             tags: ['formularios'],
             code: CODE_LINKS.AmigoInvisible,
             demoHref: '/amigo-invisible',
-            preview: <AmigoInvisible />,
+            preview: (
+              <div className="bg-indigo-50 rounded-t-xl aspect-[16/9] sm:aspect-[3/1] flex items-center justify-center p-3 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                <span className="text-slate-700 text-base sm:text-lg font-medium">
+                  `Mini App Amigo Invisible`
+                </span>
+              </div>
+            ),
           },
           {
             Comp: CustomUI,
