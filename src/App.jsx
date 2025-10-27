@@ -6,7 +6,6 @@ import Projects from './Components/Project/Projects.jsx';
 import Contact from './Components/Contact.jsx';
 import Footer from './Components/Footer.jsx';
 
-
 export default function App() {
   return (
     <div>
