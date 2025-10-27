@@ -165,8 +165,8 @@ export default function Projects() {
             demoHref: '/amigo-invisible',
             preview: (
               <div
-                className="p-3 sm:p-6 flex flex-col items-center justify-center gap-3 sm:gap-4 rounded-lg h-full transition-all duration-300
-              bg-indigo-50 hover:shadow-xl hover:-translate-y-1"
+                className="h-full flex flex-col justify-center items-center p-3 sm:p-6 rounded-lg
+      bg-indigo-50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
               >
                 <span className="text-slate-700 text-base sm:text-lg font-medium">
                   `Mini App Amigo Invisible`
