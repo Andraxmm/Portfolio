@@ -158,7 +158,6 @@ export default function Projects() {
             preview: <ControlledForm />,
           },
           {
-            Comp: AmigoInvisible,
             title: 'Amigo Invisible',
             desc: 'Asignación por sorteo.',
             tags: ['formularios'],
