@@ -9,6 +9,7 @@ import CustomUI from '../../MiniApps/CustomUI/CustomUI.jsx';
 import ProjectCard from './ProjectsCard.jsx';
 import Modal from '../Modal.jsx';
 import TodoPreview from './TodoPreview.jsx';
+import AmigoInvisible from '../../MiniApps/AmigoInvisible/AmigoInvisible.jsx';
 
 /* ========= Enlaces a GitHub ========= */
 const GH_USER = 'Andraxmm';
@@ -84,6 +85,7 @@ export default function Projects() {
             demoHref="/peliculas"
           />
 
+          {/* Aviso de cambios en curso — visible en móvil y PC */}
           <span
             className="mt-2 inline-block text-xs px-2 py-0.5 rounded-full
                 bg-yellow-100 text-yellow-800 font-medium
@@ -93,6 +95,7 @@ export default function Projects() {
             ⚠️ Sección en desarrollo
           </span>
 
+          {/* separador solo móvil */}
           <div className="sm:hidden mt-4 h-1 w-11/12 mx-auto rounded-full bg-gradient-to-r from-transparent via-slate-400/25 to-transparent" />
         </div>
 
@@ -117,11 +120,12 @@ export default function Projects() {
               </div>
             }
           />
+          {/* separador solo móvil */}
           <div className="sm:hidden mt-4 h-1 w-11/12 mx-auto rounded-full bg-gradient-to-r from-transparent via-slate-400/25 to-transparent" />
         </div>
       </div>
 
-      {/* Mini proyectos React */}
+      {/* Mini proyectos */}
       <h3 className="mt-10 text-lg sm:text-xl font-bold flex items-center gap-2 px-5 sm:px-0 text-slate-900 dark:text-white">
         <FaReact className="text-cyan-500 text-lg sm:text-2xl" />
         Mini-Proyectos React
@@ -161,25 +165,7 @@ export default function Projects() {
             code: CODE_LINKS.customUI,
             preview: <CustomUI persist={false} />,
           },
-          // ✅ Amigo Invisible añadido al mismo grid
-          {
-            title: 'Amigo Invisible',
-            desc: 'Asignación por sorteo.',
-            tags: ['formularios'],
-            code: CODE_LINKS.AmigoInvisible,
-            demoHref: '/amigo-invisible',
-            preview: (
-              <div
-                className="h-full flex flex-col justify-center items-center p-3 sm:p-6 rounded-lg
-                bg-indigo-50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
-              >
-                <span className="text-slate-700 text-base sm:text-lg font-medium">
-                  Mini App Amigo Invisible
-                </span>
-              </div>
-            ),
-          },
-        ].map(({ Comp, title, desc, tags, code, preview, demoHref }, i) => (
+        ].map(({ Comp, title, desc, tags, code, preview }, i) => (
           <div
             key={i}
             className="w-full max-w-[300px] sm:max-w-none mx-auto mb-8 sm:mb-0"
@@ -191,10 +177,10 @@ export default function Projects() {
               code={code}
               onDemo={openModal}
               preview={preview}
-              demoHref={demoHref} // <Link> se encarga de la navegación
             >
-              {Comp && <Comp />}
+              <Comp />
             </ProjectCard>
+            {/* separador solo móvil */}
             <div className="sm:hidden mt-4 h-1 w-11/12 mx-auto rounded-full bg-gradient-to-r from-transparent via-slate-400/25 to-transparent" />
           </div>
         ))}
