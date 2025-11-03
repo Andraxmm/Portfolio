@@ -1,9 +1,8 @@
-/* eslint-disable */
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from 'react';
 
 export default function AmigoInvisible() {
-  const [vista, setVista] = useState("inicio"); // Inicio / organizador / reveal
-  const [nombre, setNombre] = useState("");
+  const [vista, setVista] = useState('inicio'); // Inicio / organizador / reveal
+  const [nombre, setNombre] = useState('');
   const [participantes, setParticipantes] = useState([]);
   const [asignaciones, setAsignaciones] = useState(null);
   const [participantesLink, setParticiantesLink] = useState([]); // { name, token, revealLink, used }
@@ -22,15 +21,17 @@ export default function AmigoInvisible() {
   // --- Lifecycle: cargar sesión guardada (si existe) ---
   useEffect(() => {
     try {
-      const raw = localStorage.getItem("sorteo-amigo");
+      const raw = localStorage.getItem('sorteo-amigo');
       if (raw) {
         const data = JSON.parse(raw);
-        if (Array.isArray(data.participants)) setParticipantes(data.participants);
+        if (Array.isArray(data.participants))
+          setParticipantes(data.participants);
         if (data.assignments) setAsignaciones(data.assignments);
-        if (Array.isArray(data.participantsWithLinks)) setParticiantesLink(data.participantsWithLinks);
+        if (Array.isArray(data.participantsWithLinks))
+          setParticiantesLink(data.participantsWithLinks);
       }
     } catch (err) {
-      console.warn("No se pudo recuperar sesión:", err);
+      console.warn('No se pudo recuperar sesión:', err);
     }
   }, []);
 
@@ -52,8 +53,8 @@ export default function AmigoInvisible() {
       }
     }
     update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
   }, []);
 
   // limpiar timeouts al desmontar (toast / confirm)
@@ -84,9 +85,9 @@ export default function AmigoInvisible() {
       createdAt: new Date().toISOString(),
     };
     try {
-      localStorage.setItem("sorteo-amigo", JSON.stringify(payload));
+      localStorage.setItem('sorteo-amigo', JSON.stringify(payload));
     } catch (err) {
-      console.warn("No se pudo guardar la sesión:", err);
+      console.warn('No se pudo guardar la sesión:', err);
     }
   }
 
@@ -118,7 +119,7 @@ export default function AmigoInvisible() {
 
   function generarSorteo() {
     if (participantes.length < 2) {
-      showToast("Añade al menos 2 participantes...");
+      showToast('Añade al menos 2 participantes...');
       return;
     }
 
@@ -135,15 +136,15 @@ export default function AmigoInvisible() {
       participantsWithLinks: linksList,
     });
 
-    console.log("Sorteo generado", resultado);
-    console.log("Links generados:", linksList);
-    showToast("Sorteo generado ✅");
+    console.log('Sorteo generado', resultado);
+    console.log('Links generados:', linksList);
+    showToast('Sorteo generado ✅');
   }
 
   function resetSession() {
     if (!confirmReset) {
       setConfirmReset(true);
-      showToast("Pulsa de nuevo para confirmar el reinicio");
+      showToast('Pulsa de nuevo para confirmar el reinicio');
       // reset automático del estado de confirmación pasado X segundos
       if (confirmTimeoutRef.current) clearTimeout(confirmTimeoutRef.current);
       confirmTimeoutRef.current = setTimeout(() => {
@@ -156,7 +157,7 @@ export default function AmigoInvisible() {
     // Reseteo completo
     setAsignaciones(null);
     setParticipantes([]);
-    setNombre("");
+    setNombre('');
     setParticiantesLink([]);
     setRevealName(null);
     setRevealError(null);
@@ -164,17 +165,17 @@ export default function AmigoInvisible() {
 
     // Limpiar almacenamiento local y url
     try {
-      localStorage.removeItem("sorteo-amigo");
+      localStorage.removeItem('sorteo-amigo');
     } catch (err) {
-      console.warn("No se pudo limpiar localStorage:", err);
+      console.warn('No se pudo limpiar localStorage:', err);
     }
     window.history.replaceState({}, document.title, window.location.pathname);
 
     // Mostrar mensaje temporal
-    showToast("Sesión reiniciada 🤗");
+    showToast('Sesión reiniciada 🤗');
 
     // Mantener en la vista organizador (según tu preferencia)
-    setVista("organizador");
+    setVista('organizador');
 
     // limpiar confirm flag
     setConfirmReset(false);
@@ -186,9 +187,9 @@ export default function AmigoInvisible() {
 
   function generarToken(tokenExistente = new Set()) {
     // Evitamos caracteres ambiguos O/0, I/1 si quieres
-    const CHARS = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
+    const CHARS = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
     function oneBlock(len) {
-      let s = "";
+      let s = '';
       for (let i = 0; i < len; i++) {
         s += CHARS[Math.floor(Math.random() * CHARS.length)];
       }
@@ -200,24 +201,24 @@ export default function AmigoInvisible() {
     do {
       token = `${oneBlock(3)}-${oneBlock(3)}`;
       intentos++;
-      if (intentos > 1000) throw new Error("No se pudo generar un token único");
+      if (intentos > 1000) throw new Error('No se pudo generar un token único');
     } while (tokenExistente.has(token));
     return token;
   }
 
   function encodeBase64Url(str) {
     const bytes = new TextEncoder().encode(str);
-    let binary = "";
+    let binary = '';
     for (let i = 0; i < bytes.length; i++) {
       binary += String.fromCharCode(bytes[i]);
     }
     const b64 = btoa(binary);
-    return b64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+    return b64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
   }
 
   function decodeBase64Url(b64) {
-    let s = b64.replace(/-/g, "+").replace(/_/g, "/");
-    while (s.length % 4) s += "=";
+    let s = b64.replace(/-/g, '+').replace(/_/g, '/');
+    while (s.length % 4) s += '=';
     const binary = atob(s);
     const bytes = new Uint8Array([...binary].map((ch) => ch.charCodeAt(0)));
     const decoded = new TextDecoder().decode(bytes);
@@ -262,19 +263,19 @@ export default function AmigoInvisible() {
     setRevealLoading(true);
 
     const params = new URLSearchParams(window.location.search);
-    const data = params.get("data");
+    const data = params.get('data');
 
     if (!data) {
       setRevealLoading(false);
-      setRevealError("No se encontró información en el enlace.");
+      setRevealError('No se encontró información en el enlace.');
       return;
     }
 
     try {
       const payload = decodeBase64Url(data);
 
-      if (!payload || typeof payload !== "object" || !payload.r || !payload.t) {
-        throw new Error("Payload inválido");
+      if (!payload || typeof payload !== 'object' || !payload.r || !payload.t) {
+        throw new Error('Payload inválido');
       }
 
       setRevealName(payload.r);
@@ -287,23 +288,26 @@ export default function AmigoInvisible() {
         );
         // Persistimos la marca "used" en localStorage
         try {
-          const raw = localStorage.getItem("sorteo-amigo");
+          const raw = localStorage.getItem('sorteo-amigo');
           if (raw) {
             const session = JSON.parse(raw);
             session.participantsWithLinks = updated;
-            localStorage.setItem("sorteo-amigo", JSON.stringify(session));
+            localStorage.setItem('sorteo-amigo', JSON.stringify(session));
           }
         } catch (err) {
-          console.warn("No se pudo actualizar localStorage al marcar usado:", err);
+          console.warn(
+            'No se pudo actualizar localStorage al marcar usado:',
+            err
+          );
         }
         return updated;
       });
 
       setRevealLoading(false);
     } catch (err) {
-      console.error("Error al decodificar el enlace:", err);
+      console.error('Error al decodificar el enlace:', err);
       setRevealLoading(false);
-      setRevealError("Enlace no válido o corrupto 😕");
+      setRevealError('Enlace no válido o corrupto 😕');
     }
   }
 
@@ -311,20 +315,26 @@ export default function AmigoInvisible() {
   function handleAddParticipant(rawName) {
     const trimmed = rawName.trim();
     if (!trimmed) {
-      showToast("Introduce un nombre válido");
+      showToast('Introduce un nombre válido');
       return;
     }
     // evitar duplicados case-insensitive
-    const exists = participantes.some((p) => p.toLowerCase() === trimmed.toLowerCase());
+    const exists = participantes.some(
+      (p) => p.toLowerCase() === trimmed.toLowerCase()
+    );
     if (exists) {
-      showToast("Ese nombre ya está añadido");
+      showToast('Ese nombre ya está añadido');
       return;
     }
     const next = [...participantes, trimmed];
     setParticipantes(next);
-    setNombre("");
+    setNombre('');
     // persistimos participants al añadir
-    persistSession({ participants: next, assignments: asignaciones, participantsWithLinks: participantesLink });
+    persistSession({
+      participants: next,
+      assignments: asignaciones,
+      participantsWithLinks: participantesLink,
+    });
   }
 
   return (
@@ -332,9 +342,9 @@ export default function AmigoInvisible() {
       className="min-h-screen flex items-center justify-center p-6 relative overflow-hidden"
       style={{
         background:
-          "radial-gradient(1200px 600px at 10% 5%, rgba(99,102,241,0.12) 0%, transparent 18%)," +
-          "radial-gradient(800px 400px at 90% 85%, rgba(99,102,241,0.08) 0%, transparent 20%)," +
-          "linear-gradient(180deg, #0f172a 0%, #0b2540 35%, #3b1f2b 100%)",
+          'radial-gradient(1200px 600px at 10% 5%, rgba(99,102,241,0.12) 0%, transparent 18%),' +
+          'radial-gradient(800px 400px at 90% 85%, rgba(99,102,241,0.08) 0%, transparent 20%),' +
+          'linear-gradient(180deg, #0f172a 0%, #0b2540 35%, #3b1f2b 100%)',
       }}
     >
       {/* Botón para volver al portfolio */}
@@ -347,12 +357,20 @@ export default function AmigoInvisible() {
       </a>
 
       {/* Ambiente navideño SVGs  */}
-      <svg className="pointer-events-none absolute left-6 top-8 w-56 opacity-20 blur-sm" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+      <svg
+        className="pointer-events-none absolute left-6 top-8 w-56 opacity-20 blur-sm"
+        viewBox="0 0 200 200"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden
+      >
         <circle cx="40" cy="40" r="40" fill="#60a5fa" />
         <circle cx="150" cy="80" r="30" fill="#34d399" />
       </svg>
 
-      <svg className="pointer-events-none absolute inset-0 w-full h-full" aria-hidden>
+      <svg
+        className="pointer-events-none absolute inset-0 w-full h-full"
+        aria-hidden
+      >
         <g className="stars">
           <circle cx="18%" cy="12%" r="1.6" fill="#fff9" />
           <circle cx="36%" cy="18%" r="1.2" fill="#fff7" />
@@ -364,14 +382,24 @@ export default function AmigoInvisible() {
       </svg>
 
       {/* Guirnalda superior (sin cambios) */}
-      <svg className="pointer-events-none absolute top-0 left-0 right-0 mx-auto w-full max-w-4xl h-14" viewBox="0 0 1200 60" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+      <svg
+        className="pointer-events-none absolute top-0 left-0 right-0 mx-auto w-full max-w-4xl h-14"
+        viewBox="0 0 1200 60"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden
+      >
         <defs>
           <linearGradient id="gRope" x1="0" x2="1">
             <stop offset="0" stopColor="#fde68a" stopOpacity="0.06" />
             <stop offset="1" stopColor="#fb7185" stopOpacity="0.04" />
           </linearGradient>
         </defs>
-        <path d="M0 48 C150 5, 350 5, 500 48 S 850 90, 1200 48" stroke="url(#gRope)" strokeWidth="4" fill="none" />
+        <path
+          d="M0 48 C150 5, 350 5, 500 48 S 850 90, 1200 48"
+          stroke="url(#gRope)"
+          strokeWidth="4"
+          fill="none"
+        />
         <circle cx="160" cy="48" r="6" fill="#f87171" />
         <circle cx="320" cy="48" r="5" fill="#fbbf24" />
         <circle cx="480" cy="48" r="7" fill="#34d399" />
@@ -385,9 +413,10 @@ export default function AmigoInvisible() {
         <div
           className="mx-auto p-6 rounded-3xl shadow-2xl backdrop-blur-md"
           style={{
-            background: "rgba(255,255,255,0.06)",
-            border: "1px solid rgba(255,255,255,0.06)",
-            boxShadow: "0 14px 40px rgba(2,6,23,0.55), inset 0 1px 0 rgba(255,255,255,0.02)",
+            background: 'rgba(255,255,255,0.06)',
+            border: '1px solid rgba(255,255,255,0.06)',
+            boxShadow:
+              '0 14px 40px rgba(2,6,23,0.55), inset 0 1px 0 rgba(255,255,255,0.02)',
           }}
         >
           <header className="flex items-center justify-center gap-4 py-2">
@@ -398,12 +427,14 @@ export default function AmigoInvisible() {
           </header>
 
           {/* --- VISTA INICIO --- */}
-          {vista === "inicio" && (
+          {vista === 'inicio' && (
             <section className="mt-6 text-center">
-              <p className="text-sm text-white/80">Organiza tu sorteo navideño en segundos.</p>
+              <p className="text-sm text-white/80">
+                Organiza tu sorteo navideño en segundos.
+              </p>
               <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
                 <button
-                  onClick={() => setVista("organizador")}
+                  onClick={() => setVista('organizador')}
                   className="px-6 py-3 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold shadow-md transform transition duration-200 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-emerald-300/30"
                   aria-label="Ir a vista organizador"
                 >
@@ -411,7 +442,7 @@ export default function AmigoInvisible() {
                 </button>
 
                 <button
-                  onClick={() => setVista("reveal")}
+                  onClick={() => setVista('reveal')}
                   className="px-6 py-3 rounded-full bg-red-500 hover:bg-red-600 text-white font-semibold shadow-md transform transition duration-200 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-red-300/30"
                   aria-label="Ir a vista reveal"
                 >
@@ -422,10 +453,12 @@ export default function AmigoInvisible() {
           )}
 
           {/* --- VISTA ORGANIZADOR --- */}
-          {vista === "organizador" && (
+          {vista === 'organizador' && (
             <section className="mt-6 text-left">
               <div className="flex items-center justify-between">
-                <h2 className="text-xl font-bold text-white">Vista organizador</h2>
+                <h2 className="text-xl font-bold text-white">
+                  Vista organizador
+                </h2>
                 <span className="ml-2 text-sm bg-white/10 px-2 py-1 rounded-full text-white">
                   {participantes.length} participantes
                 </span>
@@ -439,13 +472,13 @@ export default function AmigoInvisible() {
                     placeholder="Nombre del participante"
                     onChange={(e) => setNombre(e.target.value)}
                     onKeyDown={(e) => {
-                      if (e.key === "Enter") handleAddParticipant(nombre);
+                      if (e.key === 'Enter') handleAddParticipant(nombre);
                     }}
                     className="w-full pr-12 px-4 py-3 rounded-lg border border-white/10 bg-white/5 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-emerald-300/20"
                     aria-label="Nombre del participante"
                   />
                   <button
-                    onClick={() => setNombre("")}
+                    onClick={() => setNombre('')}
                     className="absolute right-2 top-1/2 -translate-y-1/2 text-sm bg-white/6 px-2 py-1 rounded"
                     aria-label="Limpiar nombre"
                     title="Limpiar"
@@ -472,9 +505,15 @@ export default function AmigoInvisible() {
                     <span className="truncate">{p}</span>
                     <button
                       onClick={() => {
-                        const next = participantes.filter((_, idx) => idx !== i);
+                        const next = participantes.filter(
+                          (_, idx) => idx !== i
+                        );
                         setParticipantes(next);
-                        persistSession({ participants: next, assignments: asignaciones, participantsWithLinks: participantesLink });
+                        persistSession({
+                          participants: next,
+                          assignments: asignaciones,
+                          participantsWithLinks: participantesLink,
+                        });
                       }}
                       className="ml-3 text-xs px-2 py-1 rounded bg-red-600/90 hover:bg-red-700/90 text-white"
                       aria-label={`Eliminar ${p}`}
@@ -487,15 +526,28 @@ export default function AmigoInvisible() {
 
               {participantesLink && participantesLink.length > 0 && (
                 <div className="mt-6 bg-white/5 p-4 rounded-lg border border-white/8">
-                  <h3 className="font-semibold text-white">Enlaces generados</h3>
+                  <h3 className="font-semibold text-white">
+                    Enlaces generados
+                  </h3>
                   <ul className="mt-3 space-y-2">
                     {participantesLink.map((item) => (
-                      <li key={item.token} className="flex items-center gap-3 text-white">
+                      <li
+                        key={item.token}
+                        className="flex items-center gap-3 text-white"
+                      >
                         <div className="flex-1 text-sm">
                           <div className="font-medium">
-                            {item.name} <span className="text-xs text-white/60 ml-2">{item.token}</span>
+                            {item.name}{' '}
+                            <span className="text-xs text-white/60 ml-2">
+                              {item.token}
+                            </span>
                           </div>
-                          <a href={item.revealLink} target="_blank" rel="noreferrer" className="text-xs underline text-amber-200">
+                          <a
+                            href={item.revealLink}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="text-xs underline text-amber-200"
+                          >
                             abrir enlace
                           </a>
                         </div>
@@ -503,11 +555,15 @@ export default function AmigoInvisible() {
                           <button
                             onClick={async () => {
                               try {
-                                await navigator.clipboard.writeText(item.revealLink);
-                                showToast("Enlace copiado al portapapeles");
+                                await navigator.clipboard.writeText(
+                                  item.revealLink
+                                );
+                                showToast('Enlace copiado al portapapeles');
                               } catch (err) {
-                                console.error("No se pudo copiar:", err);
-                                showToast("No se pudo copiar (¡usa copiar manualmente!)");
+                                console.error('No se pudo copiar:', err);
+                                showToast(
+                                  'No se pudo copiar (¡usa copiar manualmente!)'
+                                );
                               }
                             }}
                             className="bg-cyan-500 hover:bg-cyan-600 text-white rounded-md px-3 py-1 transition"
@@ -523,7 +579,10 @@ export default function AmigoInvisible() {
               )}
 
               <div className="mt-4 flex items-center gap-3">
-                <button onClick={generarSorteo} className="bg-cyan-500 hover:bg-cyan-600 text-white rounded-md px-3 py-1 transition">
+                <button
+                  onClick={generarSorteo}
+                  className="bg-cyan-500 hover:bg-cyan-600 text-white rounded-md px-3 py-1 transition"
+                >
                   🎲 Generar sorteo
                 </button>
 
@@ -534,12 +593,17 @@ export default function AmigoInvisible() {
                   title="Resetear sesión"
                 >
                   <span className="text-lg">🧹</span>
-                  <span className="text-sm">{confirmReset ? "Pulsa para confirmar" : "Resetear sesión"}</span>
+                  <span className="text-sm">
+                    {confirmReset ? 'Pulsa para confirmar' : 'Resetear sesión'}
+                  </span>
                 </button>
               </div>
 
               <div className="mt-4">
-                <button onClick={() => setVista("inicio")} className="px-3 py-1 bg-white/6 rounded text-white">
+                <button
+                  onClick={() => setVista('inicio')}
+                  className="px-3 py-1 bg-white/6 rounded text-white"
+                >
                   Volver al inicio
                 </button>
               </div>
@@ -547,12 +611,16 @@ export default function AmigoInvisible() {
           )}
 
           {/* --- VISTA PARTICIPANTE (REVEAL) --- */}
-          {vista === "reveal" && (
+          {vista === 'reveal' && (
             <section className="mt-6 text-center relative">
               {!revealName && (
                 <>
-                  <h2 className="text-2xl font-semibold text-amber-200">¿Listo para saberlo?</h2>
-                  <p className="mt-2 text-white/80">Haz clic y descubre quién recibirá tu regalo este año 🎁</p>
+                  <h2 className="text-2xl font-semibold text-amber-200">
+                    ¿Listo para saberlo?
+                  </h2>
+                  <p className="mt-2 text-white/80">
+                    Haz clic y descubre quién recibirá tu regalo este año 🎁
+                  </p>
 
                   <div className="mt-6 flex justify-center gap-3">
                     <button
@@ -561,24 +629,39 @@ export default function AmigoInvisible() {
                       className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-full font-semibold shadow disabled:opacity-60"
                       aria-label="Revelar mi amigo invisible"
                     >
-                      {revealLoading ? "Revelando..." : "Revelar mi amigo invisible"}
+                      {revealLoading
+                        ? 'Revelando...'
+                        : 'Revelar mi amigo invisible'}
                     </button>
 
-                    <button onClick={() => setVista("inicio")} className="px-6 py-3 bg-red-100 hover:bg-red-200 text-red-700 rounded-full" aria-label="Volver al inicio">
+                    <button
+                      onClick={() => setVista('inicio')}
+                      className="px-6 py-3 bg-red-100 hover:bg-red-200 text-red-700 rounded-full"
+                      aria-label="Volver al inicio"
+                    >
                       Volver al inicio
                     </button>
                   </div>
                 </>
               )}
 
-              {revealError && <p className="mt-4 text-red-300 font-semibold">{revealError}</p>}
+              {revealError && (
+                <p className="mt-4 text-red-300 font-semibold">{revealError}</p>
+              )}
 
               {revealName && (
                 <>
                   {/* CONFETTI: aparece solo con revealName */}
                   <div className="pointer-events-none absolute inset-0 z-30">
                     {[...Array(confettiCount)].map((_, i) => {
-                      const colors = ["#F87171", "#FB923C", "#FBBF24", "#34D399", "#60A5FA", "#A78BFA"];
+                      const colors = [
+                        '#F87171',
+                        '#FB923C',
+                        '#FBBF24',
+                        '#34D399',
+                        '#60A5FA',
+                        '#A78BFA',
+                      ];
                       const left = Math.random() * 100;
                       const size = 6 + Math.random() * 14;
                       const delay = Math.random() * 0.6;
@@ -604,7 +687,9 @@ export default function AmigoInvisible() {
                   </div>
 
                   <div className="mt-8 p-8 bg-gradient-to-br from-green-50 via-red-50 to-white rounded-2xl shadow-inner relative z-40">
-                    <h3 className="text-2xl font-bold text-green-800">🎉 ¡Tu amigo invisible es... 🎉</h3>
+                    <h3 className="text-2xl font-bold text-green-800">
+                      🎉 ¡Tu amigo invisible es... 🎉
+                    </h3>
 
                     <p
                       ref={revealRef}
@@ -615,14 +700,16 @@ export default function AmigoInvisible() {
                       {revealName}
                     </p>
 
-                    <p className="mt-3 text-gray-600">¡Guarda bien este nombre y prepara un bonito regalo! 🎁</p>
+                    <p className="mt-3 text-gray-600">
+                      ¡Guarda bien este nombre y prepara un bonito regalo! 🎁
+                    </p>
 
                     <div className="mt-6">
                       <button
                         onClick={() => {
                           setRevealName(null);
                           setRevealError(null);
-                          setVista("inicio");
+                          setVista('inicio');
                         }}
                         className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-full font-semibold"
                       >
@@ -636,13 +723,21 @@ export default function AmigoInvisible() {
           )}
         </div>
 
-        <footer className="mt-6 text-xs text-white/60 text-center">Hecho con ❤️ — ¡Felices fiestas! 🎄</footer>
+        <footer className="mt-6 text-xs text-white/60 text-center">
+          Hecho con ❤️ — ¡Felices fiestas! 🎄
+        </footer>
       </main>
 
       {/* Toast */}
       {toast && (
-        <div role="status" aria-live="polite" className="fixed left-1/2 transform -translate-x-1/2 bottom-8 z-50">
-          <div className="bg-slate-900 text-white px-4 py-2 rounded-lg shadow">{toast}</div>
+        <div
+          role="status"
+          aria-live="polite"
+          className="fixed left-1/2 transform -translate-x-1/2 bottom-8 z-50"
+        >
+          <div className="bg-slate-900 text-white px-4 py-2 rounded-lg shadow">
+            {toast}
+          </div>
         </div>
       )}
 
