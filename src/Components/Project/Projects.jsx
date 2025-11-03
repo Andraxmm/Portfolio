@@ -161,8 +161,7 @@ export default function Projects() {
             code: CODE_LINKS.customUI,
             preview: <CustomUI persist={false} />,
           },
-          // ✅ Amigo Invisible añadido al mismo grid
-
+          // Amigo Invisible añadido al mismo grid
           {
             title: 'Amigo Invisible',
             desc: 'Gestiona el sorteo convirtiendo datos de JSON a Base64.',
@@ -171,16 +170,27 @@ export default function Projects() {
             demoHref: '/amigo-invisible',
             preview: (
               <div
-                className="flex flex-col justify-center items-center gap-2
-      w-full h-full
-      bg-gradient-to-br from-rose-50 via-red-50 to-white
-      hover:from-rose-100 hover:via-red-100 transition-all duration-300"
+                className="relative flex flex-col items-center justify-center gap-3
+                  w-full h-full p-6
+                  bg-gradient-to-br from-red-100 via-white to-amber-50
+                  rounded-3xl shadow-md hover:shadow-2xl
+                  transition-all duration-500 ease-out
+                  overflow-hidden"
               >
-                <span className="text-3xl sm:text-4xl">🎁</span>
-                <p className="text-sm sm:text-base font-semibold text-slate-700">
-                  Amigo Invisible
-                </p>
-                <p className="text-xs text-slate-500">Sorteo navideño 🎄</p>
+                {/* Luces decorativas suaves */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.6)_0%,transparent_60%)]"></div>
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(255,220,220,0.5)_0%,transparent_70%)]"></div>
+
+                {/* Contenido principal */}
+                <div className="relative z-10 flex flex-col items-center text-center">
+                  <div className="text-4xl mb-1">🎁</div>
+                  <h3 className="text-lg sm:text-xl font-bold text-rose-700">
+                    Amigo Invisible
+                  </h3>
+                  <p className="text-xs sm:text-sm text-rose-500 italic">
+                    Sorteo navideño 🎄
+                  </p>
+                </div>
               </div>
             ),
           },
