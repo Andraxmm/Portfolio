@@ -9,7 +9,6 @@ import CustomUI from '../../MiniApps/CustomUI/CustomUI.jsx';
 import ProjectCard from './ProjectsCard.jsx';
 import Modal from '../Modal.jsx';
 import TodoPreview from './TodoPreview.jsx';
-import AmigoInvisible from '../../MiniApps/AmigoInvisible/AmigoInvisible.jsx';
 
 /* ========= Enlaces a GitHub ========= */
 const GH_USER = 'Andraxmm';
@@ -85,7 +84,6 @@ export default function Projects() {
             demoHref="/peliculas"
           />
 
-          {/* Aviso de cambios en curso — visible en móvil y PC */}
           <span
             className="mt-2 inline-block text-xs px-2 py-0.5 rounded-full
                 bg-yellow-100 text-yellow-800 font-medium
@@ -95,7 +93,6 @@ export default function Projects() {
             ⚠️ Sección en desarrollo
           </span>
 
-          {/* separador solo móvil */}
           <div className="sm:hidden mt-4 h-1 w-11/12 mx-auto rounded-full bg-gradient-to-r from-transparent via-slate-400/25 to-transparent" />
         </div>
 
@@ -120,12 +117,11 @@ export default function Projects() {
               </div>
             }
           />
-          {/* separador solo móvil */}
           <div className="sm:hidden mt-4 h-1 w-11/12 mx-auto rounded-full bg-gradient-to-r from-transparent via-slate-400/25 to-transparent" />
         </div>
       </div>
 
-      {/* Mini proyectos */}
+      {/* Mini proyectos React */}
       <h3 className="mt-10 text-lg sm:text-xl font-bold flex items-center gap-2 px-5 sm:px-0 text-slate-900 dark:text-white">
         <FaReact className="text-cyan-500 text-lg sm:text-2xl" />
         Mini-Proyectos React
@@ -165,7 +161,30 @@ export default function Projects() {
             code: CODE_LINKS.customUI,
             preview: <CustomUI persist={false} />,
           },
-        ].map(({ Comp, title, desc, tags, code, preview }, i) => (
+          // ✅ Amigo Invisible añadido al mismo grid
+
+          {
+            title: 'Amigo Invisible',
+            desc: 'Gestiona el sorteo convirtiendo datos de JSON a Base64.',
+            tags: ['formularios'],
+            code: CODE_LINKS.AmigoInvisible,
+            demoHref: '/amigo-invisible',
+            preview: (
+              <div
+                className="flex flex-col justify-center items-center gap-2
+      w-full h-full
+      bg-gradient-to-br from-rose-50 via-red-50 to-white
+      hover:from-rose-100 hover:via-red-100 transition-all duration-300"
+              >
+                <span className="text-3xl sm:text-4xl">🎁</span>
+                <p className="text-sm sm:text-base font-semibold text-slate-700">
+                  Amigo Invisible
+                </p>
+                <p className="text-xs text-slate-500">Sorteo navideño 🎄</p>
+              </div>
+            ),
+          },
+        ].map(({ Comp, title, desc, tags, code, preview, demoHref }, i) => (
           <div
             key={i}
             className="w-full max-w-[300px] sm:max-w-none mx-auto mb-8 sm:mb-0"
@@ -177,10 +196,11 @@ export default function Projects() {
               code={code}
               onDemo={openModal}
               preview={preview}
+              demoHref={demoHref} // <Link> se encarga de la navegación
+              className="flex-1 flex flex-col"
             >
-              <Comp />
+              {Comp && <Comp />}
             </ProjectCard>
-            {/* separador solo móvil */}
             <div className="sm:hidden mt-4 h-1 w-11/12 mx-auto rounded-full bg-gradient-to-r from-transparent via-slate-400/25 to-transparent" />
           </div>
         ))}

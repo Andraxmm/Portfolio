@@ -5,7 +5,7 @@ export default function ProjectCard({
   desc,
   tags = [],
   preview,
-  code, // <-- sin valor por defecto
+  code,
   children,
   onDemo,
   demoHref,
@@ -13,18 +13,13 @@ export default function ProjectCard({
   return (
     <div className="card overflow-hidden">
       {preview ? (
-        /*CAMBIO: quita h-40 y usa aspect ratio responsivo */
-        <div
-          className="bg-slate-200 flex items-center justify-center overflow-hidden rounded-t-xl
-                        aspect-[16/9] sm:aspect-[3/1]"
-        >
+        <div className="bg-slate-200 flex items-center justify-center overflow-hidden rounded-t-xl h-[150px] sm:h-[170px]">
           <div className="pointer-events-none select-none opacity-95 scale-95">
             {preview}
           </div>
         </div>
       ) : (
-        /* Igual aquí: sin h-40, misma relación de aspecto */
-        <div className="bg-slate-200 rounded-t-xl aspect-[16/9] sm:aspect-[3/1]" />
+        <div className="bg-slate-200 rounded-t-xl h-[150px] sm:h-[170px]" />
       )}
 
       {/* Pequeño ajuste de padding responsivo (opcional) */}
