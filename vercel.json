@@ -1,0 +1,10 @@
+{
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/$1" },
+    { "source": "/_next/static/(.*)", "destination": "/_next/static/$1" },
+    { "source": "/_next/image/(.*)", "destination": "/_next/image/$1" },
+    { "source": "/static/(.*)", "destination": "/static/$1" },
+    { "source": "/favicon.ico", "destination": "/favicon.ico" },
+    { "source": "/(.*)", "destination": "/" }
+  ]
+}
