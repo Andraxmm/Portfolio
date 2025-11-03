@@ -10,7 +10,7 @@ export default {
           dark: '#4F46E5', // indigo-600
         },
       },
-      // 👇 añade las familias para usar font-sans y font-display
+      // añade las familias para usar font-sans y font-display
       fontFamily: {
         sans: [
           'Inter',
