@@ -4,7 +4,7 @@ import AmigoInvisible from './AmigoInvisible';
 import { expect } from "vitest";
 
 describe('AmigoInvisible Component,', () => { 
-    it("permite agregar un participasnte y mostrarlo en la lista", async() => {
+    it("permite agregar un participante y mostrarlo en la lista", async() => {
         render(<AmigoInvisible />);
 
         const organizadorBtn = await screen.findByRole('button', {name: /ir a vista organizador/i });
