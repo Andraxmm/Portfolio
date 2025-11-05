@@ -86,7 +86,7 @@ export default function Header() {
 
             <a
               className="btn"
-              href="/CV.AndreaMoreno.pdf"
+              href="/CV.Andrea-Moreno.pdf"
               target="_blank"
               rel="noreferrer"
             >
