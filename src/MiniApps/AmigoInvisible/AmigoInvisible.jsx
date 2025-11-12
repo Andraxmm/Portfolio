@@ -339,7 +339,7 @@ export default function AmigoInvisible() {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center p-4 sm:p-6 relative overflow-hidden"
+      className="h-screen sm:min-h-screen flex items-center justify-center p-4 sm:p-6 relative overflow-hidden"
       style={{
         background:
           'radial-gradient(1200px 600px at 10% 5%, rgba(99,102,241,0.12) 0%, transparent 18%),' +
