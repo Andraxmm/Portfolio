@@ -36,6 +36,7 @@ src/
 │  └─ Contact.jsx
 │
 ├─ MiniApps/
+│  ├─ AmigoInvisible/
 │  ├─ Counter/
 │  ├─ Todo/
 │  ├─ Controlled/
