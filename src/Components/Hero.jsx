@@ -93,7 +93,7 @@ export default function Hero() {
               {/* Botón solo en móvil */}
               <a
                 className="btn-outline md:hidden"
-                href="/CV.AndreaMoreno.pdf"
+                href="/CV.Andrea-Moreno.pdf"
                 target="_blank"
                 rel="noreferrer"
               >
