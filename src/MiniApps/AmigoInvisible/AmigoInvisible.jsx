@@ -595,7 +595,7 @@ export default function AmigoInvisible() {
                 >
                   <span className="text-base">🧹</span>
                   <span className="truncate">
-                    {confirmReset ? 'Pulsa para confirmar' : 'Resetear sesión'}
+                    {confirmReset ? 'Confirmar' : 'Resetear sesión'}
                   </span>
                 </button>
               </div>
