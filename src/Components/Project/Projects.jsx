@@ -25,6 +25,7 @@ const CODE_LINKS = {
   controlled: gh('src/MiniApps/Controlled'),
   customUI: gh('src/MiniApps/CustomUI'),
   AmigoInvisible: gh('src/MiniApps/AmigoInvisible'),
+  Rootine: gh('src/MiniApps/Rootine'),
 };
 /* ==================================== */
 
@@ -118,6 +119,46 @@ export default function Projects() {
             }
           />
           <div className="sm:hidden mt-4 h-1 w-11/12 mx-auto rounded-full bg-gradient-to-r from-transparent via-slate-400/25 to-transparent" />
+        </div>
+        {/* Rootine 🌿 */}
+        <div className="w-full max-w-[340px] sm:max-w-none mx-auto mb-8 sm:mb-0">
+          <ProjectCard
+            title="Rootine 🌿"
+            desc="Convierte tus hábitos diarios en un jardín virtual que crece contigo. Gamificación, progreso y visuales animados."
+            tags={['React', 'Tailwind', 'Framer Motion', 'LocalStorage']}
+            code={CODE_LINKS.Rootine} // Botón de GitHub ahora aparecerá
+            onDemo={() => window.open('/rootine', '_blank')} // demo en nueva pestaña
+            preview={
+              <div
+                className="p-3 sm:p-6 flex flex-col gap-3 sm:gap-4 rounded-lg h-full transition-all duration-300
+          bg-gradient-to-br from-green-50 via-emerald-50 to-white
+          hover:shadow-xl hover:-translate-y-1 hover:from-green-100 hover:via-emerald-100"
+              >
+                <div className="flex items-center justify-center flex-col gap-2">
+                  <span className="text-4xl">🌱</span>
+                  <div className="text-sm sm:text-base font-medium text-slate-700">
+                    Cultiva tus rutinas y mira cómo florecen.
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-4 gap-2 pt-2">
+                  <div className="h-12 w-12 bg-green-100 rounded-lg flex items-center justify-center text-xl">
+                    📚
+                  </div>
+                  <div className="h-12 w-12 bg-green-100 rounded-lg flex items-center justify-center text-xl">
+                    💧
+                  </div>
+                  <div className="h-12 w-12 bg-green-100 rounded-lg flex items-center justify-center text-xl">
+                    🧘
+                  </div>
+                  <div className="h-12 w-12 bg-green-100 rounded-lg flex items-center justify-center text-xl">
+                    🚶
+                  </div>
+                </div>
+              </div>
+            }
+            demoHref="/rootine"
+          />
         </div>
       </div>
 
