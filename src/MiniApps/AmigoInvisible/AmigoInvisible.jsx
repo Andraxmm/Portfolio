@@ -589,7 +589,7 @@ export default function AmigoInvisible() {
                 {/* Resetear sesión */}
                 <button
                   onClick={resetSession}
-                  className="px-4 py-2 bg-white/10 hover:bg-white/20 text-red-400 hover:text-red-500 border border-white/20 rounded-full flex items-center gap-1.5 text-sm sm:text-base w-auto sm:ml-auto"
+                  className="px-4 py-2 bg-white/10 hover:bg-white/20 text-red-400 hover:text-red-500 border border-white/20 rounded-full flex items-center gap-1.5 text-sm sm:text-base w-[180px] justify-center transition-all"
                   aria-label="Resetear sesión"
                   title="Resetear sesión"
                 >
