@@ -350,10 +350,10 @@ export default function AmigoInvisible() {
       {/* Botón para volver al portfolio */}
       <a
         href="http://localhost:5173/#home"
-        className="absolute top-4 left-4 z-50 flex items-center gap-2 px-3 sm:px-4 py-2 bg-white/10 hover:bg-white/20 text-white text-sm font-medium rounded-full backdrop-blur-md shadow-md transition-all duration-300"
+        className="absolute top-4 left-4 z-50 flex items-center gap-2 px-3 sm:px-4 py-2 bg-white/10 hover:bg-white/20 text-white text-sm sm:text-base font-medium rounded-full backdrop-blur-md shadow-md transition-all duration-300"
       >
         <span>🏠</span>
-        <span className="hidden sm:inline">Volver al portfolio</span>
+        <span className="truncate">Volver al portfolio</span>
       </a>
 
       {/* Ambiente navideño SVGs */}
@@ -486,15 +486,13 @@ export default function AmigoInvisible() {
                   </button>
                 </div>
 
-                <div className="w-full sm:w-auto flex justify-center sm:justify-start">
-                  <button
-                    onClick={() => handleAddParticipant(nombre)}
-                    className="px-5 py-3 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg font-semibold shadow-md transform transition duration-200 hover:scale-105"
-                    aria-label="Agregar participante"
-                  >
-                    Agregar
-                  </button>
-                </div>
+                <button
+                  onClick={() => handleAddParticipant(nombre)}
+                  className="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg font-semibold shadow-md transform transition duration-200 hover:scale-105"
+                  aria-label="Agregar participante"
+                >
+                  Agregar
+                </button>
               </div>
 
               <ul className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
