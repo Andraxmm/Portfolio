@@ -339,7 +339,7 @@ export default function AmigoInvisible() {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center p-6 relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center p-4 sm:p-6 relative overflow-hidden"
       style={{
         background:
           'radial-gradient(1200px 600px at 10% 5%, rgba(99,102,241,0.12) 0%, transparent 18%),' +
@@ -350,15 +350,15 @@ export default function AmigoInvisible() {
       {/* Botón para volver al portfolio */}
       <a
         href="http://localhost:5173/#home"
-        className="absolute top-4 left-4 z-50 flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white text-sm font-medium rounded-full backdrop-blur-md shadow-md transition-all duration-300"
+        className="absolute top-4 left-4 z-50 flex items-center gap-2 px-3 sm:px-4 py-2 bg-white/10 hover:bg-white/20 text-white text-sm font-medium rounded-full backdrop-blur-md shadow-md transition-all duration-300"
       >
         <span>🏠</span>
-        <span>Volver al portfolio</span>
+        <span className="hidden sm:inline">Volver al portfolio</span>
       </a>
 
-      {/* Ambiente navideño SVGs  */}
+      {/* Ambiente navideño SVGs */}
       <svg
-        className="pointer-events-none absolute left-6 top-8 w-56 opacity-20 blur-sm"
+        className="pointer-events-none absolute left-4 sm:left-6 top-8 w-40 sm:w-56 opacity-20 blur-sm"
         viewBox="0 0 200 200"
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden
@@ -381,7 +381,7 @@ export default function AmigoInvisible() {
         </g>
       </svg>
 
-      {/* Guirnalda superior (sin cambios) */}
+      {/* Guirnalda superior */}
       <svg
         className="pointer-events-none absolute top-0 left-0 right-0 mx-auto w-full max-w-4xl h-14"
         viewBox="0 0 1200 60"
@@ -411,7 +411,7 @@ export default function AmigoInvisible() {
       {/* Card central */}
       <main className="w-full max-w-3xl mx-auto relative z-30">
         <div
-          className="mx-auto p-6 rounded-3xl shadow-2xl backdrop-blur-md"
+          className="mx-auto p-4 sm:p-6 rounded-3xl shadow-2xl backdrop-blur-md"
           style={{
             background: 'rgba(255,255,255,0.06)',
             border: '1px solid rgba(255,255,255,0.06)',
@@ -419,23 +419,22 @@ export default function AmigoInvisible() {
               '0 14px 40px rgba(2,6,23,0.55), inset 0 1px 0 rgba(255,255,255,0.02)',
           }}
         >
-          <header className="flex items-center justify-center gap-4 py-2">
+          <header className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 py-2">
             <span className="text-5xl sm:text-4xl leading-none">✨</span>
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-white drop-shadow text-center">
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-white drop-shadow text-center sm:text-left">
               Amigo Invisible
             </h1>
           </header>
-
           {/* --- VISTA INICIO --- */}
           {vista === 'inicio' && (
             <section className="mt-6 text-center">
               <p className="text-sm text-white/80">
                 Organiza tu sorteo navideño en segundos.
               </p>
-              <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+              <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center items-center">
                 <button
                   onClick={() => setVista('organizador')}
-                  className="px-6 py-3 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold shadow-md transform transition duration-200 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-emerald-300/30"
+                  className="w-full max-w-[250px] sm:w-auto px-6 py-3 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold shadow-md transform transition duration-200 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-emerald-300/30"
                   aria-label="Ir a vista organizador"
                 >
                   Soy el organizador
@@ -443,7 +442,7 @@ export default function AmigoInvisible() {
 
                 <button
                   onClick={() => setVista('reveal')}
-                  className="px-6 py-3 rounded-full bg-red-500 hover:bg-red-600 text-white font-semibold shadow-md transform transition duration-200 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-red-300/30"
+                  className="w-full max-w-[250px] sm:w-auto px-6 py-3 rounded-full bg-red-500 hover:bg-red-600 text-white font-semibold shadow-md transform transition duration-200 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-red-300/30"
                   aria-label="Ir a vista reveal"
                 >
                   Revelar enlace
@@ -455,17 +454,17 @@ export default function AmigoInvisible() {
           {/* --- VISTA ORGANIZADOR --- */}
           {vista === 'organizador' && (
             <section className="mt-6 text-left">
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
                 <h2 className="text-xl font-bold text-white">
                   Vista organizador
                 </h2>
-                <span className="ml-2 text-sm bg-white/10 px-2 py-1 rounded-full text-white">
+                <span className="text-sm bg-white/10 px-2 py-1 rounded-full text-white">
                   {participantes.length} participantes
                 </span>
               </div>
 
               <div className="mt-4 flex flex-col sm:flex-row gap-3 items-center">
-                <div className="relative w-full">
+                <div className="relative w-full sm:flex-1">
                   <input
                     value={nombre}
                     type="text"
@@ -487,13 +486,15 @@ export default function AmigoInvisible() {
                   </button>
                 </div>
 
-                <button
-                  onClick={() => handleAddParticipant(nombre)}
-                  className="px-5 py-3 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg font-semibold shadow-md transform transition duration-200 hover:scale-105"
-                  aria-label="Agregar participante"
-                >
-                  Agregar
-                </button>
+                <div className="w-full sm:w-auto flex justify-center sm:justify-start">
+                  <button
+                    onClick={() => handleAddParticipant(nombre)}
+                    className="px-5 py-3 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg font-semibold shadow-md transform transition duration-200 hover:scale-105"
+                    aria-label="Agregar participante"
+                  >
+                    Agregar
+                  </button>
+                </div>
               </div>
 
               <ul className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -577,23 +578,24 @@ export default function AmigoInvisible() {
                   </ul>
                 </div>
               )}
-
-              <div className="mt-4 flex items-center gap-3">
+              <div className="mt-4 flex flex-row gap-2 justify-center sm:justify-start">
+                {/* Generar sorteo */}
                 <button
                   onClick={generarSorteo}
-                  className="bg-cyan-500 hover:bg-cyan-600 text-white rounded-md px-3 py-1 transition"
+                  className="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white rounded-md text-sm sm:text-base w-auto"
                 >
                   🎲 Generar sorteo
                 </button>
 
+                {/* Resetear sesión */}
                 <button
                   onClick={resetSession}
-                  className="ml-auto px-3 py-1 bg-white/6 hover:bg-white/10 text-red-300 hover:text-red-400 border border-white/6 rounded-full flex items-center gap-2 transition transform hover:-translate-y-0.5 duration-150"
+                  className="px-4 py-2 bg-white/10 hover:bg-white/20 text-red-400 hover:text-red-500 border border-white/20 rounded-full flex items-center gap-1.5 text-sm sm:text-base w-auto sm:ml-auto"
                   aria-label="Resetear sesión"
                   title="Resetear sesión"
                 >
-                  <span className="text-lg">🧹</span>
-                  <span className="text-sm">
+                  <span className="text-base">🧹</span>
+                  <span className="truncate">
                     {confirmReset ? 'Pulsa para confirmar' : 'Resetear sesión'}
                   </span>
                 </button>
@@ -621,12 +623,11 @@ export default function AmigoInvisible() {
                   <p className="mt-2 text-white/80">
                     Haz clic y descubre quién recibirá tu regalo este año 🎁
                   </p>
-
-                  <div className="mt-6 flex justify-center gap-3">
+                  <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center items-center">
                     <button
                       onClick={revealUrl}
                       disabled={revealLoading}
-                      className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-full font-semibold shadow disabled:opacity-60"
+                      className="w-full max-w-[250px] sm:w-auto px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-full font-semibold shadow disabled:opacity-60"
                       aria-label="Revelar mi amigo invisible"
                     >
                       {revealLoading
@@ -636,7 +637,7 @@ export default function AmigoInvisible() {
 
                     <button
                       onClick={() => setVista('inicio')}
-                      className="px-6 py-3 bg-red-100 hover:bg-red-200 text-red-700 rounded-full"
+                      className="w-full max-w-[250px] sm:w-auto px-6 py-3 bg-red-100 hover:bg-red-200 text-red-700 rounded-full"
                       aria-label="Volver al inicio"
                     >
                       Volver al inicio
