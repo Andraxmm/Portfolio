@@ -350,7 +350,7 @@ export default function AmigoInvisible() {
       {/* Botón para volver al portfolio */}
       <a
         href="http://localhost:5173/#home"
-        className="absolute top-4 left-4 z-50 flex items-center gap-2 px-3 sm:px-4 py-2 bg-white/10 hover:bg-white/20 text-white text-sm sm:text-base font-medium rounded-full backdrop-blur-md shadow-md transition-all duration-300"
+        className="fixed top-4 left-4 z-50 flex items-center gap-2 px-3 sm:px-4 py-2 bg-white/10 hover:bg-white/20 text-white text-sm sm:text-base font-medium rounded-full backdrop-blur-md shadow-md transition-all duration-300"
       >
         <span>🏠</span>
         <span className="truncate">Volver al portfolio</span>
