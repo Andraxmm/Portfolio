@@ -1,4 +1,6 @@
 import { motion } from 'framer-motion';
+import { SiTypescript } from 'react-icons/si';
+
 import {
   FaHtml5,
   FaCss3Alt,
@@ -37,9 +39,29 @@ export default function Stack() {
           icon: <FaJs className={`${iconBase} ${iconSize} text-yellow-400`} />,
         },
         {
+          name: 'TypeScript',
+          icon: (
+            <SiTypescript
+              className={`${iconBase} ${iconSize} text-[#3178C6]`}
+            />
+          ),
+        },
+
+        {
           name: 'React',
           icon: <FaReact className={`${iconBase} ${iconSize} text-cyan-400`} />,
         },
+        {
+          name: 'Zustand',
+          icon: (
+            <img
+              src="/src/assets/zustand.png"
+              alt="Zustand"
+              className={`${iconBase} ${iconSize}`}
+            />
+          ),
+        },
+
         {
           name: 'Tailwind',
           icon: (
