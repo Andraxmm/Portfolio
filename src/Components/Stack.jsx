@@ -172,7 +172,7 @@ export default function Stack() {
 
         {/* HERRAMIENTAS + EXTRAS */}
         <div className="flex flex-col md:flex-row md:gap-12 gap-12">
-          {categories.slice(1).map((cat, index) => (
+          {categories.slice(1).map((cat) => (
             <motion.div
               key={cat.title}
               initial={{ opacity: 0, y: 20 }}
