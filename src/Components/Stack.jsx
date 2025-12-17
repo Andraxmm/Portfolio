@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { SiTypescript } from 'react-icons/si';
+import { SiVercel } from 'react-icons/si';
 
 import {
   FaHtml5,
@@ -91,6 +92,10 @@ export default function Stack() {
           name: 'Git',
           icon: <FaGitAlt className={`${iconBase} ${iconSize} text-red-500`} />,
         },
+        {
+          name: 'Vercel',
+          icon: <SiVercel className={`${iconBase} ${iconSize}`} />,
+        },
       ],
     },
     {
@@ -166,14 +171,15 @@ export default function Stack() {
         </motion.div>
 
         {/* HERRAMIENTAS + EXTRAS */}
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-          {categories.slice(1).map((cat) => (
+        <div className="flex flex-col md:flex-row md:gap-12 gap-12">
+          {categories.slice(1).map((cat, index) => (
             <motion.div
               key={cat.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
+              className={`flex-1 ${cat.title === 'Extras' ? 'md:ml-6 lg:ml-12' : ''}`}
             >
               <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-6 text-slate-900 dark:text-white">
                 {cat.title}
@@ -184,11 +190,11 @@ export default function Stack() {
                   <div
                     key={t.name}
                     className="card px-4 py-5 sm:px-6 sm:py-6 gap-2 sm:gap-3
-                               flex flex-col items-center justify-center
-                               w-full max-w-[160px] mx-auto
-                               sm:max-w-none sm:w-auto sm:mx-0
-                               hover:-translate-y-2 hover:shadow-xl transition-all duration-300
-                               group dark:hover:bg-slate-700"
+                       flex flex-col items-center justify-center
+                       w-full max-w-[160px] mx-auto
+                       sm:max-w-none sm:w-auto sm:mx-0
+                       hover:-translate-y-2 hover:shadow-xl transition-all duration-300
+                       group dark:hover:bg-slate-700"
                   >
                     <div className="opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-transform duration-300">
                       {t.icon}
