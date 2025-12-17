@@ -55,7 +55,7 @@ export default function Stack() {
           name: 'Zustand',
           icon: (
             <img
-              src="/assets/zustand.png" // <- mover la imagen a public/assets
+              src="zustand.png"
               alt="Zustand"
               className={`${iconBase} ${iconSize} object-contain`} // object-contain para que escale bien
             />
